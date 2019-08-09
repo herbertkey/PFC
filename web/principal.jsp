@@ -13,9 +13,9 @@
             
             if(usuario !=null){
         %> 
-        <h1>Bem-vindo, <%=usuario.getLogin()%>!</h1>
+        <h1>Bem-vindo, <%=usuario.getNome()%>!</h1>
         <%}%>
-        <a href="admin/cadastro_usuario.jsp">Área restrita</a><br/>
-        <a href="ControleAcesso?acao=Sair">Logout</a><br/>
+        <a href="/ProjetoPFC_5/admin/area_restrita.jsp">Área restrita</a><br/><br/>
+        <a href="/ProjetoPFC_5/ControleAcesso?acao=Sair">Logout</a><br/>
     </body>
 </html>

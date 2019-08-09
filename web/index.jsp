@@ -7,10 +7,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Autenticação</title>
+        <title>Login</title>
     </head>
     <body>
-        <h1>Autenticação de Usuário!</h1>
+        <h1>Login de Usuário!</h1>
         <%
             String msg = (String)request.getAttribute("msg");
             if(msg!=null){
@@ -19,7 +19,7 @@
         <%}%>
         
         <form action="ControleAcesso" method="POST">
-            Login: <input type="text" name="txtLogin"><br/>
+            Numero de Registro: <input type="text" name="txtNumeroDeRegistro" pattern="[0-9]+$"><br/>
             Senha: <input type="password" name="txtSenha"><br/>
             <input type="submit" value="Entrar" name="acao">
         </form>

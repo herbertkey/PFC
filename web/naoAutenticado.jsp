@@ -7,5 +7,6 @@
     </head>
     <body>
         <h1>Você deve estar logado no sistema!</h1>
+        <a href="/ProjetoPFC_5/index.jsp">Logar no sistema</a>
     </body>
 </html>

@@ -1,15 +1,15 @@
 package model;
 
-public enum Prioridade {
-    BAIXA(1,1),
-    MEDIA(2,2),
-    ALTA(3,3),
-    ALTISSIMA(4,4);
+public enum Setor {
+    REITORIA(1, 3),
+    COORDENCAO(2, 1),
+    ADMINISTRACAO(3, 1),
+    PORTARIA(4, 2);
     
     private int id;
     private int prioridade;
 
-    private Prioridade(int id, int prioridade) {
+    private Setor(int id, int prioridade) {
         this.id = id;
         this.prioridade = prioridade;
     }
@@ -21,6 +21,5 @@ public enum Prioridade {
     public int getPrioridade() {
         return prioridade;
     }
-    
     
 }

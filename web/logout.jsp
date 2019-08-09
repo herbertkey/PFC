@@ -7,6 +7,6 @@
     </head>
     <body>
         <h1>Obrigado pela visita!</h1>
-        <a href="index.jsp">Logar novamente</a>
+        <a href="/ProjetoPFC_5/index.jsp">Logar novamente</a>
     </body>
 </html>

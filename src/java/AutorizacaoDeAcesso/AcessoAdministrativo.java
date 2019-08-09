@@ -10,8 +10,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.PerfilDeAcesso;
-import model.Usuario;
+import model.*;
 
 public class AcessoAdministrativo implements Filter{
 
@@ -27,10 +26,10 @@ public class AcessoAdministrativo implements Filter{
         HttpSession sessaoUsuario = ((HttpServletRequest)request).getSession();
         Usuario usuario = (Usuario) sessaoUsuario.getAttribute("usuarioAutenticado");
         
-        if(usuario!=null && usuario.getPerfil().equals(PerfilDeAcesso.ADMINISTRADOR)){
+        if(usuario!=null && (usuario.getTipo().equals(Tipo.SUPERVISOR)||usuario.getTipo().equals(Tipo.TECNICO))){
             chain.doFilter(request, response);
         } else{
-            ((HttpServletResponse)response).sendRedirect("../acessoNegado.jsp");
+            ((HttpServletResponse)response).sendRedirect("/ProjetoPFC_5/acessoNegado.jsp");
         }
         
     }

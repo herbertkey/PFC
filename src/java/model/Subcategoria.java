@@ -4,6 +4,17 @@ public class Subcategoria {
     
     private String subcategoria;
     private Prioridade prioridade;
+    private Categoria categoria;
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    
 
     public String getSubcategoria() {
         return subcategoria;

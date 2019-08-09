@@ -6,27 +6,40 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Cadastro de Subcategoria</title>
+        <title>Cadastro de nova Subcategoria</title>
     </head>
     <body>  
         <h1>Área de acesso restrito aos administradores</h1>
-        <h2>Cadastro de nova subcategoria!</h2>
+        <h2>Cadastro de nova Subcategoria!</h2>
+
         <%
             String msg = (String) request.getAttribute("msg");
-            if(msg != null){
+            if (msg != null) {
         %>
         <font color="blue"><%=msg%></font>
-        <%}%>
-        
-        <form action="ControleSubcategoria" method="POST">
-            Categoria: <input type="text" name="txtSubcategoria"><br/>
-            Prioridade: <select name="optPrioridade">
-                        <option>BAIXA</option>
-                        <option>MEDIA</option>
-                        <option>ALTA</option>
-                        <option>ALTISSIMA</option>
-                    </select><br/>
-                    <input type="submit" value="Cadastrar_Subcategoria" name="acao">
-        </form>
+        <%
+            }
+        %>
+        <form action="/ProjetoPFC_5/CadastrarSubcategoria" method="POST">
+            <%List<Categoria> categorias = (List<Categoria>) request.getAttribute("consultacategoria");%>
+            Categoria: <select name="optCategoria">
+                <%
+                    for (Categoria c : categorias) {
+                %> 
+                <option ><%=c.getCategoria()%></option> 
+                <%
+                    }
+                %></select><br/>     
+            Subcategoria: <input type="text" name="txtSubcategoria"><br/>
+            Prioridade: <select name="optPrioridade"><%
+                for (Prioridade prioridade : Prioridade.values()) {
+                %>
+                <option ><%=prioridade%></option> 
+                <%
+                    }
+                %></select><br/>     
+        <input type="submit" value="Cadastrar" name="acao">
+    </form>
+    <a href="/ProjetoPFC_5/principal.jsp">Pagina Principal</a>
     </body>
 </html>

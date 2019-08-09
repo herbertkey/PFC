@@ -7,5 +7,6 @@
     </head>
     <body>
         <h1>Você não tem permissão de acesso</h1>
+        <a href="/ProjetoPFC_5/principal.jsp">Pagina Inicial</a>
     </body>
 </html>

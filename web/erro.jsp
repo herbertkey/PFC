@@ -8,5 +8,6 @@
     <body>
         <h1>Erro!</h1>
         <%=((Exception)request.getAttribute("erro")).getMessage()%>
+        <a href="/ProjetoPFC_5/index.jsp"></a>
     </body>
 </html>

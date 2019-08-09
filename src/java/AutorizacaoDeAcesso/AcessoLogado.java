@@ -10,7 +10,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Usuario;
+import model.*;
 
 public class AcessoLogado implements Filter{
 
@@ -28,7 +28,7 @@ public class AcessoLogado implements Filter{
         if(usuarioLogado !=null){
             chain.doFilter(request, response);
         } else{
-            ((HttpServletResponse)response).sendRedirect("naoAutenticado.jsp");
+            ((HttpServletResponse)response).sendRedirect("/ProjetoPFC_5/naoAutenticado.jsp");
         }
         
     }

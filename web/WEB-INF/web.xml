@@ -4,6 +4,14 @@
         <servlet-name>ControleUsuario</servlet-name>
         <servlet-class>controller.ControleUsuario</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControleCategoria</servlet-name>
+        <servlet-class>controller.ControleCategoria</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControleSubcategoria</servlet-name>
+        <servlet-class>controller.ControleSubcategoria</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControleUsuario</servlet-name>
         <url-pattern>/ControleUsuario</url-pattern>
@@ -16,11 +24,19 @@
         <servlet-name>ControleAcesso</servlet-name>
         <url-pattern>/ControleAcesso</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControleCategoria</servlet-name>
+        <url-pattern>/ControleCategoria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControleSubcategoria</servlet-name>
+        <url-pattern>/ControleSubcategoria</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            15
         </session-timeout>
-           </session-config>
+    </session-config>
     <filter>
         <filter-name>AcessoAdministrativo</filter-name>
         <filter-class>AutorizacaoDeAcesso.AcessoAdministrativo</filter-class>
