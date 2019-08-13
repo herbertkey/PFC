@@ -44,7 +44,7 @@ public class ControleUsuario extends HttpServlet {
             if (setor.equalsIgnoreCase("reitoria")) {
                 usuario.setSetor(Setor.REITORIA);
             } else if (setor.equalsIgnoreCase("coordenacao")) {
-                usuario.setSetor(Setor.COORDENCAO);
+                usuario.setSetor(Setor.COORDENACAO);
             } else if (setor.equalsIgnoreCase("administracao")) {
                 usuario.setSetor(Setor.ADMINISTRACAO);
             } else if (setor.equalsIgnoreCase("portaria")) {
@@ -116,7 +116,7 @@ public class ControleUsuario extends HttpServlet {
             if (setor.equalsIgnoreCase("reitoria")) {
                 usuario.setSetor(Setor.REITORIA);
             } else if (setor.equalsIgnoreCase("coordenacao")) {
-                usuario.setSetor(Setor.COORDENCAO);
+                usuario.setSetor(Setor.COORDENACAO);
             } else if (setor.equalsIgnoreCase("administracao")) {
                 usuario.setSetor(Setor.ADMINISTRACAO);
             } else if (setor.equalsIgnoreCase("portaria")) {
