@@ -12,6 +12,10 @@
         <servlet-name>ControleSubcategoria</servlet-name>
         <servlet-class>controller.ControleSubcategoria</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControleChamado</servlet-name>
+        <servlet-class>controller.ControleChamado</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControleUsuario</servlet-name>
         <url-pattern>/ControleUsuario</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>ControleSubcategoria</servlet-name>
         <url-pattern>/ControleSubcategoria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControleChamado</servlet-name>
+        <url-pattern>/ControleChamado</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
