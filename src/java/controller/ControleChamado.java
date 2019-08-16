@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.*;
 
 
-@WebServlet(urlPatterns = {"/AbrirChamado"})
+@WebServlet(urlPatterns = {"/AbrirChamado","/ConsultarChamado"})
 public class ControleChamado extends HttpServlet {
 
     protected void abrirChamado(HttpServletRequest request, HttpServletResponse response)
@@ -62,10 +62,6 @@ public class ControleChamado extends HttpServlet {
             chamadoDAO.abrirChamado(chamado);
                 request.setAttribute("msg", "Chamado aberto com com sucesso");
                 request.setAttribute("chamado", chamado);
-                //RequestDispatcher rd = request.getRequestDispatcher("/abertura_chamado.jsp");
-                //rd.forward(request, response);
-                
-                
             }
                 
             CategoriaDAO categoriaDAO = new CategoriaDAO();
@@ -85,9 +81,45 @@ public class ControleChamado extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/abertura_chamado.jsp");
             rd.forward(request, response);
             
+        } catch (Exception erro) {
+            RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");
+            request.setAttribute("erro", erro);
+            rd.forward(request, response);
+        }
+    }
+     protected void consultarChamado(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try {
+            String acao = request.getParameter("acao");
+            if (acao.equals("Consultar")){
+            Chamado chamado = new Chamado();            
+            Usuario usuario = new Usuario();
             
+            usuario.setNumero_registro(Integer.parseInt(request.getParameter("txtNumeroDeRegistro")));
+            chamado.setUsuario(usuario);
+            String status = request.getParameter("optStatus");
+            if (status.equalsIgnoreCase("aberto")) {
+                chamado.setStatus(StatusChamado.ABERTO);
+            } else if (status.equalsIgnoreCase("em_andamento")) {
+                chamado.setStatus(StatusChamado.EM_ANDAMENTO);
+            } else if (status.equalsIgnoreCase("fechado")) {
+                chamado.setStatus(StatusChamado.FECHADO);
+            }else if (status.equalsIgnoreCase("todos")) {
+                chamado.setStatus(StatusChamado.TODOS);
+            }
             
-            
+            List<Chamado> chamados = new ArrayList<Chamado>();
+            ChamadoDAO chamadoDAO = new ChamadoDAO();            
+            chamados = chamadoDAO.consultarChamadosCliente(chamado);
+                      
+            request.setAttribute("consulta", chamados);
+            RequestDispatcher rd = request.getRequestDispatcher("/consultar_chamado.jsp");
+            rd.forward(request, response);
+            }else{
+                RequestDispatcher rd = request.getRequestDispatcher("/consultar_chamado.jsp");
+            rd.forward(request, response);
+            }
             
         } catch (Exception erro) {
             RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");
@@ -95,15 +127,15 @@ public class ControleChamado extends HttpServlet {
             rd.forward(request, response);
         }
     }
- 
+
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = request.getRequestURI();
         try {
-            if (url.equals(request.getContextPath() + "/ConsultarUsuario")) {
-                //consultarUsuario(request, response);
+            if (url.equals(request.getContextPath() + "/ConsultarChamado")) {
+                consultarChamado(request, response);
             } else if (url.equals(request.getContextPath() + "/ExcluirUsuario")) {
                 //excluirUsuario(request, response);
             } else if (url.equals(request.getContextPath() + "/AlterarPageUsuario")) {
