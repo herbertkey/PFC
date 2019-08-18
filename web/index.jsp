@@ -11,10 +11,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link href="/PFC/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/PFC/css/metisMenu.min.css" rel="stylesheet">
-        <link href="/PFC/css/startmin.css" rel="stylesheet">
-        <link href="/PFC/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="/ProjetoPFC_5/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/ProjetoPFC_5/css/metisMenu.min.css" rel="stylesheet">
+        <link href="/ProjetoPFC_5/css/startmin.css" rel="stylesheet">
+        <link href="/ProjetoPFC_5/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
         <title>Sistema de Chamados</title>
         
@@ -69,9 +69,9 @@
         
         
         
-        <script src="/PFC/js/jquery.min.js"></script>
-        <script src="/PFC/js/bootstrap.min.js"></script>
-        <script src="/PFC/js/metisMenu.min.js"></script>
-        <script src="/PFC/js/startmin.js"></script>
+        <script src="/ProjetoPFC_5/js/jquery.min.js"></script>
+        <script src="/ProjetoPFC_5/js/bootstrap.min.js"></script>
+        <script src="/ProjetoPFC_5/js/metisMenu.min.js"></script>
+        <script src="/ProjetoPFC_5/js/startmin.js"></script>
     </body>
 </html>
