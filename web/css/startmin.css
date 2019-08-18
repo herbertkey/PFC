@@ -6,6 +6,8 @@
 
 body {
     background-color: #f8f8f8;
+    background-image: url(/ProjetoPFC_5/images/bump-collaboration.jpg);
+    background-size: cover;
 }
 
 #wrapper {
