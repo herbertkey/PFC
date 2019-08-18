@@ -49,7 +49,7 @@
                                         
                                     </div>
                                     
-                                    <input class="btn btn-lg btn-success btn-block" type="submit" value="Entrar" name="acao">
+                                    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Entrar" name="acao">
                                     </form>
                                 </fieldset>
                             </form>
