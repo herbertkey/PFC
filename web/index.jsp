@@ -34,11 +34,11 @@
                             <form role="form" action="ControleAcesso" method="POST">
                                 <fieldset>
                                     <%
-            String msg = (String)request.getAttribute("msg");
-            if(msg!=null){
-        %>
-        <font color="red"> <%=msg%></font>        
-        <%}%>
+                                        String msg = (String) request.getAttribute("msg");
+                                        if (msg != null) {
+                                    %>
+                                    <font color="red"> <%=msg%></font>        
+                                    <%}%>
                                     <div class="form-group">
                                         <input class="form-control" placeholder="Numero do registro" name="txtNumeroDeRegistro" type="number" autofocus>
                                     </div>
@@ -51,8 +51,6 @@
                                     
                                     <input class="btn btn-lg btn-success btn-block" type="submit" value="Entrar" name="acao">
                                     </form>
-<!--                                     Change this to a button or input when using this as a form 
-                                    <a href="index.html" class="btn btn-lg btn-success btn-block">Login</a>-->
                                 </fieldset>
                             </form>
                         </div>
@@ -60,16 +58,6 @@
                 </div>
             </div>
         </div>
-        <!--</div>-->
-       
-<!--        <form action="ControleAcesso" method="POST">
-            Numero de Registro: <input type="text" name="txtNumeroDeRegistro" pattern="[0-9]+$"><br/>
-            Senha: <input type="password" name="txtSenha"><br/>
-            <input type="submit" value="Entrar" name="acao">
-        </form>-->
-        
-        
-        
         <script src="/ProjetoPFC_5/js/jquery.min.js"></script>
         <script src="/ProjetoPFC_5/js/bootstrap.min.js"></script>
         <script src="/ProjetoPFC_5/js/metisMenu.min.js"></script>
