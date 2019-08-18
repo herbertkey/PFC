@@ -30,6 +30,7 @@
 
                     }
                 %></select><br/>
+                Categoria: <input type="text" readonly="true" name="txtCategoria" value="<%=subcategoria.getCategoria().getCategoria() %>"><br/>
 
             <input type="submit" value="Alterar"></br></br>
 

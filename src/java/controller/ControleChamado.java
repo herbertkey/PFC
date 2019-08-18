@@ -111,7 +111,15 @@ public class ControleChamado extends HttpServlet {
             
             List<Chamado> chamados = new ArrayList<Chamado>();
             ChamadoDAO chamadoDAO = new ChamadoDAO();            
-            chamados = chamadoDAO.consultarChamadosCliente(chamado);
+            
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
+            usuario = usuarioDAO.consultaUmUsuario(usuario);
+            if(usuario.getTipo().equals(Tipo.CLIENTE)){
+                chamados = chamadoDAO.consultarChamadosCliente(chamado);
+            } else if(usuario.getTipo().equals(Tipo.TECNICO)){
+                chamados = chamadoDAO.consultarChamadosTecnico(chamado);
+            }           
+            
                       
             request.setAttribute("consulta", chamados);
             RequestDispatcher rd = request.getRequestDispatcher("/consultar_chamado.jsp");

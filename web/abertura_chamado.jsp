@@ -27,22 +27,27 @@
             Nome: <input type="text" name="txtNome" readonly="true" value="<%=usuario.getNome()%>"><br/>
             Descrição: <textarea name="txtDescricao"></textarea><br/>
             <%List<Categoria> categorias = (List<Categoria>) request.getAttribute("consultacategoria");%>
-            Categoria: <select name="optCategoria">
+            <%List<Subcategoria> subcategorias = (List<Subcategoria>) request.getAttribute("consultasubcategoria");%>
+            Categoria: <select name="optCategoria" id="cat">
                 <%
                     for (Categoria c : categorias) {
                 %> 
-                <option ><%=c.getCategoria()%></option> 
+                <option><%=c.getCategoria()%></option> 
                 <%
                     }
                 %></select><br/>
-                <%List<Subcategoria> subcategorias = (List<Subcategoria>) request.getAttribute("consultasubcategoria");%>
+                
             Subcategoria: <select name="optSubcategoria">
                 <%
                     for (Subcategoria sc : subcategorias) {
-                %> 
+                        //if(equals(sc.getCategoria().getCategoria())){
+                
+                %>
                 <option ><%=sc.getSubcategoria()%></option> 
-                <%
-                    }
+                <%                            
+                        }
+                    
+                    
                 %></select><br/>
                 Prioridade: <select name="optPrioridade"><%
                 for (Prioridade prioridade : Prioridade.values()) {

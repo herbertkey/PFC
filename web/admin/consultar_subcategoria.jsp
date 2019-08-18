@@ -22,6 +22,7 @@
                 <tr>
                     <th>Subcategoria</th>
                     <th>Prioridade</th>
+                    <th>Categoria</th>
                 </tr>
             </thead>            
             <tbody>                
@@ -30,7 +31,8 @@
                 %>                
                 <tr>
                     <td> <%= s.getSubcategoria()%></td>
-                    <td> <%= s.getPrioridade()%></td>          
+                    <td> <%= s.getPrioridade()%></td>    
+                    <td> <%= s.getCategoria().getCategoria()%></td> 
                     <td><a href="/ProjetoPFC_5/AlterarPageSubcategoria?acao=<%=s.getSubcategoria()%>">Alterar</a>    </td>
                     <td><a href="/ProjetoPFC_5/ExcluirSubcategoria?acao=<%=s.getSubcategoria()%>">Excluir</a>    </td>
                 </tr>       
