@@ -20,12 +20,7 @@
         
     </head>
     <body>
-        <%
-            String msg = (String)request.getAttribute("msg");
-            if(msg!=null){
-        %>
-        <font color="red"> <%=msg%></font>        
-        <%}%>   
+        
         
 <!--        <div class="bg"> -->
   <div class="container" >
@@ -33,13 +28,19 @@
                 <div class="col-md-4 col-md-offset-4">
                     <div class="login-panel panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Bem vindo ao sistema de chamados</h3>
+                            <h3 class="panel-title">Login</h3>
                         </div>
                         <div class="panel-body">
                             <form role="form" action="ControleAcesso" method="POST">
                                 <fieldset>
+                                    <%
+            String msg = (String)request.getAttribute("msg");
+            if(msg!=null){
+        %>
+        <font color="red"> <%=msg%></font>        
+        <%}%>
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Numero do registro" name="txtNumeroDeRegistro" type="text" autofocus>
+                                        <input class="form-control" placeholder="Numero do registro" name="txtNumeroDeRegistro" type="number" autofocus>
                                     </div>
                                     <div class="form-group">
                                         <input class="form-control" placeholder="Sua senha" name="txtSenha" type="password" value="">
