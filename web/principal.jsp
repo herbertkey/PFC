@@ -17,6 +17,7 @@
         <%}%>
         <a href="/ProjetoPFC_5/admin/area_restrita.jsp">Área restrita</a><br/><br/>
         <a href="/ProjetoPFC_5/AbrirChamado?acao=">Abrir Chamado</a><br/><br/>
+        <a href="/ProjetoPFC_5/ConsultarChamado?acao=">Consultar Chamado</a><br/><br/>
         <a href="/ProjetoPFC_5/ControleAcesso?acao=Sair">Logout</a><br/>
     </body>
 </html>
