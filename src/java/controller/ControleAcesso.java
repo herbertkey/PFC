@@ -36,7 +36,9 @@ public class ControleAcesso extends HttpServlet {
                     response.sendRedirect("principal.jsp");
                 } else {
                     RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-                    request.setAttribute("msg", "Login ou Senha Incorreto!");
+                    request.setAttribute("msg", " <div class=\"alert alert-danger\" role=\"alert\">\n"
+                            + "                                    Usuário ou senha incorreto!\n"
+                            + "                                </div>");
                     rd.forward(request, response);
                 }
             } else if (acao.equals("Sair")) {
