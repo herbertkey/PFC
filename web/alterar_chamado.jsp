@@ -19,23 +19,29 @@
 
             %> 
 
-            Subcategoria: <input type="text" readonly="true" name="txtSubcategoria" value="<%=subcategoria.getSubcategoria()%>"><br/>
-            Prioridade: <select name="optPrioridade">
+            ID: <input type="text" readonly="true" name="txtId" value="<%=chamado.getId()%>"><br/>
+            Descrição: <textarea name="txtDescricao" ><%=chamado.getDescricao()%></textarea><br/>
+            Data Inicio: <input type="text" readonly="true" name="txtId" value="<%=chamado.getDescricao()%>"><br/>
+            Status:<select name="optStatus">
                 <%
-                for (Prioridade prioridade : Prioridade.values()) {
-                    if (prioridade == subcategoria.getPrioridade()) {
+                    for (StatusChamado status : StatusChamado.values()) {
+                        if (status == chamado.getStatus()) {
                 %> 
-                <option selected><%=prioridade%></option> 
+                <option selected><%=status%></option> 
                 <%
+                } else if (status.equals("TODOS")) {
                 } else {
                 %>
-                <option><%=prioridade%></option> 
-                <%
-                        }
+                <option> < %= status%></option> 
+                <%}
 
                     }
                 %></select><br/>
-                Categoria: <input type="text" readonly="true" name="txtCategoria" value="<%=subcategoria.getCategoria().getCategoria() %>"><br/>
+            Nome: <input type="text" readonly="true" name="txtNome" value="<%=chamado.getUsuario().getNome()%>"><br/>
+            Categoria: <input type="text" readonly="true" name="txtSubcategoria" value="<%=chamado.getCategoria().getCategoria() %>"><br/>
+            Subcategoria <input type="text" readonly="true" name="txtSubcategoria" value="<%=chamado.getSubcategoria().getSubcategoria() %>"><br/>
+            Técnico: <input type="text" readonly="true" name="txtTecnico" value="<%=chamado.getTecnico().getNome()%>"><br/>
+            Prioridade: <input type="text" readonly="true" name="txtPrioridade" value="<%=chamado.getPrioridade()%>"><br/>
 
             <input type="submit" value="Alterar"></br></br>
 

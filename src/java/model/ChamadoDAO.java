@@ -19,7 +19,7 @@ public class ChamadoDAO {
     private static final String CONSULTA_CHAMADO_TECNICO = "SELECT c.id, c.descricao, c.data_inicio, c.data_fim, c.status, (SELECT nome FROM usuario WHERE id=c.usuario), c.categoria, c.subcategoria, (SELECT nome as tecnico FROM usuario WHERE id=c.tecnico), c.prioridade FROM chamado c WHERE (SELECT id FROM usuario WHERE numero_registro=?)=c.tecnico	AND c.status LIKE replace(?,'TODOS','%%')";
     private static final String CONSULTA_CHAMADO_CLIENTE = "SELECT c.id, c.descricao, c.data_inicio, c.data_fim, c.status, (SELECT nome FROM usuario WHERE id=c.usuario), c.categoria, c.subcategoria, (SELECT nome as tecnico FROM usuario WHERE id=c.tecnico), c.prioridade FROM chamado c WHERE (SELECT id FROM usuario WHERE numero_registro=?)=c.usuario	AND c.status LIKE replace(?,'TODOS','%%')";
     private static final String CONSULTA_CHAMADO_SUPERVISOR = "SELECT c.id, c.descricao, c.data_inicio, c.data_fim, c.status, (SELECT nome FROM usuario WHERE id=c.usuario), c.categoria, c.subcategoria, (SELECT nome as tecnico FROM usuario WHERE id=c.tecnico), c.prioridade FROM chamado c WHERE c.status LIKE replace(?,'TODOS','%%')";
-    private static final String CONSULTA_UM_CHAMADO = "SELECT c.id, c.descricao, c.data_inicio, c.data_fim, c.status, (SELECT nome FROM usuario WHERE id=c.usuario), c.categoria, c.subcategoria, (SELECT nome as tecnico FROM usuario WHERE id=c.tecnico), c.prioridade FROM chamado c WHERE c.id=?";
+    private static final String CONSULTA_UM_CHAMADO = "SELECT c.id, c.descricao, c.data_inicio, c.data_fim, c.status, (SELECT nome FROM usuario WHERE id=c.usuario), (SELECT categoria FROM categoria WHERE id=c.categoria), (SELECT subcategoria FROM subcategoria WHERE id=c.subcategoria), (SELECT nome as tecnico FROM usuario WHERE id=c.tecnico), c.prioridade FROM chamado c WHERE c.id=?";
     //private static final String ALTERAR_USUARIO = "UPDATE usuario SET email=?,nome=?,telefone=?,tipo=?,cargo=?, setor=? WHERE numero_registro=?";
     //private static final String CONSULTA_UM_USUARIO = "SELECT numero_registro, email, nome, telefone, tipo, cargo, setor FROM usuario Where numero_registro=?";
     //private static final String EXCLUIR_USUARIO = "UPDATE usuario SET status='INATIVO' WHERE numero_registro=?";
@@ -238,7 +238,7 @@ public class ChamadoDAO {
 
             pstmt.setInt(1, Integer.parseInt(chamado.getId()));
             ResultSet resultado = pstmt.executeQuery();
-
+            if (resultado.next()) {
                 c = new Chamado();
                 Usuario u = new Usuario();
                 Usuario t = new Usuario();
@@ -258,7 +258,7 @@ public class ChamadoDAO {
                 t.setNome(resultado.getString("tecnico"));
                 c.setTecnico(t);
                 c.setPrioridade(Prioridade.valueOf(resultado.getString("prioridade")));
-              
+            }
         } catch (SQLException sqlErro) {
             throw new RuntimeException(sqlErro);
         } finally {

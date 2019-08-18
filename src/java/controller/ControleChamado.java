@@ -150,7 +150,7 @@ public class ControleChamado extends HttpServlet {
             chamados = chamadoDAO.consultarUmChamado(chamado);
 
             request.setAttribute("chamado", chamados);
-            request.getRequestDispatcher("/admin/alterar_chamado.jsp").forward(request, response);
+            request.getRequestDispatcher("/alterar_chamado.jsp").forward(request, response);
 
         } catch (Exception erro) {
             RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");

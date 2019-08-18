@@ -13,6 +13,7 @@
                 Subcategoria subcategoria = (Subcategoria) request.getAttribute("subcategoria");
 
             %> 
+            
 
             Subcategoria: <input type="text" readonly="true" name="txtSubcategoria" value="<%=subcategoria.getSubcategoria()%>"><br/>
             Prioridade: <select name="optPrioridade">

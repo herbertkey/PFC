@@ -23,7 +23,8 @@
                 <option ><%=status%></option> 
                 <%
                     }
-                %>     
+                %>
+                <option>TODOS</option>
                 <input type="submit" value="Consultar" name="acao">
         </form>
         <%
@@ -33,6 +34,7 @@
         <table>            
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Descrição</th>
                     <th>Data Inicio</th>
                     <th>Data Fim</th>
@@ -51,6 +53,7 @@
                         for (Chamado c : chamados) {
                 %>                
                 <tr>
+                    <td> <%= c.getId()%></td>
                     <td> <%= c.getDescricao()%></td>
                     <td> <%= c.getData_inicio()%></td>
                     <td> <%= c.getData_fim()%></td>
