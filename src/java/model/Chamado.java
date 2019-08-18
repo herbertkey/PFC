@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Chamado {
     
+    private String id;
     private String descricao;
     private String data_inicio;
     private String data_fim;
@@ -14,6 +15,16 @@ public class Chamado {
     private Usuario tecnico; //Técnico que será atribuido ao chamado
     private Prioridade prioridade; //Prioridade do Chamado (Calculo será feito por meio da regra de negocio)
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    
+    
     public String getDescricao() {
         return descricao;
     }

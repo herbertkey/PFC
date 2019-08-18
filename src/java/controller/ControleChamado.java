@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.*;
 
 
-@WebServlet(urlPatterns = {"/AbrirChamado","/ConsultarChamado"})
+@WebServlet(urlPatterns = {"/AbrirChamado","/ConsultarChamado","/AlterarPageChamado"})
 public class ControleChamado extends HttpServlet {
 
     protected void abrirChamado(HttpServletRequest request, HttpServletResponse response)
@@ -118,7 +118,9 @@ public class ControleChamado extends HttpServlet {
                 chamados = chamadoDAO.consultarChamadosCliente(chamado);
             } else if(usuario.getTipo().equals(Tipo.TECNICO)){
                 chamados = chamadoDAO.consultarChamadosTecnico(chamado);
-            }           
+            } else if(usuario.getTipo().equals(Tipo.SUPERVISOR)){
+                chamados = chamadoDAO.consultarChamadosTecnico(chamado);
+            }          
             
                       
             request.setAttribute("consulta", chamados);
@@ -135,6 +137,29 @@ public class ControleChamado extends HttpServlet {
             rd.forward(request, response);
         }
     }
+     protected void alterarPageChamado(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
+        response.setContentType("text/html;charset=UTF-8");
+        try {
+            
+            String acao = (String) request.getParameter("acao");
+            ChamadoDAO chamadoDAO = new ChamadoDAO();
+            Chamado chamado = new Chamado();
+            Chamado chamados = new Chamado();
+            chamado.setId(acao);
+            chamados = chamadoDAO.consultarUmChamado(chamado);
+
+            request.setAttribute("chamado", chamados);
+            request.getRequestDispatcher("/admin/alterar_chamado.jsp").forward(request, response);
+
+        } catch (Exception erro) {
+            RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");
+            request.setAttribute("erro", erro);
+            rd.forward(request, response);
+        }
+
+    }
+
 
     
     @Override
@@ -146,8 +171,8 @@ public class ControleChamado extends HttpServlet {
                 consultarChamado(request, response);
             } else if (url.equals(request.getContextPath() + "/ExcluirUsuario")) {
                 //excluirUsuario(request, response);
-            } else if (url.equals(request.getContextPath() + "/AlterarPageUsuario")) {
-                //alterarPageUsuario(request, response);
+            } else if (url.equals(request.getContextPath() + "/AlterarPageChamado")) {
+                alterarPageChamado(request, response);
             } else if (url.equals(request.getContextPath() + "/AbrirChamado")) {
                 abrirChamado(request, response);
             }
