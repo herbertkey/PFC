@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class Chamado {
     
@@ -14,7 +15,8 @@ public class Chamado {
     private Subcategoria subcategoria; //Subcategoria do chamado
     private Usuario tecnico; //Técnico que será atribuido ao chamado
     private Prioridade prioridade; //Prioridade do Chamado (Calculo será feito por meio da regra de negocio)
-
+   
+    
     public String getId() {
         return id;
     }
