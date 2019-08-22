@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.*;
 
 
-@WebServlet(urlPatterns = {"/AbrirChamado","/ConsultarChamado","/AlterarPageChamado"})
+@WebServlet(urlPatterns = {"/AbrirChamado","/ConsultarChamado","/AlterarPageChamado","/AlterarChamado"})
 public class ControleChamado extends HttpServlet {
 
     protected void abrirChamado(HttpServletRequest request, HttpServletResponse response)
@@ -143,13 +143,42 @@ public class ControleChamado extends HttpServlet {
         try {
             
             String acao = (String) request.getParameter("acao");
+            
+            if(acao.equals("Adicionar")){
+                HistoricoDAO historicoDAO = new HistoricoDAO();
+                Historico historico = new Historico();
+            
+                Usuario usuario = new Usuario();            
+                usuario.setNumero_registro(Integer.parseInt(request.getParameter("txtNumeroDeRegistro")));
+                historico.setUsuario(usuario);             
+            
+                historico.setInformacoes_adicionais(request.getParameter("txtInformacoesAdicionais"));
+                
+                ChamadoDAO chamadoDAO = new ChamadoDAO();
+                Chamado chamado = new Chamado();
+                chamado.setId(request.getParameter("txtId"));
+                
+                historico.setChamado(chamado);
+                historico.setData(chamadoDAO.getDateTime());
+                
+                historicoDAO.inserirInformacoes(historico);
+                               
+                
+            }            
+            
             ChamadoDAO chamadoDAO = new ChamadoDAO();
             Chamado chamado = new Chamado();
             Chamado chamados = new Chamado();
-            chamado.setId(acao);
+            if(acao.equals("Adicionar")){
+                chamado.setId(request.getParameter("txtId"));
+            }else{
+                chamado.setId(acao);
+            }
+            
             chamados = chamadoDAO.consultarUmChamado(chamado);
 
             request.setAttribute("chamado", chamados);
+            
             request.getRequestDispatcher("/alterar_chamado.jsp").forward(request, response);
 
         } catch (Exception erro) {
@@ -159,6 +188,37 @@ public class ControleChamado extends HttpServlet {
         }
 
     }
+        protected void alterarChamado(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
+
+        response.setContentType("text/html;charset=UTF-8");
+        try {
+            String acao = request.getParameter("acao");
+            if (acao.equals("Adicionar Informacoes")){
+                ChamadoDAO chamadoDAO = new ChamadoDAO();
+                Chamado chamado = new Chamado();
+                Chamado chamados = new Chamado();
+                chamado.setId(request.getParameter("txtId"));
+                chamados = chamadoDAO.consultarUmChamado(chamado);
+
+                request.setAttribute("chamado", chamados);
+                request.getRequestDispatcher("/adicionar_informacoes_chamado.jsp").forward(request, response);
+                
+            } else if(acao.equals("Alterar")){
+            
+                
+                
+                
+            }
+            
+        } catch (Exception erro) {
+            RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");
+            request.setAttribute("erro", erro);
+            rd.forward(request, response);
+        }
+
+    }
+
 
 
     
@@ -182,7 +242,7 @@ public class ControleChamado extends HttpServlet {
             rd.forward(request, response);
         }
     }
-
+ 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -190,8 +250,10 @@ public class ControleChamado extends HttpServlet {
         try {
             if (url.equals(request.getContextPath() + "/AbrirChamado")) {
                 abrirChamado(request, response);
-            } else if (url.equals(request.getContextPath() + "/AlterarUsuario")) {
-                //alterarUsuario(request, response);
+            } else if (url.equals(request.getContextPath() + "/AlterarChamado")) {
+                alterarChamado(request, response);
+            }else if (url.equals(request.getContextPath() + "/AlterarPageChamado")) {
+                alterarPageChamado(request, response);
             }
         } catch (Exception erro) {
             RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");

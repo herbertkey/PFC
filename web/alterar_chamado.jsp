@@ -1,15 +1,10 @@
-<%-- 
-    Document   : alterar_chamado
-    Created on : 18/08/2019, 19:50:19
-    Author     : herbe
---%>
 <%@page import="model.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Alterar Chamado</title>
     </head>
     <body>
         <h1>Alterar Chamado</h1>
@@ -43,7 +38,8 @@
             Técnico: <input type="text" readonly="true" name="txtTecnico" value="<%=chamado.getTecnico().getNome()%>"><br/>
             Prioridade: <input type="text" readonly="true" name="txtPrioridade" value="<%=chamado.getPrioridade()%>"><br/>
 
-            <input type="submit" value="Alterar"></br></br>
+            <input type="submit" name="acao" value="Adicionar Informacoes"></br></br>
+            <input type="submit" name="acao" value="Alterar"></br></br>
 
         </form>
         <a href="/ProjetoPFC_5/ConsultarSubcategoria?txtSubcategoria=">Voltar</a>
