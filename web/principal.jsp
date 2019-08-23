@@ -59,15 +59,15 @@
                                 <a href="/ProjetoPFC_5/admin/area_restrita.jsp"> Área restrita</a>
                             </li>
                             <li>
-                            <a href="#"> Chamado<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="/ProjetoPFC_5/admin/AbrirChamado?acao="> Abrir Chamado</a>
-                                </li>
-                                <li>
-                                    <a href="/ProjetoPFC_5/admin/ConsultarChamado?acao="> Consultar Chamado</a>
-                                </li>
-                             </li>
+                                <a href="#"> Chamado<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="/ProjetoPFC_5/AbrirChamado?acao="> Abrir Chamado</a>
+                                    </li>
+                                    <li>
+                                        <a href="/ProjetoPFC_5/ConsultarChamado?acao="> Consultar Chamado</a>
+                                    </li>
+                            </li>
 
 
 
