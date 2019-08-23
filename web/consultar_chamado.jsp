@@ -24,7 +24,6 @@
                 <%
                     }
                 %>
-                <option>TODOS</option>
                 <input type="submit" value="Consultar" name="acao">
         </form>
         <%
