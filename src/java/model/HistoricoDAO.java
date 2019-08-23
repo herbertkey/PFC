@@ -11,7 +11,7 @@ import util.ConectaBanco;
 public class HistoricoDAO {
     
     private static final String INSERIR_INFORMACOES_ADICIONAIS = "INSERT INTO historico (data,informacoes_adicionais,usuario,chamado) VALUES (?,?,(SELECT id FROM usuario WHERE numero_registro=?),?)";
-    private static final String CONSULTA_INFORMACOES_ADICIONAIS = "SELECT h.id, h.data, h.informacoes_adicionais, (SELECT nome FROM usuario WHERE id=h.usuario), h.chamado FROM historico h";
+    private static final String CONSULTA_INFORMACOES_ADICIONAIS = "SELECT h.id, h.data, h.informacoes_adicionais, (SELECT nome FROM usuario WHERE id=h.usuario) FROM historico h WHERE h.chamado=? ORDER BY data";
         
         public void inserirInformacoes(Historico historico) {
         Connection conexao = null;
@@ -42,41 +42,31 @@ public class HistoricoDAO {
         }
     }
     
-        public List<Chamado> consultarChamadosCliente(Chamado chamado) {
+        public List<Historico> consultarHistoricoChamado(Historico historico) {
 
         Connection conexao = null;
         PreparedStatement pstmt = null;
-        List<Chamado> chamados = new ArrayList<Chamado>();
+        List<Historico> historicos = new ArrayList<Historico>();
         try {
 
             conexao = ConectaBanco.getConexao();
             pstmt = conexao.prepareStatement(CONSULTA_INFORMACOES_ADICIONAIS);
-            //SELECT h.id, h.data, h.informacoes_adicionais, (SELECT nome FROM usuario WHERE id=h.usuario), h.chamado 
-            //FROM historico h
+            //SELECT h.id, h.data, h.informacoes_adicionais, (SELECT nome FROM usuario WHERE id=h.usuario) 
+            //FROM historico h where h.chamado=? ORDER BY data
+            pstmt.setInt(1, Integer.parseInt(historico.getChamado().getId()));
             ResultSet resultado = pstmt.executeQuery();
 
-            while (resultado.next()) {
-                Chamado c = new Chamado();
-                Usuario u = new Usuario();
-                Usuario t = new Usuario();
-                Categoria cat = new Categoria();
-                Subcategoria s = new Subcategoria();
-                c.setId(resultado.getString("id"));
-                c.setDescricao(resultado.getString("descricao"));
-                c.setData_inicio(resultado.getString("data_inicio"));
-                c.setData_fim(resultado.getString("data_fim"));
-                c.setStatus(StatusChamado.valueOf(resultado.getString("status")));
+            while (resultado.next()) {    
+                Historico h = new Historico();
+                
+                h.setData(resultado.getString("data"));
+                h.setInformacoes_adicionais(resultado.getString("informacoes_adicionais"));
+                
+                Usuario u = new Usuario();                
                 u.setNome(resultado.getString("nome"));
-                c.setUsuario(u);
-                cat.setCategoria(resultado.getString("categoria"));
-                c.setCategoria(cat);
-                s.setSubcategoria(resultado.getString("subcategoria"));
-                c.setSubcategoria(s);
-                t.setNome(resultado.getString("tecnico"));
-                c.setTecnico(t);
-                c.setPrioridade(Prioridade.valueOf(resultado.getString("prioridade")));
+                h.setUsuario(u);
 
-                chamados.add(c);
+                historicos.add(h);
             }
         } catch (SQLException sqlErro) {
             throw new RuntimeException(sqlErro);
@@ -89,7 +79,7 @@ public class HistoricoDAO {
                 }
             }
         }
-        return chamados;
+        return historicos;
     }
         
         

@@ -15,13 +15,12 @@ import util.ConectaBanco;
 public class ChamadoDAO {
 
     //private static final String AUTENTICA_USUARIO = "SELECT * FROM usuario WHERE numero_registro=? AND senha=? AND status='ATIVO'";
-    private static final String ABRIR_CHAMADO = "INSERT INTO chamado(descricao, data_inicio, status, usuario, categoria, subcategoria, tecnico, prioridade) VALUES (?, ?,'ABERTO', (SELECT id FROM usuario WHERE numero_registro=?), (SELECT id FROM categoria Where upper(categoria)=?), (SELECT id FROM subcategoria Where upper(subcategoria)=?), ?, ?);";
-    private static final String CONSULTA_CHAMADO_TECNICO = "SELECT c.id, c.descricao, c.data_inicio, c.data_fim, c.status, (SELECT nome FROM usuario WHERE id=c.usuario), c.categoria, c.subcategoria, (SELECT nome as tecnico FROM usuario WHERE id=c.tecnico), c.prioridade FROM chamado c WHERE (SELECT id FROM usuario WHERE numero_registro=?)=c.tecnico	AND c.status LIKE replace(?,'TODOS','%%')";
-    private static final String CONSULTA_CHAMADO_CLIENTE = "SELECT c.id, c.descricao, c.data_inicio, c.data_fim, c.status, (SELECT nome FROM usuario WHERE id=c.usuario), c.categoria, c.subcategoria, (SELECT nome as tecnico FROM usuario WHERE id=c.tecnico), c.prioridade FROM chamado c WHERE (SELECT id FROM usuario WHERE numero_registro=?)=c.usuario	AND c.status LIKE replace(?,'TODOS','%%')";
-    private static final String CONSULTA_CHAMADO_SUPERVISOR = "SELECT c.id, c.descricao, c.data_inicio, c.data_fim, c.status, (SELECT nome FROM usuario WHERE id=c.usuario), c.categoria, c.subcategoria, (SELECT nome as tecnico FROM usuario WHERE id=c.tecnico), c.prioridade FROM chamado c WHERE c.status LIKE replace(?,'TODOS','%%')";
+    private static final String ABRIR_CHAMADO = "INSERT INTO chamado(descricao, data_inicio, status, usuario, categoria, subcategoria, tecnico, prioridade) VALUES (?, ?,'ABERTO', (SELECT id FROM usuario WHERE numero_registro=?), (SELECT id FROM categoria Where upper(categoria)=?), (SELECT id FROM subcategoria Where upper(subcategoria)=?), (SELECT id FROM usuario WHERE numero_registro=?), ?);";
+    private static final String CONSULTA_CHAMADO_TECNICO = "SELECT c.id, c.descricao, c.data_inicio, c.data_fim, c.status, (SELECT nome FROM usuario WHERE id=c.usuario), (SELECT categoria FROM categoria WHERE id=c.categoria), (SELECT subcategoria FROM subcategoria WHERE id=c.subcategoria), (SELECT nome as tecnico FROM usuario WHERE id=c.tecnico), c.prioridade FROM chamado c WHERE (SELECT id FROM usuario WHERE numero_registro=?)=c.tecnico AND c.status LIKE replace(?,'TODOS','%%')";
+    private static final String CONSULTA_CHAMADO_CLIENTE = "SELECT c.id, c.descricao, c.data_inicio, c.data_fim, c.status, (SELECT nome FROM usuario WHERE id=c.usuario), (SELECT categoria FROM categoria WHERE id=c.categoria), (SELECT subcategoria FROM subcategoria WHERE id=c.subcategoria), (SELECT nome as tecnico FROM usuario WHERE id=c.tecnico), c.prioridade FROM chamado c WHERE (SELECT id FROM usuario WHERE numero_registro=?)=c.usuario AND c.status LIKE replace(?,'TODOS','%%')";
+    private static final String CONSULTA_CHAMADO_SUPERVISOR = "SELECT c.id, c.descricao, c.data_inicio, c.data_fim, c.status, (SELECT nome FROM usuario WHERE id=c.usuario), (SELECT categoria FROM categoria WHERE id=c.categoria), (SELECT subcategoria FROM subcategoria WHERE id=c.subcategoria), (SELECT nome as tecnico FROM usuario WHERE id=c.tecnico), c.prioridade FROM chamado c WHERE c.status LIKE replace(?,'TODOS','%%')";
     private static final String CONSULTA_UM_CHAMADO = "SELECT c.id, c.descricao, c.data_inicio, c.data_fim, c.status, (SELECT nome FROM usuario WHERE id=c.usuario), (SELECT categoria FROM categoria WHERE id=c.categoria), (SELECT subcategoria FROM subcategoria WHERE id=c.subcategoria), (SELECT nome as tecnico FROM usuario WHERE id=c.tecnico), c.prioridade FROM chamado c WHERE c.id=?";
-    //private static final String ALTERAR_USUARIO = "UPDATE usuario SET email=?,nome=?,telefone=?,tipo=?,cargo=?, setor=? WHERE numero_registro=?";
-    //private static final String CONSULTA_UM_USUARIO = "SELECT numero_registro, email, nome, telefone, tipo, cargo, setor FROM usuario Where numero_registro=?";
+    private static final String ALTERAR_CHAMADO = "UPDATE chamado SET descricao=?, status=?, categoria=(SELECT id FROM categoria WHERE categoria=?), subcategoria=(SELECT id FROM subcategoria WHERE subcategoria=?), prioridade=? WHERE id=?";
     //private static final String EXCLUIR_USUARIO = "UPDATE usuario SET status='INATIVO' WHERE numero_registro=?";
 
     public void abrirChamado(Chamado chamado) {
@@ -272,5 +271,36 @@ public class ChamadoDAO {
         }
         return c;
     }
+    public void alterarChamado(Chamado chamado) {
+
+        Connection conexao = null;
+        PreparedStatement pstmt = null;
+        try {
+            
+            conexao = ConectaBanco.getConexao();
+            pstmt = conexao.prepareStatement(ALTERAR_CHAMADO);
+            //UPDATE chamado c SET c.descricao=?, c.status=?, c.categoria=(SELECT id FROM categoria WHERE categoria=?),
+            //c.subcategoria=(SELECT id FROM subcategoria WHERE subcategoria=?), c.prioridade=? 
+            //WHERE c.id=?
+            pstmt.setString(1, chamado.getDescricao());
+            pstmt.setString(2, chamado.getStatus().toString());
+            pstmt.setString(3, chamado.getCategoria().getCategoria());
+            pstmt.setString(4, chamado.getSubcategoria().getSubcategoria());
+            pstmt.setString(5, chamado.getPrioridade().toString());
+            pstmt.setInt(6, Integer.parseInt(chamado.getId()));
+            pstmt.execute();
+        } catch (SQLException sqlErro) {
+            throw new RuntimeException(sqlErro);
+        } finally {
+            if (conexao != null) {
+                try {
+                    conexao.close();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        }
+    }
+
 
 }

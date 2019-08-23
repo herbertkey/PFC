@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="model.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,6 +22,37 @@
 
             ID: <input type="text" readonly="true" name="txtId" value="<%=chamado.getId()%>"><br/>
             Descrição: <textarea readonly="true" name="txtDescricao" ><%=chamado.getDescricao()%></textarea><br/><br/>
+            <%
+                List<Historico> historicos = (List<Historico>) request.getAttribute("historico");
+                
+                if (historicos != null) {
+                    
+            %>    
+            <table>            
+                <thead>
+                    <tr>
+                        <th >Informações Adicionais</th>
+                        <th>Data</th>
+                        <th>Nome</th>
+                    </tr>
+                </thead>  
+                <%
+                    for (Historico h : historicos) {
+                %> 
+                <tbody>
+                    <tr>
+                        <td> <%= h.getInformacoes_adicionais()%></td>
+                        <td> <%= h.getData()%></td>
+                        <td> <%= h.getUsuario().getNome()%></td>
+                    </tr>
+                    <%
+                        }
+                    %>
+                </tbody>
+            </table>
+            <%
+                }
+            %>
             Adicionar Informação: <textarea name="txtInformacoesAdicionais" ></textarea><br/>
             
             <input type="submit" name="acao" value="Adicionar"></br></br>
