@@ -75,7 +75,7 @@ public class ControleChamado extends HttpServlet {
             List<Subcategoria> subcategorias = new ArrayList<Subcategoria>();
             Subcategoria subcategoria = new Subcategoria();
             subcategoria.setSubcategoria("");
-            subcategorias = subcategoriaDAO.consultarSubcategoria(subcategoria);
+            subcategorias = subcategoriaDAO.consultarSubcategoria(subcategoria,categorias);
             request.setAttribute("consultasubcategoria", subcategorias);
 
             RequestDispatcher rd = request.getRequestDispatcher("/abertura_chamado.jsp");
@@ -193,7 +193,7 @@ public class ControleChamado extends HttpServlet {
             List<Subcategoria> subcategorias = new ArrayList<Subcategoria>();
             Subcategoria subcategoria = new Subcategoria();
             subcategoria.setSubcategoria("");
-            subcategorias = subcategoriaDAO.consultarSubcategoria(subcategoria);
+            subcategorias = subcategoriaDAO.consultarSubcategoria(subcategoria,categorias);
             request.setAttribute("consultasubcategoria", subcategorias);
 
             request.setAttribute("chamado", chamados);

@@ -8,7 +8,7 @@
     </head>
     <body>
         <h1>Alterar Subcategoria</h1>
-        <form action="/ProjetoPFC_5/AlterarSubategoria" method="POST">
+        <form action="/ProjetoPFC_5/AlterarSubcategoria" method="POST">
             <%
                 Subcategoria subcategoria = (Subcategoria) request.getAttribute("subcategoria");
 

@@ -2,9 +2,18 @@ package model;
 
 public class Subcategoria {
     
+    private String id;
     private String subcategoria;
     private Prioridade prioridade;
     private Categoria categoria;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public Categoria getCategoria() {
         return categoria;

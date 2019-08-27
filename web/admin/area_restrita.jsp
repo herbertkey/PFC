@@ -82,7 +82,7 @@
                                 <a href="#"> Subcategoria<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="/ProjetoPFC_5/admin/CadastrarSubcategoria?acao="> Cadastro de Subcategoria</a>
+                                        <a href="/ProjetoPFC_5/CadastrarSubcategoria?acao="> Cadastro de Subcategoria</a>
                                     </li>
                                     <li>
                                         <a href="/ProjetoPFC_5/ConsultarSubcategoria?txtSubcategoria="> Consultar Subcategoria</a>

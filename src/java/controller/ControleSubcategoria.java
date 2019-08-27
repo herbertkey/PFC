@@ -37,12 +37,16 @@ public class ControleSubcategoria extends HttpServlet {
             }
             
             Categoria categoria = new Categoria();
+            CategoriaDAO categoriaDAO = new CategoriaDAO();
             categoria.setCategoria(request.getParameter("optCategoria"));
+            categoria.setId(categoriaDAO.consultaIdCategoriaParaCadastrarSubcategoria(categoria).getId());
+            
             subcategoria.setCategoria(categoria);
 
             SubcategoriaDAO subcategoriaDAO = new SubcategoriaDAO();
             
-            String nome = subcategoriaDAO.consultaUmaSubcategoria(subcategoria).getSubcategoria();
+            String nome = subcategoriaDAO.consultaUmaSubcategoria(subcategoria).getSubcategoria();   
+            
             if (nome != null) {
                 request.setAttribute("msg", "Subcategoria já cadastrada");
                 //RequestDispatcher rd = request.getRequestDispatcher("/admin/cadastro_subcategoria.jsp");
@@ -76,11 +80,17 @@ public class ControleSubcategoria extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
+            List<Categoria> categorias = new ArrayList<Categoria>();
+            Categoria categoria = new Categoria();
+            CategoriaDAO categoriaDAO = new CategoriaDAO();
+            categoria.setCategoria("");
+            categorias = categoriaDAO.consultarCategoria(categoria);
+            
             Subcategoria subcategoria = new Subcategoria();
             subcategoria.setSubcategoria(request.getParameter("txtSubcategoria"));
             List<Subcategoria> subcategorias = new ArrayList<Subcategoria>();
             SubcategoriaDAO subcategoriaDAO = new SubcategoriaDAO();            
-            subcategorias = subcategoriaDAO.consultarSubcategoria(subcategoria);
+            subcategorias = subcategoriaDAO.consultarSubcategoria(subcategoria,categorias);
             
             request.setAttribute("consulta", subcategorias);
             RequestDispatcher rd = request.getRequestDispatcher("/admin/consultar_subcategoria.jsp");
@@ -109,6 +119,8 @@ public class ControleSubcategoria extends HttpServlet {
             }else if (prioridade.equalsIgnoreCase("altissima")) {
                 subcategoria.setPrioridade(Prioridade.ALTISSIMA);
             }
+            
+            subcategoria.setSubcategoria(request.getParameter("txtSubcategoria"));
 
             SubcategoriaDAO subcategoriaDAO = new SubcategoriaDAO();
             subcategoriaDAO.alterarSubcategoria(subcategoria);
@@ -132,7 +144,14 @@ public class ControleSubcategoria extends HttpServlet {
             Subcategoria subcategorias = new Subcategoria();
             subcategoria.setSubcategoria(acao);
             subcategorias = subcategoriaDAO.consultaUmaSubcategoria(subcategoria);
-
+            
+            Categoria categoria = new Categoria();
+            CategoriaDAO categoriaDAO = new CategoriaDAO();
+            categoria.setId(subcategorias.getCategoria().getId());
+            categoria.setCategoria(categoriaDAO.consultaNomeCategoriaPorID(categoria).getCategoria());
+            
+            subcategorias.setCategoria(categoria);    
+            
             request.setAttribute("subcategoria", subcategorias);
             request.getRequestDispatcher("/admin/alterar_subcategoria.jsp").forward(request, response);
 

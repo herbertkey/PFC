@@ -11,10 +11,12 @@ import util.ConectaBanco;
 public class CategoriaDAO {
     
     private static final String CADASTRA_NOVA_CATEGORIA = "INSERT INTO categoria (categoria,prioridade,status) values (?,?,'ATIVO')";
-    private static final String CONSULTA_CATEGORIA = "SELECT categoria, prioridade FROM categoria WHERE upper(categoria) LIKE ? and status='ATIVO'";
+    private static final String CONSULTA_CATEGORIA = "SELECT id, categoria, prioridade FROM categoria WHERE upper(categoria) LIKE ? and status='ATIVO'";
     private static final String ALTERAR_CATEGORIA = "UPDATE categoria SET categoria=?,prioridade=? WHERE upper(categoria)=?";
     private static final String CONSULTA_UMA_CATEGORIA = "SELECT categoria,prioridade FROM categoria Where upper(categoria)=?";
     private static final String EXCLUIR_CATEGORIA = "UPDATE categoria SET status='INATIVO' WHERE upper(categoria)=?";
+    private static final String CONSULTA_ID_CATEGORIA_PARA_CADASTRAR_SUBCATEGORIA = "SELECT id FROM categoria Where upper(categoria)=?";
+    private static final String CONSULTA_NOME_CATEGORIA_POR_ID = "SELECT categoria FROM categoria Where id=?";
 
     public void cadastraNovaCategoria(Categoria categoria) {
         Connection conexao = null;
@@ -51,6 +53,7 @@ public class CategoriaDAO {
 
             while (resultado.next()) {
                 Categoria c = new Categoria();
+                c.setId(resultado.getString("id"));
                 c.setCategoria(resultado.getString("categoria"));
                 c.setPrioridade(Prioridade.valueOf(resultado.getString("prioridade")));
 
@@ -149,6 +152,66 @@ public class CategoriaDAO {
             }
         }
 
+    }
+    public Categoria consultaIdCategoriaParaCadastrarSubcategoria(Categoria categoria) throws ClassNotFoundException, SQLException {
+
+        Categoria c = null;
+        Connection conexao = null;
+        PreparedStatement pstmt = null;
+
+        try {
+
+            conexao = ConectaBanco.getConexao();
+            pstmt = conexao.prepareStatement(CONSULTA_ID_CATEGORIA_PARA_CADASTRAR_SUBCATEGORIA);
+            pstmt.setString(1, categoria.getCategoria().toUpperCase());
+            pstmt.execute();
+            ResultSet resultado = pstmt.executeQuery();
+            c = new Categoria();
+            if (resultado.next()) {
+                c.setId(resultado.getString("id"));
+            }
+        } catch (SQLException sqlErro) {
+            throw new RuntimeException(sqlErro);
+        } finally {
+            if (conexao != null) {
+                try {
+                    conexao.close();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        }
+        return c;
+    }
+    public Categoria consultaNomeCategoriaPorID(Categoria categoria) throws ClassNotFoundException, SQLException {
+
+        Categoria c = null;
+        Connection conexao = null;
+        PreparedStatement pstmt = null;
+
+        try {
+
+            conexao = ConectaBanco.getConexao();
+            pstmt = conexao.prepareStatement(CONSULTA_NOME_CATEGORIA_POR_ID);
+            pstmt.setInt(1, Integer.parseInt(categoria.getId()));
+            pstmt.execute();
+            ResultSet resultado = pstmt.executeQuery();
+            c = new Categoria();
+            if (resultado.next()) {
+                c.setCategoria(resultado.getString("categoria"));
+            }
+        } catch (SQLException sqlErro) {
+            throw new RuntimeException(sqlErro);
+        } finally {
+            if (conexao != null) {
+                try {
+                    conexao.close();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        }
+        return c;
     }
     
     
