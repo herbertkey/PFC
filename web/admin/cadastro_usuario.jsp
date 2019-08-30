@@ -22,44 +22,34 @@
         <link href="/ProjetoPFC_5/css/startmin.css" rel="stylesheet">
         <link href="/ProjetoPFC_5/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     </head>
-    <body>
-
-        
-            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <body> 
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="/ProjetoPFC_5/principal.jsp">Cadastro de usuários</a>
                 </div>
-
                 <ul class="nav navbar-nav navbar-left navbar-top-links">
                     <li><a href="/ProjetoPFC_5/principal.jsp"> <i class="fa fa-home fa-fw"></i> Home</a></li>
                 </ul>
-
                 <ul class="nav navbar-right navbar-top-links">
                     <li class="dropdown navbar-inverse">
-
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%
                             Usuario usuario = (Usuario) session.getAttribute("usuarioAutenticado");
-
                             if (usuario != null) {
                             %>
                             <i class="fa fa-user fa-fw"></i> <%=usuario.getNome()%> <b class="caret"></b>
-
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-
                             <li><a href="/ProjetoPFC_5/ControleAcesso?acao=Sair"><i class="fa fa-sign-out fa-fw"></i> Sair</a>
                             </li>
                         </ul>
                     </li>
                 </ul>
                 <!-- /.navbar-top-links -->
-
                 <div class="navbar-default sidebar" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
-
                             <li>
                                 <a href="#"> Usuário<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
@@ -71,7 +61,6 @@
                                     </li>
                                 </ul>
                             </li>
-
                             <li>
                                 <a href="#"> Categoria<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
@@ -109,16 +98,13 @@
                         <!-- /.col-lg-12 -->
                     </div>
                     <!-- /.row -->
-                    <form action="/ProjetoPFC_5/CadastrarUsuario" method="POST">
+                    
                         <div class="row">
-
                             <div class="panel panel-default">
-
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-lg-6">
-                                            <form role="form">
-
+                                            <form role="form" action="/ProjetoPFC_5/CadastrarUsuario" method="POST">
 
                                                 <div class="form-group">
                                                     <label>Número de Registro:</label>
@@ -127,32 +113,29 @@
 
                                                 <div class="form-group">
                                                     <label>Nome:</label>
-                                                    <input type="text" class="form-control" placeholder="Nome" name="txtNome" pattern="[0-9]+$">
+                                                    <input type="text" class="form-control" placeholder="Nome" name="txtNome">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Email:</label>
-                                                    <input type="email" class="form-control" placeholder="Email" name="txtEmail" pattern="[0-9]+$">
+                                                    <input type="email" class="form-control" placeholder="Email" name="txtEmail">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Telefone:</label>
-                                                    <input type="tel" class="form-control" placeholder="Telefone" name="txtTelefone" pattern="[0-9]+$">
+                                                    <input type="tel" class="form-control" placeholder="Telefone" name="txtTelefone">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Senha:</label>
-                                                    <input type="password" class="form-control" placeholder="Senha" name="txtSenha" pattern="[0-9]+$">
+                                                    <input type="password" class="form-control" placeholder="Senha" name="txtSenha">
                                                     <p class="help-block">Utilize sempre senhas seguras</p>
                                                 </div>
 
-
                                                 <div class="form-group">
                                                     <label>Cargo:</label>
-                                                    <input type="texte" class="form-control" placeholder="Cargo" name="txtCargo" pattern="[0-9]+$">
+                                                    <input type="texte" class="form-control" placeholder="Cargo" name="txtCargo">
                                                 </div>
-
-
 
                                                 <div class="form-group">
                                                     <% Usuario usuarioSessao = (Usuario) session.getAttribute("usuarioAutenticado");
@@ -174,105 +157,43 @@
 
                                                 </div>    
 
-                                                <div class="form-group">
-                                                    <label>Setor:</label>
-                                                    <select class="form-control" name="optSetor">
-                                                        <%
-                                                            for (Setor setores : Setor.values()) {
-                                                        %>
-                                                        <option ><%=setores%></option> 
-                                                        <%
-                                                            }
-                                                        %>
+                                                        <div class="form-group">
+                                                            <label>Setor:</label>
+                                                            <select class="form-control" name="optSetor">
+                                                                <%
+                                                                    for (Setor setores : Setor.values()) {
+                                                                %>
+                                                                <option ><%=setores%></option> 
+                                                                <%
+                                                                    }
+                                                                %>
+                                                            </select>
+                                                        </div>
+                                                        
 
-                                                </div>
-<button type="submit" class="btn btn-default">Submit Button</button>  
-                                                <button type="submit" class="btn btn-default">Submit Button</button>  
-
-
-                                                <button type="submit" class="btn btn-default">Submit Button</button>  
-
-
-                                                <button type="submit" class="btn btn-default">Submit Button</button>  
-
-
-                                                <button type="submit" class="btn btn-default">Submit Button</button>  
+                                                 <button type="submit" class="btn btn-default">Cadastrar</button>  
                                                 </form> 
-                                                <button type="submit" class="btn btn-default">Submit Button</button>  
-                                                <button type="submit" class="btn btn-default">Submit Button</button>  
-
-
-                                                <button type="submit" class="btn btn-default">Submit Button</button>  
-
-
-                                                <button type="submit" class="btn btn-default">Submit Button</button>  
-
-
-                                                <button type="submit" class="btn btn-default">Submit Button</button>  
-
-
                                                 
-
-
-                                            
-
-
-
-
-
-
-
-
-
-
-
                                         </div>
-
                                     </div>
-                                    <!-- /.row (nested) -->
+                                    
                                 </div>
-                                <!-- /.panel-body -->
+                                
                             </div>
-                            <!-- /.panel -->
-
-
+                            
                         </div>
-
-
-
-
-
-
-
-
-
-
-                    </form>
-                    <!-- /.panel-body -->
+						  
+                   
+					
+                   
                 </div>
-                <!-- /.panel -->
+                
             </div>
-            <!-- /.col-lg-12 -->
+            
         </div>
-        <!-- /.row -->
-
-
-
-
-        <div id="page-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-
-
-
-                    <!-- /.col-lg-12 -->
-                </div>
-
-            </div>
-            <!-- /.container-fluid -->
-        </div>
-        <!-- /#page-wrapper -->
-
+        
+        
+        
 
 
         <!-- jQuery -->
