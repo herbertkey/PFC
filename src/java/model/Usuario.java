@@ -2,6 +2,7 @@ package model;
 
 public class Usuario {
 
+    private int id;
     private int numero_registro;
     private String email;
     private String nome;
@@ -10,6 +11,14 @@ public class Usuario {
     private Tipo tipo; //Tipo é referente ao tipo de usuario (Classe Tipo)
     private String cargo;
     private Setor setor; //Setor é referente ao setor de usuario (Classe Setor)
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Setor getSetor() {
         return setor;

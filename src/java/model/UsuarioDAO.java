@@ -18,7 +18,7 @@ public class UsuarioDAO {
     private static final String CADASTRA_NOVO_USUARIO = "INSERT INTO usuario (numero_registro, email, nome, telefone, senha, tipo, cargo, status, setor) values (?,?,?,?,?,?,?,'ATIVO',?)";
     private static final String CONSULTA_USUARIO = "SELECT numero_registro, email, nome, telefone, senha, tipo, cargo, setor FROM usuario WHERE upper(nome) LIKE ? and status='ATIVO'";
     private static final String ALTERAR_USUARIO = "UPDATE usuario SET email=?,nome=?,telefone=?,tipo=?,cargo=?, setor=? WHERE numero_registro=?";
-    private static final String CONSULTA_UM_USUARIO = "SELECT numero_registro, email, nome, telefone, tipo, cargo, setor FROM usuario Where numero_registro=?";
+    private static final String CONSULTA_UM_USUARIO = "SELECT id, numero_registro, email, nome, telefone, tipo, cargo, setor FROM usuario Where numero_registro=?";
     private static final String EXCLUIR_USUARIO = "UPDATE usuario SET status='INATIVO' WHERE numero_registro=?";
 
     public void cadastraNovoUsuario(Usuario usuario) {
@@ -164,6 +164,7 @@ public class UsuarioDAO {
             ResultSet resultado = pstmt.executeQuery();
             u = new Usuario();
             if (resultado.next()) {
+                u.setId(resultado.getInt("id"));
                 u.setNumero_registro(resultado.getInt("numero_registro"));
                 u.setEmail(resultado.getString("email"));
                 u.setNome(resultado.getString("nome"));
