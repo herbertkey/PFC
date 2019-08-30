@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.*;
 
-@WebServlet(urlPatterns = {"/AbrirChamado", "/ConsultarChamado", "/AlterarPageChamado", "/AlterarChamado"})
+@WebServlet(urlPatterns = {"/AbrirChamado", "/ConsultarChamado", "/AlterarPageChamado", "/AlterarChamado", "/FecharChamado"})
 public class ControleChamado extends HttpServlet {
 
     protected void abrirChamado(HttpServletRequest request, HttpServletResponse response)
@@ -43,7 +43,7 @@ public class ControleChamado extends HttpServlet {
                 Usuario tecnico = new Usuario();
                 tecnico.setNumero_registro(789);
                 chamado.setTecnico(tecnico);
-                
+
                 //Depois que implementar o calculo da prioridade retirar essas linhas
                 String prioridade = request.getParameter("optPrioridade");
                 if (prioridade.equalsIgnoreCase("baixa")) {
@@ -75,7 +75,7 @@ public class ControleChamado extends HttpServlet {
             List<Subcategoria> subcategorias = new ArrayList<Subcategoria>();
             Subcategoria subcategoria = new Subcategoria();
             subcategoria.setSubcategoria("");
-            subcategorias = subcategoriaDAO.consultarSubcategoria(subcategoria,categorias);
+            subcategorias = subcategoriaDAO.consultarSubcategoria(subcategoria, categorias);
             request.setAttribute("consultasubcategoria", subcategorias);
 
             RequestDispatcher rd = request.getRequestDispatcher("/abertura_chamado.jsp");
@@ -151,6 +151,8 @@ public class ControleChamado extends HttpServlet {
 
                 Usuario usuario = new Usuario();
                 usuario.setNumero_registro(Integer.parseInt(request.getParameter("txtNumeroDeRegistro")));
+                UsuarioDAO usuarioDAO = new UsuarioDAO();
+                usuario = usuarioDAO.consultaUmUsuario(usuario);
                 historico.setUsuario(usuario);
 
                 historico.setInformacoes_adicionais(request.getParameter("txtInformacoesAdicionais"));
@@ -159,11 +161,15 @@ public class ControleChamado extends HttpServlet {
                 Chamado chamado = new Chamado();
                 chamado.setId(request.getParameter("txtId"));
 
+                
+                
                 historico.setChamado(chamado);
                 historico.setData(chamadoDAO.getDateTime());
+                
+                
 
                 historicoDAO.inserirInformacoes(historico);
-                
+
             }
 
             ChamadoDAO chamadoDAO = new ChamadoDAO();
@@ -181,7 +187,7 @@ public class ControleChamado extends HttpServlet {
             historicos = historicoDAO.consultarHistoricoChamado(historico);
 
             chamados = chamadoDAO.consultarUmChamado(chamado);
-            
+
             List<Categoria> categorias = new ArrayList<Categoria>();
             Categoria categoria = new Categoria();
             CategoriaDAO categoriaDAO = new CategoriaDAO();
@@ -193,7 +199,7 @@ public class ControleChamado extends HttpServlet {
             List<Subcategoria> subcategorias = new ArrayList<Subcategoria>();
             Subcategoria subcategoria = new Subcategoria();
             subcategoria.setSubcategoria("");
-            subcategorias = subcategoriaDAO.consultarSubcategoria(subcategoria,categorias);
+            subcategorias = subcategoriaDAO.consultarSubcategoria(subcategoria, categorias);
             request.setAttribute("consultasubcategoria", subcategorias);
 
             request.setAttribute("chamado", chamados);
@@ -231,9 +237,9 @@ public class ControleChamado extends HttpServlet {
                 request.getRequestDispatcher("/adicionar_informacoes_chamado.jsp").forward(request, response);
 
             } else if (acao.equals("Alterar")) {
-                
+
                 Chamado chamado = new Chamado();
-                
+
                 chamado.setId(request.getParameter("txtId"));
 
                 chamado.setDescricao(request.getParameter("txtDescricao"));
@@ -245,7 +251,7 @@ public class ControleChamado extends HttpServlet {
                 Subcategoria subcategoria = new Subcategoria();
                 subcategoria.setSubcategoria(request.getParameter("optSubcategoria"));
                 chamado.setSubcategoria(subcategoria);
-                
+
                 //Depois que implementar o calculo da prioridade retirar essas linhas
                 String prioridade = request.getParameter("txtPrioridade");
                 if (prioridade.equalsIgnoreCase("baixa")) {
@@ -257,7 +263,7 @@ public class ControleChamado extends HttpServlet {
                 } else if (prioridade.equalsIgnoreCase("altissima")) {
                     chamado.setPrioridade(Prioridade.ALTISSIMA);
                 }
-                
+
                 String status = request.getParameter("optStatus");
                 if (status.equalsIgnoreCase("aberto")) {
                     chamado.setStatus(StatusChamado.ABERTO);
@@ -270,13 +276,61 @@ public class ControleChamado extends HttpServlet {
                 }
 
                 ChamadoDAO chamadoDAO = new ChamadoDAO();
-                
+
                 chamadoDAO.alterarChamado(chamado);
-                
-                request.setAttribute("consulta", chamado);
-                RequestDispatcher rd = request.getRequestDispatcher("/consultar_chamado.jsp");
+
+                Chamado chamados = new Chamado();
+                chamados.setId(chamado.getId());
+                chamados = chamadoDAO.consultarUmChamado(chamados);
+                HistoricoDAO historicoDAO = new HistoricoDAO();
+                Historico historico = new Historico();
+                List<Historico> historicos = new ArrayList<Historico>();
+
+                historico.setChamado(chamados);
+                historicos = historicoDAO.consultarHistoricoChamado(historico);
+
+                request.setAttribute("chamado", chamados);
+                request.setAttribute("historico", historicos);
+                request.setAttribute("msg", "Chamado alterado com sucesso");
+
+                List<Categoria> categorias = new ArrayList<Categoria>();
+
+                CategoriaDAO categoriaDAO = new CategoriaDAO();
+                categoria.setCategoria("");
+                categorias = categoriaDAO.consultarCategoria(categoria);
+                request.setAttribute("consultacategoria", categorias);
+
+                SubcategoriaDAO subcategoriaDAO = new SubcategoriaDAO();
+                List<Subcategoria> subcategorias = new ArrayList<Subcategoria>();
+
+                subcategoria.setSubcategoria("");
+                subcategorias = subcategoriaDAO.consultarSubcategoria(subcategoria, categorias);
+                request.setAttribute("consultasubcategoria", subcategorias);
+
+                RequestDispatcher rd = request.getRequestDispatcher("/alterar_chamado.jsp");
                 rd.forward(request, response);
             }
+        } catch (Exception erro) {
+            RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");
+            request.setAttribute("erro", erro);
+            rd.forward(request, response);
+        }
+
+    }
+    protected void fecharChamado(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
+        response.setContentType("text/html;charset=UTF-8");
+        try {
+            String acao = (String) request.getParameter("acao");
+            Chamado chamado = new Chamado();
+            chamado.setId(acao);
+            ChamadoDAO chamadoDAO = new ChamadoDAO();
+            chamado.setData_fim(chamadoDAO.getDateTime());           
+            
+            chamadoDAO.fecharChamado(chamado);
+            request.getRequestDispatcher("/consultar_chamado.jsp").forward(request, response);
+            
+
         } catch (Exception erro) {
             RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");
             request.setAttribute("erro", erro);
@@ -292,8 +346,8 @@ public class ControleChamado extends HttpServlet {
         try {
             if (url.equals(request.getContextPath() + "/ConsultarChamado")) {
                 consultarChamado(request, response);
-            } else if (url.equals(request.getContextPath() + "/ExcluirUsuario")) {
-                //excluirUsuario(request, response);
+            } else if (url.equals(request.getContextPath() + "/FecharChamado")) {
+                fecharChamado(request, response);
             } else if (url.equals(request.getContextPath() + "/AlterarPageChamado")) {
                 alterarPageChamado(request, response);
             } else if (url.equals(request.getContextPath() + "/AbrirChamado")) {

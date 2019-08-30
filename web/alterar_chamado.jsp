@@ -12,8 +12,13 @@
         <form action="/ProjetoPFC_5/AlterarChamado" method="POST">
             <%
                 Chamado chamado = (Chamado) request.getAttribute("chamado");
-
+                String msg = (String) request.getAttribute("msg");
+                if (msg != null) {
             %> 
+            <font color="blue"><%=msg%></font></br>
+            <%
+                }
+            %>
 
             ID: <input type="text" readonly="true" name="txtId" value="<%=chamado.getId()%>"><br/>
             Descrição: <textarea name="txtDescricao" ><%=chamado.getDescricao()%></textarea><br/>
@@ -74,28 +79,28 @@
                     for (Categoria c : categorias) {
                         if (c.equals(chamado.getCategoria().getCategoria())) {
                 %> 
-                <option selected><%=c.getCategoria() %></option> 
+                <option selected><%=c.getCategoria()%></option> 
                 <%
-                }else{
+                } else {
                 %> 
                 <option><%=c.getCategoria()%></option> 
                 <%
-                    }
+                        }
                     }
                 %></select><br/>
-                
+
             Subcategoria: <select name="optSubcategoria">
                 <%
                     for (Subcategoria sc : subcategorias) {
                         if (sc.equals(chamado.getSubcategoria().getSubcategoria())) {
                 %> 
-                <option selected><%=sc.getSubcategoria() %></option> 
+                <option selected><%=sc.getSubcategoria()%></option> 
                 <%
-                }else{
+                } else {
                 %> 
                 <option><%=sc.getSubcategoria()%></option> 
                 <%
-                    }
+                        }
                     }
                 %></select><br/>
             Categoria: <input type="text" readonly="true" name="txtSubcategoria" value="<%=chamado.getCategoria().getCategoria()%>"><br/>

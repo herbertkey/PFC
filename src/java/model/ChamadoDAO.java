@@ -14,14 +14,13 @@ import util.ConectaBanco;
 
 public class ChamadoDAO {
 
-    //private static final String AUTENTICA_USUARIO = "SELECT * FROM usuario WHERE numero_registro=? AND senha=? AND status='ATIVO'";
     private static final String ABRIR_CHAMADO = "INSERT INTO chamado(descricao, data_inicio, status, usuario, categoria, subcategoria, tecnico, prioridade) VALUES (?, ?,'ABERTO', (SELECT id FROM usuario WHERE numero_registro=?), (SELECT id FROM categoria Where upper(categoria)=?), (SELECT id FROM subcategoria Where upper(subcategoria)=?), (SELECT id FROM usuario WHERE numero_registro=?), ?);";
     private static final String CONSULTA_CHAMADO_TECNICO = "SELECT c.id, c.descricao, c.data_inicio, c.data_fim, c.status, (SELECT nome FROM usuario WHERE id=c.usuario), (SELECT categoria FROM categoria WHERE id=c.categoria), (SELECT subcategoria FROM subcategoria WHERE id=c.subcategoria), (SELECT nome as tecnico FROM usuario WHERE id=c.tecnico), c.prioridade FROM chamado c WHERE (SELECT id FROM usuario WHERE numero_registro=?)=c.tecnico AND c.status LIKE replace(?,'TODOS','%%')";
     private static final String CONSULTA_CHAMADO_CLIENTE = "SELECT c.id, c.descricao, c.data_inicio, c.data_fim, c.status, (SELECT nome FROM usuario WHERE id=c.usuario), (SELECT categoria FROM categoria WHERE id=c.categoria), (SELECT subcategoria FROM subcategoria WHERE id=c.subcategoria), (SELECT nome as tecnico FROM usuario WHERE id=c.tecnico), c.prioridade FROM chamado c WHERE (SELECT id FROM usuario WHERE numero_registro=?)=c.usuario AND c.status LIKE replace(?,'TODOS','%%')";
     private static final String CONSULTA_CHAMADO_SUPERVISOR = "SELECT c.id, c.descricao, c.data_inicio, c.data_fim, c.status, (SELECT nome FROM usuario WHERE id=c.usuario), (SELECT categoria FROM categoria WHERE id=c.categoria), (SELECT subcategoria FROM subcategoria WHERE id=c.subcategoria), (SELECT nome as tecnico FROM usuario WHERE id=c.tecnico), c.prioridade FROM chamado c WHERE c.status LIKE replace(?,'TODOS','%%')";
-    private static final String CONSULTA_UM_CHAMADO = "SELECT c.id, c.descricao, c.data_inicio, c.data_fim, c.status, (SELECT nome FROM usuario WHERE id=c.usuario), (SELECT categoria FROM categoria WHERE id=c.categoria), (SELECT subcategoria FROM subcategoria WHERE id=c.subcategoria), (SELECT nome as tecnico FROM usuario WHERE id=c.tecnico), c.prioridade FROM chamado c WHERE c.id=?";
+    private static final String CONSULTA_UM_CHAMADO = "SELECT c.id, c.descricao, c.data_inicio, c.data_fim, c.status, u.nome, cat.categoria, sc.subcategoria, t.nome as tecnico, c.prioridade FROM chamado c INNER JOIN usuario u on u.id = c.usuario INNER JOIN categoria cat on cat.id = c.categoria INNER JOIN subcategoria sc on sc.id = c.subcategoria INNER JOIN usuario t on t.id = c.tecnico WHERE c.id=?";
     private static final String ALTERAR_CHAMADO = "UPDATE chamado SET descricao=?, status=?, categoria=(SELECT id FROM categoria WHERE categoria=?), subcategoria=(SELECT id FROM subcategoria WHERE subcategoria=?), prioridade=? WHERE id=?";
-    //private static final String EXCLUIR_USUARIO = "UPDATE usuario SET status='INATIVO' WHERE numero_registro=?";
+    private static final String FECHAR_CHAMADO = "UPDATE chamado SET status='FECHADO', data_fim=? WHERE id=?";
 
     public void abrirChamado(Chamado chamado) {
         Connection conexao = null;
@@ -231,8 +230,12 @@ public class ChamadoDAO {
 
             conexao = ConectaBanco.getConexao();
             pstmt = conexao.prepareStatement(CONSULTA_UM_CHAMADO);
-            //SELECT c.id, c.descricao, c.data_inicio, c.data_fim, c.status, (SELECT nome FROM usuario WHERE id=c.usuario), c.categoria, c.subcategoria, (SELECT nome as tecnico FROM usuario WHERE id=c.tecnico), c.prioridade 
-            //FROM chamado c
+            // SELECT c.id, c.descricao, c.data_inicio, c.data_fim, c.status, u.nome, cat.categoria, sc.subcategoria, t.nome as tecnico, c.prioridade 
+            // FROM chamado c 
+            // INNER JOIN usuario u on u.id = c.usuario
+            //INNER JOIN categoria cat on cat.id = c.categoria
+            //INNER JOIN subcategoria sc on sc.id = c.subcategoria
+            //INNER JOIN usuario t on t.id = c.tecnico
             //WHERE c.id=?
 
             pstmt.setInt(1, Integer.parseInt(chamado.getId()));
@@ -301,6 +304,30 @@ public class ChamadoDAO {
             }
         }
     }
+    public void fecharChamado(Chamado chamado) throws ClassNotFoundException, SQLException {
+        Connection conexao = null;
+        PreparedStatement pstmt = null;
 
+        try {
+
+            conexao = ConectaBanco.getConexao();
+            pstmt = conexao.prepareStatement(FECHAR_CHAMADO);
+            pstmt.setString(1, chamado.getData_fim());
+            pstmt.setInt(2, Integer.parseInt(chamado.getId()));
+            pstmt.execute();
+            
+        } catch (SQLException sqlErro) {
+            throw new RuntimeException(sqlErro);
+        } finally {
+            if (conexao != null) {
+                try {
+                    conexao.close();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        }
+
+    }
 
 }

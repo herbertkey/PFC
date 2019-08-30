@@ -10,8 +10,8 @@ import util.ConectaBanco;
 
 public class HistoricoDAO {
     
-    private static final String INSERIR_INFORMACOES_ADICIONAIS = "INSERT INTO historico (data,informacoes_adicionais,usuario,chamado) VALUES (?,?,(SELECT id FROM usuario WHERE numero_registro=?),?)";
-    private static final String CONSULTA_INFORMACOES_ADICIONAIS = "SELECT h.id, h.data, h.informacoes_adicionais, (SELECT nome FROM usuario WHERE id=h.usuario) FROM historico h WHERE h.chamado=? ORDER BY data";
+    private static final String INSERIR_INFORMACOES_ADICIONAIS = "INSERT INTO historico (data,informacoes_adicionais,usuario,chamado) VALUES (?,?,?,?)";
+    private static final String CONSULTA_INFORMACOES_ADICIONAIS = "SELECT h.id, h.data, h.informacoes_adicionais, u.nome FROM historico h INNER JOIN usuario u on u.id=h.usuario WHERE h.chamado=? ORDER BY data";
         
         public void inserirInformacoes(Historico historico) {
         Connection conexao = null;
@@ -25,7 +25,7 @@ public class HistoricoDAO {
             pstmt = conexao.prepareStatement(INSERIR_INFORMACOES_ADICIONAIS);
             pstmt.setString(1, historico.getData().toString());
             pstmt.setString(2, historico.getInformacoes_adicionais());
-            pstmt.setInt(3, historico.getUsuario().getNumero_registro()); 
+            pstmt.setInt(3, historico.getUsuario().getId()); 
             pstmt.setInt(4, Integer.parseInt(historico.getChamado().getId())); 
             pstmt.execute();
 
@@ -51,8 +51,10 @@ public class HistoricoDAO {
 
             conexao = ConectaBanco.getConexao();
             pstmt = conexao.prepareStatement(CONSULTA_INFORMACOES_ADICIONAIS);
-            //SELECT h.id, h.data, h.informacoes_adicionais, (SELECT nome FROM usuario WHERE id=h.usuario) 
-            //FROM historico h where h.chamado=? ORDER BY data
+            //SELECT h.id, h.data, h.informacoes_adicionais, u.nome 
+            //FROM historico h 
+            //INNER JOIN usuario u on u.id=h.usuario 
+            //WHERE h.chamado=? ORDER BY data
             pstmt.setInt(1, Integer.parseInt(historico.getChamado().getId()));
             ResultSet resultado = pstmt.executeQuery();
 

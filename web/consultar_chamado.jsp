@@ -63,7 +63,7 @@
                     <td> <%= c.getTecnico().getNome() %></td>  
                     <td> <%= c.getPrioridade() %></td>  
                     <td><a href="/ProjetoPFC_5/AlterarPageChamado?acao=<%=c.getId()%>">Alterar</a></td>
-                    <td><a href="/ProjetoPFC_5/ExcluirChamado?acao=<%=c.getId()%>">Excluir</a></td>
+                    <td><a href="/ProjetoPFC_5/FecharChamado?acao=<%=c.getId()%>">Excluir</a></td>
                 </tr>       
                 <%
                         }
