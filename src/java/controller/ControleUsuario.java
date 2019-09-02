@@ -60,7 +60,7 @@ public class ControleUsuario extends HttpServlet {
                 rd.forward(request, response);
             } else {
                 usuarioDAO.cadastraNovoUsuario(usuario);
-                request.setAttribute("msg", "<div class=\"alert alert-danger\" role=\"alert\">\n"
+                request.setAttribute("msg", "<div class=\"alert alert-success\" role=\"alert\">\n"
                         + "                                    Usuário cadastrado com sucesso!\n"
                         + "                                </div>");
                 request.setAttribute("usuario", usuario);
