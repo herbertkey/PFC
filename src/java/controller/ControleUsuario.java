@@ -53,12 +53,16 @@ public class ControleUsuario extends HttpServlet {
 
             UsuarioDAO usuarioDAO = new UsuarioDAO();
             if (usuarioDAO.consultaUmUsuario(usuario).getNumero_registro() == usuario.getNumero_registro()) {
-                request.setAttribute("msg", "Usuario já cadastrado");
+                request.setAttribute("msg", "<div class=\"alert alert-danger\" role=\"alert\">\n"
+                        + "                                    Usuário já cadastrado!\n"
+                        + "                                </div>");
                 RequestDispatcher rd = request.getRequestDispatcher("/admin/cadastro_usuario.jsp");
                 rd.forward(request, response);
             } else {
                 usuarioDAO.cadastraNovoUsuario(usuario);
-                request.setAttribute("msg", "cadastrado com sucesso");
+                request.setAttribute("msg", "<div class=\"alert alert-danger\" role=\"alert\">\n"
+                        + "                                    Usuário cadastrado com sucesso!\n"
+                        + "                                </div>");
                 request.setAttribute("usuario", usuario);
                 RequestDispatcher rd = request.getRequestDispatcher("/admin/cadastro_usuario.jsp");
                 rd.forward(request, response);
