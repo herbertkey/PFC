@@ -38,12 +38,16 @@ public class ControleCategoria extends HttpServlet {
             CategoriaDAO categoriaDAO = new CategoriaDAO();
             String nome = categoriaDAO.consultaUmaCategoria(categoria).getCategoria();
             if (nome != null) {
-                request.setAttribute("msg", "Categoria já cadastrada");
+                request.setAttribute("msg", "<div class=\"alert alert-danger\" role=\"alert\">\n"
+                        + "                                    Categoria já cadastrada!\n"
+                        + "                                </div>");
                 RequestDispatcher rd = request.getRequestDispatcher("/admin/cadastro_categoria.jsp");
                 rd.forward(request, response);
             } else {
                 categoriaDAO.cadastraNovaCategoria(categoria);
-                request.setAttribute("msg", "Categoria cadastrada com sucesso");
+                request.setAttribute("msg", "<div class=\"alert alert-success\" role=\"alert\">\n"
+                        + "                                    Categoria cadastrada com sucesso!\n"
+                        + "                                </div>");
                 request.setAttribute("categoria", categoria);
                 RequestDispatcher rd = request.getRequestDispatcher("/admin/cadastro_categoria.jsp");
                 rd.forward(request, response);

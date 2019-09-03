@@ -103,7 +103,14 @@
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <div class="row">
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-6"><%
+                                            String msg = (String) request.getAttribute("msg");
+                                                if (msg != null) {
+                                            %>
+                                                <%=msg%>
+                                            <%
+                                                }
+                                            %>
                                             <form role="form" action="/ProjetoPFC_5/CadastrarUsuario" method="POST">
 
                                                 <div class="form-group">
@@ -171,7 +178,8 @@
                                                         </div>
                                                         
 
-                                                 <button type="submit" class="btn btn-default">Cadastrar</button>  
+                                                 <button type="submit" class="btn btn-default">Cadastrar</button>
+                                                 
                                                 </form> 
                                                 
                                         </div>
