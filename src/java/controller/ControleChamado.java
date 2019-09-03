@@ -26,37 +26,45 @@ public class ControleChamado extends HttpServlet {
                 Chamado chamado = new Chamado();
 
                 Usuario usuario = new Usuario();
-
+                UsuarioDAO usuarioDAO = new UsuarioDAO();
                 usuario.setNumero_registro(Integer.parseInt(request.getParameter("txtNumeroDeRegistro")));
+                usuario = usuarioDAO.consultaUmUsuario(usuario);
                 chamado.setUsuario(usuario);
 
                 chamado.setDescricao(request.getParameter("txtDescricao"));
 
                 Categoria categoria = new Categoria();
+                CategoriaDAO categoriaDAO = new CategoriaDAO();
                 categoria.setCategoria(request.getParameter("optCategoria"));
+                categoria = categoriaDAO.consultaUmaCategoria(categoria);
                 chamado.setCategoria(categoria);
 
                 Subcategoria subcategoria = new Subcategoria();
+                SubcategoriaDAO subcategoriaDAO = new SubcategoriaDAO();
                 subcategoria.setSubcategoria(request.getParameter("optSubcategoria"));
+                subcategoria = subcategoriaDAO.consultaUmaSubcategoria(subcategoria);
                 chamado.setSubcategoria(subcategoria);
 
+                //Depois que implementar a atribuição automatica retirar essas linhas
                 Usuario tecnico = new Usuario();
-                tecnico.setNumero_registro(789);
+                tecnico.setId(3);
                 chamado.setTecnico(tecnico);
-
+                
+                ChamadoDAO chamadoDAO = new ChamadoDAO();
+                                
                 //Depois que implementar o calculo da prioridade retirar essas linhas
-                String prioridade = request.getParameter("optPrioridade");
-                if (prioridade.equalsIgnoreCase("baixa")) {
+                String prioridade = chamadoDAO.calcularPrioridadeDoChamado(chamado);
+                if (prioridade.equalsIgnoreCase("BAIXA")) {
                     chamado.setPrioridade(Prioridade.BAIXA);
-                } else if (prioridade.equalsIgnoreCase("media")) {
+                } else if (prioridade.equalsIgnoreCase("MEDIA")) {
                     chamado.setPrioridade(Prioridade.MEDIA);
-                } else if (prioridade.equalsIgnoreCase("alta")) {
+                } else if (prioridade.equalsIgnoreCase("ALTA")) {
                     chamado.setPrioridade(Prioridade.ALTA);
-                } else if (prioridade.equalsIgnoreCase("altissima")) {
+                } else if (prioridade.equalsIgnoreCase("ALTISSIMA")) {
                     chamado.setPrioridade(Prioridade.ALTISSIMA);
                 }
-
-                ChamadoDAO chamadoDAO = new ChamadoDAO();
+                         
+                
                 chamado.setData_inicio(chamadoDAO.getDateTime());
 
                 chamadoDAO.abrirChamado(chamado);

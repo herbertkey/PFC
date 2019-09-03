@@ -13,7 +13,7 @@ public class SubcategoriaDAO {
     private static final String CADASTRA_NOVA_SUBCATEGORIA = "INSERT INTO subcategoria (subcategoria,prioridade,status,categoria) values (?,?,'ATIVO',?)";
     private static final String CONSULTA_SUBCATEGORIA = "SELECT subcategoria, prioridade, categoria FROM subcategoria WHERE upper(subcategoria) LIKE ? and status='ATIVO'";
     private static final String ALTERAR_SUBCATEGORIA = "UPDATE subcategoria SET prioridade=? WHERE upper(subcategoria)=?";
-    private static final String CONSULTA_UMA_SUBCATEGORIA = "SELECT subcategoria, prioridade, categoria FROM subcategoria Where upper(subcategoria)=?";
+    private static final String CONSULTA_UMA_SUBCATEGORIA = "SELECT id, subcategoria, prioridade, categoria FROM subcategoria Where upper(subcategoria)=?";
     private static final String EXCLUIR_SUBCATEGORIA = "UPDATE subcategoria SET status='INATIVO' WHERE upper(subcategoria)=?";
 
     public void cadastraNovaSubcategoria(Subcategoria subcategoria) {
@@ -124,6 +124,7 @@ public class SubcategoriaDAO {
             ResultSet resultado = pstmt.executeQuery();
             s = new Subcategoria();
             if (resultado.next()) {
+                s.setId(resultado.getString("id"));
                 s.setSubcategoria(resultado.getString("subcategoria"));
                 s.setPrioridade(Prioridade.valueOf(resultado.getString("prioridade")));
                 Categoria c = new Categoria();

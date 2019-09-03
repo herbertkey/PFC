@@ -11,10 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import util.ConectaBanco;
+import java.lang.Math;
 
 public class ChamadoDAO {
 
-    private static final String ABRIR_CHAMADO = "INSERT INTO chamado(descricao, data_inicio, status, usuario, categoria, subcategoria, tecnico, prioridade) VALUES (?, ?,'ABERTO', (SELECT id FROM usuario WHERE numero_registro=?), (SELECT id FROM categoria Where upper(categoria)=?), (SELECT id FROM subcategoria Where upper(subcategoria)=?), (SELECT id FROM usuario WHERE numero_registro=?), ?);";
+    private static final String ABRIR_CHAMADO = "INSERT INTO chamado(descricao, data_inicio, status, usuario, categoria, subcategoria, tecnico, prioridade) VALUES (?, ?,'ABERTO', ?, ?, ?, ?, ?)";
     private static final String CONSULTA_CHAMADO_TECNICO = "SELECT c.id, c.descricao, c.data_inicio, c.data_fim, c.status, (SELECT nome FROM usuario WHERE id=c.usuario), (SELECT categoria FROM categoria WHERE id=c.categoria), (SELECT subcategoria FROM subcategoria WHERE id=c.subcategoria), (SELECT nome as tecnico FROM usuario WHERE id=c.tecnico), c.prioridade FROM chamado c WHERE (SELECT id FROM usuario WHERE numero_registro=?)=c.tecnico AND c.status LIKE replace(?,'TODOS','%%')";
     private static final String CONSULTA_CHAMADO_CLIENTE = "SELECT c.id, c.descricao, c.data_inicio, c.data_fim, c.status, (SELECT nome FROM usuario WHERE id=c.usuario), (SELECT categoria FROM categoria WHERE id=c.categoria), (SELECT subcategoria FROM subcategoria WHERE id=c.subcategoria), (SELECT nome as tecnico FROM usuario WHERE id=c.tecnico), c.prioridade FROM chamado c WHERE (SELECT id FROM usuario WHERE numero_registro=?)=c.usuario AND c.status LIKE replace(?,'TODOS','%%')";
     private static final String CONSULTA_CHAMADO_SUPERVISOR = "SELECT c.id, c.descricao, c.data_inicio, c.data_fim, c.status, (SELECT nome FROM usuario WHERE id=c.usuario), (SELECT categoria FROM categoria WHERE id=c.categoria), (SELECT subcategoria FROM subcategoria WHERE id=c.subcategoria), (SELECT nome as tecnico FROM usuario WHERE id=c.tecnico), c.prioridade FROM chamado c WHERE c.status LIKE replace(?,'TODOS','%%')";
@@ -27,15 +28,17 @@ public class ChamadoDAO {
         PreparedStatement pstmt = null;
         try {
             conexao = ConectaBanco.getConexao();
+            //INSERT INTO chamado(descricao, data_inicio, status, usuario, categoria, subcategoria, tecnico, prioridade) 
+            //VALUES (?, ?,'ABERTO', ?, ?, ?, ?, ?)
 
             pstmt = conexao.prepareStatement(ABRIR_CHAMADO);
             pstmt.setString(1, chamado.getDescricao());
             pstmt.setString(2, chamado.getData_inicio().toString());
             //Status do chamado automaticamente Aberto
-            pstmt.setInt(3, chamado.getUsuario().getNumero_registro()); //Precisa ser o Numero de Registro do cliente
-            pstmt.setString(4, chamado.getCategoria().getCategoria().toString().toUpperCase()); //Precisa ser o ID da categoria
-            pstmt.setString(5, chamado.getSubcategoria().getSubcategoria().toString().toUpperCase());
-            pstmt.setInt(6, chamado.getTecnico().getNumero_registro()); //Precisa ser o Numero de Registro do técnico
+            pstmt.setInt(3, chamado.getUsuario().getId());
+            pstmt.setInt(4, Integer.parseInt(chamado.getCategoria().getId())); //Precisa ser o ID da categoria
+            pstmt.setInt(5, Integer.parseInt(chamado.getSubcategoria().getId())); //Precisa ser o ID da subcategoria
+            pstmt.setInt(6, chamado.getTecnico().getId()); //Precisa ser o ID do técnico
             pstmt.setString(7, chamado.getPrioridade().toString().toUpperCase()); // Fazer o calculo da prioridade e salvar o nome do ENUM
             pstmt.execute();
 
@@ -274,12 +277,13 @@ public class ChamadoDAO {
         }
         return c;
     }
+
     public void alterarChamado(Chamado chamado) {
 
         Connection conexao = null;
         PreparedStatement pstmt = null;
         try {
-            
+
             conexao = ConectaBanco.getConexao();
             pstmt = conexao.prepareStatement(ALTERAR_CHAMADO);
             //UPDATE chamado c SET c.descricao=?, c.status=?, c.categoria=(SELECT id FROM categoria WHERE categoria=?),
@@ -304,6 +308,7 @@ public class ChamadoDAO {
             }
         }
     }
+
     public void fecharChamado(Chamado chamado) throws ClassNotFoundException, SQLException {
         Connection conexao = null;
         PreparedStatement pstmt = null;
@@ -315,7 +320,7 @@ public class ChamadoDAO {
             pstmt.setString(1, chamado.getData_fim());
             pstmt.setInt(2, Integer.parseInt(chamado.getId()));
             pstmt.execute();
-            
+
         } catch (SQLException sqlErro) {
             throw new RuntimeException(sqlErro);
         } finally {
@@ -327,6 +332,33 @@ public class ChamadoDAO {
                 }
             }
         }
+    }
+
+    public String calcularPrioridadeDoChamado(Chamado chamado) {
+
+        String prioridade = "0";
+        double prioridadeFinal = 0;
+        double prioridadeCategoria = 0;
+        double prioridadeSubcategoria = 0;
+        double prioridadeSetor = 0;
+
+        prioridadeCategoria = chamado.getCategoria().getPrioridade().getPrioridade();
+        prioridadeSubcategoria = chamado.getSubcategoria().getPrioridade().getPrioridade();
+        prioridadeSetor = chamado.getUsuario().getSetor().getPrioridade();
+
+        prioridadeFinal = Math.round((prioridadeSetor + prioridadeCategoria + prioridadeSubcategoria) / 3);
+
+        if (prioridadeFinal==1) {
+            prioridade = "BAIXA";
+        } else if (prioridadeFinal==2) {
+            prioridade = "MEDIA";
+        } else if (prioridadeFinal==3) {
+            prioridade = "ALTA";
+        } else if (prioridadeFinal==4) {
+            prioridade = "ALTISSIMA";
+        }
+
+        return prioridade;
 
     }
 
