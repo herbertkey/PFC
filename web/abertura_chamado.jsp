@@ -48,15 +48,7 @@
                         }
                     
                     
-                %></select><br/>
-                Prioridade: <select name="optPrioridade"><%
-                for (Prioridade prioridade : Prioridade.values()) {
-                %>
-                <option ><%=prioridade%></option> 
-                <%
-                    }
-                %></select><br/> 
-  
+                %>  
                 <input type="submit" value="Abrir" name="acao">
     </form>
     <a href="/ProjetoPFC_5/principal.jsp">Pagina Principal</a>

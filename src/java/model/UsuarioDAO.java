@@ -20,6 +20,7 @@ public class UsuarioDAO {
     private static final String ALTERAR_USUARIO = "UPDATE usuario SET email=?,nome=?,telefone=?,tipo=?,cargo=?, setor=? WHERE numero_registro=?";
     private static final String CONSULTA_UM_USUARIO = "SELECT id, numero_registro, email, nome, telefone, tipo, cargo, setor FROM usuario Where numero_registro=?";
     private static final String EXCLUIR_USUARIO = "UPDATE usuario SET status='INATIVO' WHERE numero_registro=?";
+    private static final String CONSULTA_TECNICO = "SELECT id, numero_registro, email, nome, telefone, senha, tipo, cargo, setor FROM usuario WHERE tipo='TECNICO' and status='ATIVO'";
 
     public void cadastraNovoUsuario(Usuario usuario) {
         Connection conexao = null;
@@ -222,5 +223,44 @@ public class UsuarioDAO {
         } 
         return senha; 
     }
+    
+    public List<Usuario> consultarTecnico() {
+
+        Connection conexao = null;
+        PreparedStatement pstmt = null;
+        List<Usuario> usuarios = new ArrayList<Usuario>();
+        try {
+            conexao = ConectaBanco.getConexao();
+            pstmt = conexao.prepareStatement(CONSULTA_TECNICO);
+            ResultSet resultado = pstmt.executeQuery();
+
+            while (resultado.next()) {
+                Usuario u = new Usuario();
+                
+                u.setId(resultado.getInt("id"));
+                u.setNumero_registro(resultado.getInt("numero_registro"));
+                u.setEmail(resultado.getString("email"));
+                u.setNome(resultado.getString("nome"));
+                u.setTelefone(resultado.getString("telefone"));
+                u.setTipo(Tipo.valueOf(resultado.getString("tipo")));
+                u.setCargo(resultado.getString("cargo"));
+                u.setSetor(Setor.valueOf(resultado.getString("setor")));
+
+                usuarios.add(u);
+            }
+        } catch (SQLException sqlErro) {
+            throw new RuntimeException(sqlErro);
+        } finally {
+            if (conexao != null) {
+                try {
+                    conexao.close();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        }
+        return usuarios;
+    }
+
 
 }

@@ -24,7 +24,8 @@ public class ControleChamado extends HttpServlet {
             String acao = request.getParameter("acao");
             if (acao.equals("Abrir")) {
                 Chamado chamado = new Chamado();
-
+                ChamadoDAO chamadoDAO = new ChamadoDAO();
+                
                 Usuario usuario = new Usuario();
                 UsuarioDAO usuarioDAO = new UsuarioDAO();
                 usuario.setNumero_registro(Integer.parseInt(request.getParameter("txtNumeroDeRegistro")));
@@ -45,14 +46,12 @@ public class ControleChamado extends HttpServlet {
                 subcategoria = subcategoriaDAO.consultaUmaSubcategoria(subcategoria);
                 chamado.setSubcategoria(subcategoria);
 
-                //Depois que implementar a atribuição automatica retirar essas linhas
                 Usuario tecnico = new Usuario();
-                tecnico.setId(3);
-                chamado.setTecnico(tecnico);
-                
-                ChamadoDAO chamadoDAO = new ChamadoDAO();
-                                
-                //Depois que implementar o calculo da prioridade retirar essas linhas
+                List<Usuario> tecnicos = new ArrayList<Usuario>();
+                tecnicos = usuarioDAO.consultarTecnico();       
+                tecnico.setId(chamadoDAO.atribuicaoDoChamado(tecnicos));
+                chamado.setTecnico(tecnico);          
+                                 
                 String prioridade = chamadoDAO.calcularPrioridadeDoChamado(chamado);
                 if (prioridade.equalsIgnoreCase("BAIXA")) {
                     chamado.setPrioridade(Prioridade.BAIXA);
@@ -104,9 +103,10 @@ public class ControleChamado extends HttpServlet {
             if (acao.equals("Consultar")) {
                 Chamado chamado = new Chamado();
                 Usuario usuario = new Usuario();
-
+                
                 usuario.setNumero_registro(Integer.parseInt(request.getParameter("txtNumeroDeRegistro")));
-                chamado.setUsuario(usuario);
+                
+                
                 String status = request.getParameter("optStatus");
                 if (status.equalsIgnoreCase("aberto")) {
                     chamado.setStatus(StatusChamado.ABERTO);
@@ -121,14 +121,15 @@ public class ControleChamado extends HttpServlet {
                 List<Chamado> chamados = new ArrayList<Chamado>();
                 ChamadoDAO chamadoDAO = new ChamadoDAO();
 
-                UsuarioDAO usuarioDAO = new UsuarioDAO();
+                UsuarioDAO usuarioDAO = new UsuarioDAO();                
                 usuario = usuarioDAO.consultaUmUsuario(usuario);
+                chamado.setUsuario(usuario);
                 if (usuario.getTipo().equals(Tipo.CLIENTE)) {
                     chamados = chamadoDAO.consultarChamadosCliente(chamado);
                 } else if (usuario.getTipo().equals(Tipo.TECNICO)) {
                     chamados = chamadoDAO.consultarChamadosTecnico(chamado);
                 } else if (usuario.getTipo().equals(Tipo.SUPERVISOR)) {
-                    chamados = chamadoDAO.consultarChamadosTecnico(chamado);
+                    chamados = chamadoDAO.consultarChamadosSupervisor(chamado);
                 }
 
                 request.setAttribute("consulta", chamados);
@@ -169,13 +170,9 @@ public class ControleChamado extends HttpServlet {
                 Chamado chamado = new Chamado();
                 chamado.setId(request.getParameter("txtId"));
 
-                
-                
                 historico.setChamado(chamado);
                 historico.setData(chamadoDAO.getDateTime());
                 
-                
-
                 historicoDAO.inserirInformacoes(historico);
 
             }
