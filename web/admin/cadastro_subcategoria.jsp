@@ -34,11 +34,11 @@
                     <li class="dropdown navbar-inverse">
                     </li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">                            
+                            <%
                             Usuario usuario = (Usuario) session.getAttribute("usuarioAutenticado");
                             if (usuario != null) {
-                            %>
-                            
+                            %>                            
                             <i class="fa fa-user fa-fw"></i> <%=usuario.getNome()%> <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
@@ -77,7 +77,7 @@
                                 <a href="#"> Subcategoria<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="/ProjetoPFC_5/admin/cadastro_subcategoria.jsp"> Cadastro de Subcategoria</a>
+                                        <a href="/ProjetoPFC_5/CadastrarSubcategoria?acao="> Cadastro de Subcategoria</a>
                                     </li>
                                     <li>
                                         <a href="/ProjetoPFC_5/ConsultarSubcategoria?txtSubcategoria="> Consultar Subcategoria</a>
@@ -104,74 +104,74 @@
                     </div>
                     <!-- /.row -->
                     
-                        <div class="row">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <%
-                                                String msg = (String) request.getAttribute("msg");
-                                                if (msg != null) {
-                                            %>
-                                            <font color="blue"><%=msg%></font>
-                                            <%
-                                                }
-                                            %>
-                                            <form role="form" action="/ProjetoPFC_5/CadastrarSubcategoria" method="POST">
-                                            
+                    <div class="row">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <%
+                                            String msg = (String) request.getAttribute("msg");
+                                            if (msg != null) {
+                                        %>
+                                        <font color="blue"><%=msg%></font>
+                                        <%
+                                            }
+                                        %>
+                                        <form role="form" action="/ProjetoPFC_5/CadastrarSubcategoria" method="POST">
+
                                             <%List<Categoria> categorias = (List<Categoria>) request.getAttribute("consultacategoria");%>
-                                            
+
                                             <div class="form-group">
-                                                    <label>Nome da categoria:</label>
-                                                    <select class="form-control" name="optCategoria">
-                                            
-                                                        <%
-                                                            for (Categoria c : categorias) {
-                                                        %> 
-                                            
-                                                        <option ><%=c.getCategoria()%></option> 
-                                                        
-                                                        <%
-                                                            }
-                                                        %>
-                                            
-                                                    </select>     
+                                                <label>Nome da categoria:</label>
+                                                <select class="form-control" name="optCategoria">
+
+                                                    <%
+                                                        for (Categoria c : categorias) {
+                                                    %> 
+
+                                                    <option ><%=c.getCategoria()%></option> 
+
+                                                    <%
+                                                        }
+                                                    %>
+
+                                                </select>     
                                             </div>
 
                                             <div class="form-group">
-                                                    <label>Nome da subcategoria:</label>
-                                                    <input type="text" class="form-control" placeholder="Subcategoria" name="txtSubcategoria">
+                                                <label>Nome da subcategoria:</label>
+                                                <input type="text" class="form-control" placeholder="Subcategoria" name="txtSubcategoria">
                                             </div>
-                                            
+
                                             <div class="form-group">
                                                 <label>Prioridade:</label>
                                                 <select class="form-control"name="optPrioridade"><%
-                                                   for (Prioridade prioridade : Prioridade.values()) 
-                                                        {
-                                                        %>
-                                                            <option ><%=prioridade%></option> 
-                                                        <%
+                                                    for (Prioridade prioridade : Prioridade.values()) {
+                                                    %>
+                                                    <option ><%=prioridade%></option> 
+                                                    <%
                                                         }
-                                                        %>
+                                                    %>
                                                 </select>
                                             </div>     
-                                            <button type="submit" class="btn btn-default">Cadastrar</button>  
-                                            </form> 
-                                                
-                                        </div>
+                                            
+                                                <button type="submit" value="Cadastrar" name="acao" class="btn btn-default">Cadastrar</button>  
+                                        
+                                        </form> 
+
                                     </div>
-                                    
+                                                
                                 </div>
-                                
+
                             </div>
-                            
+
                         </div>
-						  
-                   
-					
+
+                    </div>		
                    
                 </div>
-           	</div>
+                                                
+            </div>
         
         <!-- jQuery -->
         <script src="/ProjetoPFC_5/js/jquery.min.js"></script>
@@ -197,7 +197,6 @@
                 });
             });
         </script>
-        
     </body>
 </html>
 

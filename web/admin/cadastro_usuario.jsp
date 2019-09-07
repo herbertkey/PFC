@@ -147,7 +147,7 @@
                                                 <div class="form-group">
                                                     <% Usuario usuarioSessao = (Usuario) session.getAttribute("usuarioAutenticado");
                                                             if (usuarioSessao.getTipo().toString() == "TECNICO") {%>
-                                                    Tipo de Usuário: <input type="text" value="CLIENTE" readonly name="optTipo"> <br/>                   
+                                                    <label>Tipo de Usuário:</label> <input class="form-control" value="CLIENTE" readonly name="optTipo"> <br/>                   
                                                     <%} else {
                                                     %>
                                                     <label>Tipo de Usuário:</label>

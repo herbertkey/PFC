@@ -67,11 +67,12 @@
                                     <li>
                                         <a href="/ProjetoPFC_5/ConsultarChamado?acao="> Consultar Chamado</a>
                                     </li>
+                                </ul>
                             </li>
 
 
 
-                        </ul>
+                        
                     </div>
                     <!-- /.sidebar-collapse -->
                 </div>
