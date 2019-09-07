@@ -190,40 +190,5 @@
                 });
             });
         </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <h1>Consultar Categorias</h1>
-
-        <table>            
-
-            <tbody>                
-                <%if (categorias != null) {
-                        for (Categoria c : categorias) {
-                %>                
-                <tr>
-                    <td> <%= c.getCategoria()%></td>
-                    <td> <%= c.getPrioridade()%></td>          
-                    <td><a href="/ProjetoPFC_5/AlterarPageCategoria?acao=<%=c.getCategoria()%>">Alterar</a>    </td>
-                    <td><a href="/ProjetoPFC_5/ExcluirCategoria?acao=<%=c.getCategoria()%>">Excluir</a>    </td>
-                </tr>       
-                <%
-                        }
-                    }
-                %>
-            </tbody>  
-        </table>
-        <a href="/ProjetoPFC_5/admin/area_restrita.jsp">Voltar</a>
     </body>
 </html>
