@@ -61,8 +61,7 @@ public class ControleChamado extends HttpServlet {
                     chamado.setPrioridade(Prioridade.ALTA);
                 } else if (prioridade.equalsIgnoreCase("ALTISSIMA")) {
                     chamado.setPrioridade(Prioridade.ALTISSIMA);
-                }
-                         
+                }                         
                 
                 chamado.setData_inicio(chamadoDAO.getDateTime());
 
