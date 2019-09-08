@@ -53,7 +53,7 @@
                                 <a href="#"> Usuário<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="/ProjetoPFC_5/CadastrarUsuario?acao="> Cadastro de Usuário</a>
+                                        <a href="/ProjetoPFC_5/admin/cadastro_usuario.jsp"> Cadastro de Usuário</a>
                                     </li>
                                     <li>
                                         <a href="/ProjetoPFC_5/ConsultarUsuario?txtNome="> Consultar Usuário</a>
@@ -108,7 +108,8 @@
                                                 <label>Categoria:</label>
                                                 <input type="text" class="form-control" name="txtCategoria">
                                             </div>
-                                            <button type="submit" class="btn btn-default">Consultar</button>  
+                                            <button type="submit" class="btn btn-default">Consultar</button>
+                                            <button href="/ProjetoPFC_5/ConsultarCategoria?txtCategoria=" class="btn btn-default">Limpar consulta</button>
                                         </form>
                                 </div>
                                 <!-- /.panel-heading -->

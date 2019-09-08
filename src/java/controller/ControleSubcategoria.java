@@ -48,12 +48,16 @@ public class ControleSubcategoria extends HttpServlet {
             String nome = subcategoriaDAO.consultaUmaSubcategoria(subcategoria).getSubcategoria();   
             
             if (nome != null) {
-                request.setAttribute("msg", "Subcategoria já cadastrada");
+                request.setAttribute("msg", "<div class=\"alert alert-danger\" role=\"alert\">\n"
+                        + "                                    Subcategoria já cadastrada!\n"
+                        + "                                </div>");
                 //RequestDispatcher rd = request.getRequestDispatcher("/admin/cadastro_subcategoria.jsp");
                 //rd.forward(request, response);
             } else {
                 subcategoriaDAO.cadastraNovaSubcategoria(subcategoria);
-                request.setAttribute("msg", "Subcategoria cadastrada com sucesso");
+                request.setAttribute("msg", "<div class=\"alert alert-success\" role=\"alert\">\n"
+                        + "                                    Subcategoria cadastrada com sucesso!\n"
+                        + "                                </div>");
                 request.setAttribute("subcategoria", subcategoria);
                 //RequestDispatcher rd = request.getRequestDispatcher("/admin/cadastro_subcategoria.jsp");
                // rd.forward(request, response);
