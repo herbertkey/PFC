@@ -170,7 +170,7 @@ public class ControleUsuario extends HttpServlet {
             usuario.setNumero_registro(Integer.parseInt(numero));
             UsuarioDAO usuarioDAO = new UsuarioDAO();
             usuarioDAO.excluirUsuario(usuario);
-            request.getRequestDispatcher("/admin/consultar_usuario.jsp").forward(request, response);
+            request.getRequestDispatcher("/ConsultarUsuario?txtNome=").forward(request, response);
 
         } catch (Exception erro) {
             RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");

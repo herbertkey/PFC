@@ -33,7 +33,12 @@ public class ControleAcesso extends HttpServlet {
                     HttpSession sessaoUsuario = request.getSession();
                     sessaoUsuario.setAttribute("usuarioAutenticado", usuarioAutenticado);
                     //redireciona para a pagina princiapal
-                    response.sendRedirect("principal.jsp");
+                    //response.sendRedirect("principal.jsp");
+                    request.setAttribute("usuarioAutenticado", usuarioAutenticado);
+                    
+                    response.sendRedirect("/ProjetoPFC_5/ConsultarChamado?acao=Consultar");
+                    
+                    
                 } else {
                     RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
                     request.setAttribute("msg", " <div class=\"alert alert-danger\" role=\"alert\">\n"

@@ -176,7 +176,8 @@ public class ControleSubcategoria extends HttpServlet {
             subcategoria.setSubcategoria(acao);
             SubcategoriaDAO subcategoriaDAO = new SubcategoriaDAO();
             subcategoriaDAO.excluirSubcategoria(subcategoria);
-            request.getRequestDispatcher("/admin/consultar_subcategoria.jsp").forward(request, response);
+            
+            request.getRequestDispatcher("/ConsultarSubcategoria?txtSubcategoria=").forward(request, response);
 
         } catch (Exception erro) {
             RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");

@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.*;
 
 @WebServlet(urlPatterns = {"/AbrirChamado", "/ConsultarChamado", "/AlterarPageChamado", "/AlterarChamado", "/FecharChamado"})
@@ -101,21 +102,24 @@ public class ControleChamado extends HttpServlet {
             String acao = request.getParameter("acao");
             if (acao.equals("Consultar")) {
                 Chamado chamado = new Chamado();
-                Usuario usuario = new Usuario();
+                //Usuario usuario = new Usuario();
+                HttpSession sessaoUsuario = request.getSession();
                 
-                usuario.setNumero_registro(Integer.parseInt(request.getParameter("txtNumeroDeRegistro")));
+                Usuario usuario = (Usuario)sessaoUsuario.getAttribute("usuarioAutenticado");
                 
+                //usuario.setNumero_registro(Integer.parseInt(request.getParameter("txtNumeroDeRegistro")));
                 
-                String status = request.getParameter("optStatus");
-                if (status.equalsIgnoreCase("aberto")) {
-                    chamado.setStatus(StatusChamado.ABERTO);
-                } else if (status.equalsIgnoreCase("em_andamento")) {
-                    chamado.setStatus(StatusChamado.EM_ANDAMENTO);
-                } else if (status.equalsIgnoreCase("fechado")) {
-                    chamado.setStatus(StatusChamado.FECHADO);
-                } else if (status.equalsIgnoreCase("todos")) {
-                    chamado.setStatus(StatusChamado.TODOS);
-                }
+                chamado.setStatus(StatusChamado.TODOS);
+//                String status = request.getParameter("optStatus");
+//                if (status.equalsIgnoreCase("aberto")) {
+//                    chamado.setStatus(StatusChamado.ABERTO);
+//                } else if (status.equalsIgnoreCase("em_andamento")) {
+//                    chamado.setStatus(StatusChamado.EM_ANDAMENTO);
+//                } else if (status.equalsIgnoreCase("fechado")) {
+//                    chamado.setStatus(StatusChamado.FECHADO);
+//                } else if (status.equalsIgnoreCase("todos")) {
+//                    chamado.setStatus(StatusChamado.TODOS);
+//                }
 
                 List<Chamado> chamados = new ArrayList<Chamado>();
                 ChamadoDAO chamadoDAO = new ChamadoDAO();
@@ -243,6 +247,7 @@ public class ControleChamado extends HttpServlet {
             } else if (acao.equals("Alterar")) {
 
                 Chamado chamado = new Chamado();
+                ChamadoDAO chamadoDAO = new ChamadoDAO();
 
                 chamado.setId(request.getParameter("txtId"));
 
@@ -256,17 +261,17 @@ public class ControleChamado extends HttpServlet {
                 subcategoria.setSubcategoria(request.getParameter("optSubcategoria"));
                 chamado.setSubcategoria(subcategoria);
 
-                //Depois que implementar o calculo da prioridade retirar essas linhas
-                String prioridade = request.getParameter("txtPrioridade");
-                if (prioridade.equalsIgnoreCase("baixa")) {
+                
+                String prioridade = chamadoDAO.calcularPrioridadeDoChamado(chamado);
+                if (prioridade.equalsIgnoreCase("BAIXA")) {
                     chamado.setPrioridade(Prioridade.BAIXA);
-                } else if (prioridade.equalsIgnoreCase("media")) {
+                } else if (prioridade.equalsIgnoreCase("MEDIA")) {
                     chamado.setPrioridade(Prioridade.MEDIA);
-                } else if (prioridade.equalsIgnoreCase("alta")) {
+                } else if (prioridade.equalsIgnoreCase("ALTA")) {
                     chamado.setPrioridade(Prioridade.ALTA);
-                } else if (prioridade.equalsIgnoreCase("altissima")) {
+                } else if (prioridade.equalsIgnoreCase("ALTISSIMA")) {
                     chamado.setPrioridade(Prioridade.ALTISSIMA);
-                }
+                } 
 
                 String status = request.getParameter("optStatus");
                 if (status.equalsIgnoreCase("aberto")) {
@@ -278,8 +283,7 @@ public class ControleChamado extends HttpServlet {
                 } else if (status.equalsIgnoreCase("todos")) {
                     chamado.setStatus(StatusChamado.TODOS);
                 }
-
-                ChamadoDAO chamadoDAO = new ChamadoDAO();
+         
 
                 chamadoDAO.alterarChamado(chamado);
 

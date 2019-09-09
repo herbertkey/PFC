@@ -141,7 +141,7 @@ public class ControleCategoria extends HttpServlet {
             categoria.setCategoria(acao);
             CategoriaDAO categoriaDAO = new CategoriaDAO();
             categoriaDAO.excluirCategoria(categoria);
-            request.getRequestDispatcher("/admin/consultar_categoria.jsp").forward(request, response);
+            request.getRequestDispatcher("/ConsultarCategoria?txtCategoria=").forward(request, response);
 
         } catch (Exception erro) {
             RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");
