@@ -136,10 +136,10 @@ public class ControleChamado extends HttpServlet {
                 }
 
                 request.setAttribute("consulta", chamados);
-                RequestDispatcher rd = request.getRequestDispatcher("/consultar_chamado.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/principal.jsp");
                 rd.forward(request, response);
             } else {
-                RequestDispatcher rd = request.getRequestDispatcher("/consultar_chamado.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/principal.jsp");
                 rd.forward(request, response);
             }
 
@@ -248,17 +248,27 @@ public class ControleChamado extends HttpServlet {
 
                 Chamado chamado = new Chamado();
                 ChamadoDAO chamadoDAO = new ChamadoDAO();
+                
+                Usuario usuario = new Usuario();
+                UsuarioDAO usuarioDAO = new UsuarioDAO();
+                usuario.setNumero_registro(Integer.parseInt(request.getParameter("txtNumeroDeRegistro")));
+                usuario = usuarioDAO.consultaUmUsuario(usuario);
+                chamado.setUsuario(usuario);
 
                 chamado.setId(request.getParameter("txtId"));
 
                 chamado.setDescricao(request.getParameter("txtDescricao"));
 
                 Categoria categoria = new Categoria();
+                CategoriaDAO categoriaDAO = new CategoriaDAO();
                 categoria.setCategoria(request.getParameter("optCategoria"));
+                categoria = categoriaDAO.consultaUmaCategoria(categoria);
                 chamado.setCategoria(categoria);
 
                 Subcategoria subcategoria = new Subcategoria();
+                SubcategoriaDAO subcategoriaDAO = new SubcategoriaDAO();
                 subcategoria.setSubcategoria(request.getParameter("optSubcategoria"));
+                subcategoria = subcategoriaDAO.consultaUmaSubcategoria(subcategoria);
                 chamado.setSubcategoria(subcategoria);
 
                 
@@ -303,12 +313,12 @@ public class ControleChamado extends HttpServlet {
 
                 List<Categoria> categorias = new ArrayList<Categoria>();
 
-                CategoriaDAO categoriaDAO = new CategoriaDAO();
+                
                 categoria.setCategoria("");
                 categorias = categoriaDAO.consultarCategoria(categoria);
                 request.setAttribute("consultacategoria", categorias);
 
-                SubcategoriaDAO subcategoriaDAO = new SubcategoriaDAO();
+                
                 List<Subcategoria> subcategorias = new ArrayList<Subcategoria>();
 
                 subcategoria.setSubcategoria("");

@@ -21,6 +21,7 @@
             %>
 
             ID: <input type="text" readonly="true" name="txtId" value="<%=chamado.getId()%>"><br/>
+            Numero de Registro: <input type="text" readonly="true" name="txtNumeroDeRegistro" value="<%=chamado.getUsuario().getNumero_registro()%>"><br/>
             Descrição: <textarea name="txtDescricao" ><%=chamado.getDescricao()%></textarea><br/>
             <%
                 List<Historico> historicos = (List<Historico>) request.getAttribute("historico");
