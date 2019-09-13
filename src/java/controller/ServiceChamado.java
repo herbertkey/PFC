@@ -4,16 +4,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import model.Chamado;
+import model.ChamadoDAO;
 import model.Prioridade;
 import model.Usuario;
 import util.ConectaBanco;
 
 public class ServiceChamado {
-    
-    private static final String CONSULTA_PRIORIDADE_CHAMADO = "SELECT prioridade FROM chamado c WHERE ?=tecnico AND (status LIKE 'ABERTO' OR status LIKE 'EM_ANDAMENTO')";
-    
+
     public String calcularPrioridadeDoChamado(Chamado chamado) {
 
         String prioridade = "0";
@@ -44,31 +44,19 @@ public class ServiceChamado {
     
     public int atribuicaoDoChamado(List<Usuario> usuarios) {
 
-        Connection conexao = null;
-        PreparedStatement pstmt = null;
         int idTecnico=0;
         
-        try {
+        double prioridadeMenorChamado = 9999;
+        for(Usuario u: usuarios){
             
-            double prioridadeMenorChamado = 9999;            
-                        
-            for(Usuario u: usuarios){
-                
             double prioridadeTotal = 0;
-            //double cont=0;
-                 
-            conexao = ConectaBanco.getConexao();
-            pstmt = conexao.prepareStatement(CONSULTA_PRIORIDADE_CHAMADO);
-            //SELECT prioridade 
-            //FROM chamado c 
-            //WHERE ?=tecnico AND (status LIKE 'ABERTO' OR status LIKE 'EM_ANDAMENTO')
             
-            pstmt.setInt(1, u.getId());
-            ResultSet resultado = pstmt.executeQuery();
-            while (resultado.next()) {
-                Chamado c = new Chamado();
-                c.setPrioridade(Prioridade.valueOf(resultado.getString("prioridade")));
-                prioridadeTotal = prioridadeTotal + c.getPrioridade().getPrioridade();
+            List<Chamado> chamados = new ArrayList<Chamado>();
+            ChamadoDAO chamadoDAO = new ChamadoDAO();
+            chamados = chamadoDAO.consultaPrioridadeChamadoPorTecnico(u);
+            
+            for(Chamado ch: chamados) {
+                prioridadeTotal = prioridadeTotal + ch.getPrioridade().getPrioridade();
                                     
             }
            
@@ -77,19 +65,8 @@ public class ServiceChamado {
                 idTecnico = u.getId();
             }            
             
-            }            
-            
-        } catch (SQLException sqlErro) {
-            throw new RuntimeException(sqlErro);
-        } finally {
-            if (conexao != null) {
-                try {
-                    conexao.close();
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
         }
+        
         return idTecnico;
     }
     

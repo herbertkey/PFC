@@ -51,9 +51,12 @@ public class ControleChamado extends HttpServlet {
                 List<Usuario> tecnicos = new ArrayList<Usuario>();
                 tecnicos = usuarioDAO.consultarTecnico();       
                 tecnico.setId(chamadoDAO.atribuicaoDoChamado(tecnicos));
-                chamado.setTecnico(tecnico);          
-                                 
-                String prioridade = chamadoDAO.calcularPrioridadeDoChamado(chamado);
+                chamado.setTecnico(tecnico);      
+                
+                ServiceChamado serviceChamado = new ServiceChamado();
+                                                 
+//                String prioridade = chamadoDAO.calcularPrioridadeDoChamado(chamado);
+                String prioridade = serviceChamado.calcularPrioridadeDoChamado(chamado);
                 if (prioridade.equalsIgnoreCase("BAIXA")) {
                     chamado.setPrioridade(Prioridade.BAIXA);
                 } else if (prioridade.equalsIgnoreCase("MEDIA")) {
@@ -271,8 +274,10 @@ public class ControleChamado extends HttpServlet {
                 subcategoria = subcategoriaDAO.consultaUmaSubcategoria(subcategoria);
                 chamado.setSubcategoria(subcategoria);
 
-                
-                String prioridade = chamadoDAO.calcularPrioridadeDoChamado(chamado);
+                 ServiceChamado serviceChamado = new ServiceChamado();
+                                                 
+//                String prioridade = chamadoDAO.calcularPrioridadeDoChamado(chamado);
+                String prioridade = serviceChamado.calcularPrioridadeDoChamado(chamado);
                 if (prioridade.equalsIgnoreCase("BAIXA")) {
                     chamado.setPrioridade(Prioridade.BAIXA);
                 } else if (prioridade.equalsIgnoreCase("MEDIA")) {
@@ -312,7 +317,6 @@ public class ControleChamado extends HttpServlet {
                 request.setAttribute("msg", "Chamado alterado com sucesso");
 
                 List<Categoria> categorias = new ArrayList<Categoria>();
-
                 
                 categoria.setCategoria("");
                 categorias = categoriaDAO.consultarCategoria(categoria);
