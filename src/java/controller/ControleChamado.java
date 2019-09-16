@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.*;
 
-@WebServlet(urlPatterns = {"/AbrirChamado", "/ConsultarChamado", "/AlterarPageChamado", "/AlterarChamado", "/FecharChamado"})
+@WebServlet(urlPatterns = {"/AbrirChamado", "/ConsultarChamado", "/AlterarPageChamado", "/AlterarChamado"})
 public class ControleChamado extends HttpServlet {
 
     protected void abrirChamado(HttpServletRequest request, HttpServletResponse response)
@@ -47,13 +47,15 @@ public class ControleChamado extends HttpServlet {
                 subcategoria = subcategoriaDAO.consultaUmaSubcategoria(subcategoria);
                 chamado.setSubcategoria(subcategoria);
 
+                ServiceChamado serviceChamado = new ServiceChamado();
+                
                 Usuario tecnico = new Usuario();
                 List<Usuario> tecnicos = new ArrayList<Usuario>();
                 tecnicos = usuarioDAO.consultarTecnico();       
-                tecnico.setId(chamadoDAO.atribuicaoDoChamado(tecnicos));
+                tecnico.setId(serviceChamado.atribuicaoDoChamado(tecnicos));
                 chamado.setTecnico(tecnico);      
                 
-                ServiceChamado serviceChamado = new ServiceChamado();
+                
                                                  
 //                String prioridade = chamadoDAO.calcularPrioridadeDoChamado(chamado);
                 String prioridade = serviceChamado.calcularPrioridadeDoChamado(chamado);
@@ -109,20 +111,8 @@ public class ControleChamado extends HttpServlet {
                 HttpSession sessaoUsuario = request.getSession();
                 
                 Usuario usuario = (Usuario)sessaoUsuario.getAttribute("usuarioAutenticado");
-                
-                //usuario.setNumero_registro(Integer.parseInt(request.getParameter("txtNumeroDeRegistro")));
-                
+
                 chamado.setStatus(StatusChamado.TODOS);
-//                String status = request.getParameter("optStatus");
-//                if (status.equalsIgnoreCase("aberto")) {
-//                    chamado.setStatus(StatusChamado.ABERTO);
-//                } else if (status.equalsIgnoreCase("em_andamento")) {
-//                    chamado.setStatus(StatusChamado.EM_ANDAMENTO);
-//                } else if (status.equalsIgnoreCase("fechado")) {
-//                    chamado.setStatus(StatusChamado.FECHADO);
-//                } else if (status.equalsIgnoreCase("todos")) {
-//                    chamado.setStatus(StatusChamado.TODOS);
-//                }
 
                 List<Chamado> chamados = new ArrayList<Chamado>();
                 ChamadoDAO chamadoDAO = new ChamadoDAO();
@@ -339,28 +329,7 @@ public class ControleChamado extends HttpServlet {
         }
 
     }
-    protected void fecharChamado(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException {
-        response.setContentType("text/html;charset=UTF-8");
-        try {
-            String acao = (String) request.getParameter("acao");
-            Chamado chamado = new Chamado();
-            chamado.setId(acao);
-            ChamadoDAO chamadoDAO = new ChamadoDAO();
-            chamado.setData_fim(chamadoDAO.getDateTime());           
-            
-            chamadoDAO.fecharChamado(chamado);
-            request.getRequestDispatcher("/consultar_chamado.jsp").forward(request, response);
-            
-
-        } catch (Exception erro) {
-            RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");
-            request.setAttribute("erro", erro);
-            rd.forward(request, response);
-        }
-
-    }
-
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -368,8 +337,6 @@ public class ControleChamado extends HttpServlet {
         try {
             if (url.equals(request.getContextPath() + "/ConsultarChamado")) {
                 consultarChamado(request, response);
-            } else if (url.equals(request.getContextPath() + "/FecharChamado")) {
-                fecharChamado(request, response);
             } else if (url.equals(request.getContextPath() + "/AlterarPageChamado")) {
                 alterarPageChamado(request, response);
             } else if (url.equals(request.getContextPath() + "/AbrirChamado")) {
