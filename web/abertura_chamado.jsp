@@ -50,38 +50,9 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
+                        
                         <li>
-                            <a href="#"> Usuário<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="/ProjetoPFC_5/CadastrarUsuario?acao="> Cadastro de Usuário</a>
-                                </li>
-                                <li>
-                                    <a href="/ProjetoPFC_5/ConsultarUsuario?txtNome="> Consultar Usuário</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"> Categoria<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="/ProjetoPFC_5/admin/cadastro_categoria.jsp"> Cadastro de Categoria</a>
-                                </li>
-                                <li>
-                                    <a href="/ProjetoPFC_5/ConsultarCategoria?txtCategoria="> Consultar Categoria</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"> Subcategoria<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="/ProjetoPFC_5/CadastrarSubcategoria?acao="> Cadastro de Subcategoria</a>
-                                </li>
-                                <li>
-                                    <a href="/ProjetoPFC_5/ConsultarSubcategoria?txtSubcategoria="> Consultar Subcategoria</a>
-                                </li>
-                            </ul>
+                                <a href="/ProjetoPFC_5/AbrirChamado?acao="> Abrir Chamado</a>
                         </li>
                     </ul>
                 </div>

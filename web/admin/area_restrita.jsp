@@ -30,7 +30,7 @@
                 </div>
 				
                 <ul class="nav navbar-nav navbar-left navbar-top-links">
-                    <li><a href="/ProjetoPFC_5/principal.jsp"> <i class="fa fa-home fa-fw"></i> Home</a></li>
+                    <li><a href="/ProjetoPFC_5/ConsultarChamado?acao=Consultar"> <i class="fa fa-home fa-fw"></i> Home</a></li>
                 </ul>
 
                  <ul class="nav navbar-right navbar-top-links">

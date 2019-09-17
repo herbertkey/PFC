@@ -30,7 +30,7 @@
                 </div>
 				
                 <ul class="nav navbar-nav navbar-left navbar-top-links">
-                    <li><a href="/ProjetoPFC_5/principal.jsp"> <i class="fa fa-home fa-fw"></i> Home</a></li>
+                    <li><a href="/ProjetoPFC_5/ConsultarChamado?acao=Consultar"> <i class="fa fa-home fa-fw"></i> Home</a></li>
                 </ul>
 
                  <ul class="nav navbar-right navbar-top-links">
@@ -58,25 +58,45 @@
                 <div class="navbar-default sidebar" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
-
-                            <li>
-                                <a href="/ProjetoPFC_5/admin/area_restrita.jsp"> Área restrita</a>
-                            </li>
-                            <li>
-                                <a href="#"> Chamado<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
+                            
+                            
+                            <% Usuario usuarioSessao = (Usuario) session.getAttribute("usuarioAutenticado");
+                                if (usuarioSessao.getTipo().toString() == "TECNICO") {%>
                                     <li>
-                                        <a href="/ProjetoPFC_5/AbrirChamado?acao="> Abrir Chamado</a>
-                                    </li>
-                                    <li>
-                                        <a href="/ProjetoPFC_5/ConsultarChamado?acao="> Consultar Chamado</a>
-                                    </li>
-                                </ul>
+                                        <a href="/ProjetoPFC_5/admin/area_restrita.jsp"> Área restrita</a>
+                                    </li>                  
+
+
+
+                            <%} else {
+                            %>
+
+
+                            <%
+                                if (usuarioSessao.getTipo().toString() == "SUPERVISOR") {%>
+                                     <li>
+                                        <a href = "/ProjetoPFC_5/admin/area_restrita.jsp" > Área restrita</a>
+                                     </li > 
+                                    
+                                    
+                                    
+                            <%
+                                }
+                            %>
+
+
+                                
+                            
+                            <%
+                                }
+                            %>
+                            
+                            
+
+                           
+                            <li>
+                                <a href="/ProjetoPFC_5/AbrirChamado?acao="> Abrir Chamado</a>
                             </li>
-
-
-
-                        
                     </div>
                     <!-- /.sidebar-collapse -->
                 </div>
