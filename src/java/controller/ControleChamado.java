@@ -72,7 +72,9 @@ public class ControleChamado extends HttpServlet {
                 chamado.setData_inicio(chamadoDAO.getDateTime());
 
                 chamadoDAO.abrirChamado(chamado);
-                request.setAttribute("msg", "Chamado aberto com com sucesso");
+                request.setAttribute("msg", "<div class=\"alert alert-success\" role=\"alert\">\n"
+                        + "                                    Chamado aberto com sucesso!\n"
+                        + "                                </div>");
                 request.setAttribute("chamado", chamado);
             }
 
