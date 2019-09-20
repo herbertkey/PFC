@@ -116,6 +116,6 @@
         <input type="submit" name="acao" value="Alterar"></br></br>
 
     </form>
-    <a href="/ProjetoPFC_5/ConsultarChamado?acao=">Voltar</a>
+    <a href="/ProjetoPFC_5/ConsultarChamado?acao=Consultar">Voltar</a>
 </body>
 </html>
