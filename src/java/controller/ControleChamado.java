@@ -70,6 +70,7 @@ public class ControleChamado extends HttpServlet {
                 }                         
                 
                 chamado.setData_inicio(chamadoDAO.getDateTime());
+                chamado.setData_fim("");
 
                 chamadoDAO.abrirChamado(chamado);
                 request.setAttribute("msg", "<div class=\"alert alert-success\" role=\"alert\">\n"
@@ -280,6 +281,7 @@ public class ControleChamado extends HttpServlet {
                     chamado.setPrioridade(Prioridade.ALTISSIMA);
                 } 
 
+                chamado.setData_fim("");
                 String status = request.getParameter("optStatus");
                 if (status.equalsIgnoreCase("aberto")) {
                     chamado.setStatus(StatusChamado.ABERTO);
@@ -287,6 +289,7 @@ public class ControleChamado extends HttpServlet {
                     chamado.setStatus(StatusChamado.EM_ANDAMENTO);
                 } else if (status.equalsIgnoreCase("fechado")) {
                     chamado.setStatus(StatusChamado.FECHADO);
+                    chamado.setData_fim(chamadoDAO.getDateTime());
                 } else if (status.equalsIgnoreCase("todos")) {
                     chamado.setStatus(StatusChamado.TODOS);
                 }
@@ -320,6 +323,11 @@ public class ControleChamado extends HttpServlet {
                 subcategoria.setSubcategoria("");
                 subcategorias = subcategoriaDAO.consultarSubcategoria(subcategoria, categorias);
                 request.setAttribute("consultasubcategoria", subcategorias);
+                
+                //Condição que vai verificar se a fila ficou vazia 
+                if(serviceChamado.verificarFilaVazia(chamados.getTecnico().getId())){
+                    serviceChamado.realocacaoDeChamado(chamados);
+                }
 
                 RequestDispatcher rd = request.getRequestDispatcher("/alterar_chamado.jsp");
                 rd.forward(request, response);

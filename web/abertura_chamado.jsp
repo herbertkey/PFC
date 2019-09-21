@@ -80,7 +80,7 @@
                                         if (msg != null) {
                                     %>
                                     
-                                    <font color="blue"><%=msg%></font>
+                                    <font><%=msg%></font>
                                     <%
                                         }
                                     %>
