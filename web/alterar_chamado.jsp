@@ -77,9 +77,9 @@
                             <div class="panel-body">
                                 <div class="row">
                                      <div class="col-lg-6">
-                                        
+                                     <form action="/ProjetoPFC_5/AlterarChamado" method="POST">   
                                         <div class="form-group">
-                                        <form action="/ProjetoPFC_5/AlterarChamado" method="POST">
+                                    
                                         <button type="submit" name="acao" value="Adicionar Informacoes" class="btn btn-default">Adicionar novas informações</button> 
                                         </div>
                                         <%
@@ -207,7 +207,7 @@
                                         
                                         <button type="submit" name="acao" value="Alterar" class="btn btn-default">Alterar chamado</button>
                                         <button type="submit" name="acao" value="Adicionar Informacoes" class="btn btn-default">Adicionar novas informações</button>    
-                                        </form>
+                                    </form>
                                         
                                 </div>
                                     <div class="col-lg-6">
