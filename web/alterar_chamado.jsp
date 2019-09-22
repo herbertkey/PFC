@@ -77,8 +77,9 @@
                             <div class="panel-body">
                                 <div class="row">
                                      <div class="col-lg-6">
-                                    <form action="/ProjetoPFC_5/AlterarChamado" method="POST">
+                                     <form action="/ProjetoPFC_5/AlterarChamado" method="POST">   
                                         <div class="form-group">
+                                    
                                         <button type="submit" name="acao" value="Adicionar Informacoes" class="btn btn-default">Adicionar novas informações</button> 
                                         </div>
                                         <%
@@ -204,9 +205,10 @@
                                             <input class="form-control" id="disabledInput" readonly="true" type="text" name="txtPrioridade" value="<%=chamado.getPrioridade()%>" >
                                         </div>
                                         
-                                        <button type="submit" name="acao" value="Alterar" class="btn btn-default">Alterar chamado</button>  
-
+                                        <button type="submit" name="acao" value="Alterar" class="btn btn-default">Alterar chamado</button>
+                                        <button type="submit" name="acao" value="Adicionar Informacoes" class="btn btn-default">Adicionar novas informações</button>    
                                     </form>
+                                        
                                 </div>
                                     <div class="col-lg-6">
                                     <div class="form-group">
@@ -249,9 +251,11 @@
                                         %>
                                         <%
                                             } 
-                                        %>             
+                                        %>
+                                       
                                     </div>
                                      <!-- /.col-lg-6 -->
+                                    
                                 </div>
                             </div>
                         </div>
