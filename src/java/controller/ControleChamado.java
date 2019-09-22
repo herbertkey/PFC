@@ -294,7 +294,9 @@ public class ControleChamado extends HttpServlet {
 
                 request.setAttribute("chamado", chamados);
                 request.setAttribute("historico", historicos);
-                request.setAttribute("msg", "Chamado alterado com sucesso");
+                request.setAttribute("msg", "<div class=\"alert alert-success\" role=\"alert\">\n"
+                        + "                                    Chamado alterado com sucesso!\n"
+                        + "                                </div>");
 
                 List<Categoria> categorias = new ArrayList<Categoria>();
                 
