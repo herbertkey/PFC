@@ -18,11 +18,17 @@ public class CategoriaDAO {
     private static final String CONSULTA_ID_CATEGORIA_PARA_CADASTRAR_SUBCATEGORIA = "SELECT id FROM categoria Where upper(categoria)=?";
     private static final String CONSULTA_NOME_CATEGORIA_POR_ID = "SELECT categoria FROM categoria Where id=?";
 
+    private final Connection conexao;
+    
+    public CategoriaDAO (Connection conexao){
+        this.conexao = conexao;
+    }
+    
     public void cadastraNovaCategoria(Categoria categoria) {
-        Connection conexao = null;
+        //Connection conexao = null;
         PreparedStatement pstmt = null;
         try {
-            conexao = ConectaBanco.getConexao();
+            //conexao = ConectaBanco.getConexao();
             pstmt = conexao.prepareStatement(CADASTRA_NOVA_CATEGORIA);
             pstmt.setString(1, categoria.getCategoria());
             pstmt.setString(2, categoria.getPrioridade().toString());
@@ -42,11 +48,11 @@ public class CategoriaDAO {
 
     public List<Categoria> consultarCategoria(Categoria categoria) {
 
-        Connection conexao = null;
+        //Connection conexao = null;
         PreparedStatement pstmt = null;
         List<Categoria> categorias = new ArrayList<Categoria>();
         try {
-            conexao = ConectaBanco.getConexao();
+            //conexao = ConectaBanco.getConexao();
             pstmt = conexao.prepareStatement(CONSULTA_CATEGORIA);
             pstmt.setString(1, "%" + categoria.getCategoria().toUpperCase() + "%");
             ResultSet resultado = pstmt.executeQuery();
@@ -75,10 +81,10 @@ public class CategoriaDAO {
 
     public void alterarCategoria(Categoria categoria) {
 
-        Connection conexao = null;
+        //Connection conexao = null;
         PreparedStatement pstmt = null;
         try {
-            conexao = ConectaBanco.getConexao();
+            //conexao = ConectaBanco.getConexao();
             pstmt = conexao.prepareStatement(ALTERAR_CATEGORIA);
             pstmt.setString(1, categoria.getCategoria());
             pstmt.setString(2, categoria.getPrioridade().toString());
@@ -100,12 +106,12 @@ public class CategoriaDAO {
     public Categoria consultaUmaCategoria(Categoria categoria) throws ClassNotFoundException, SQLException {
 
         Categoria c = null;
-        Connection conexao = null;
+        //Connection conexao = null;
         PreparedStatement pstmt = null;
 
         try {
 
-            conexao = ConectaBanco.getConexao();
+            //conexao = ConectaBanco.getConexao();
             pstmt = conexao.prepareStatement(CONSULTA_UMA_CATEGORIA);
             pstmt.setString(1, categoria.getCategoria().toUpperCase());
             pstmt.execute();
@@ -131,12 +137,12 @@ public class CategoriaDAO {
     }
 
     public void excluirCategoria(Categoria categoria) throws ClassNotFoundException, SQLException {
-        Connection conexao = null;
+        //Connection conexao = null;
         PreparedStatement pstmt = null;
 
         try {
 
-            conexao = ConectaBanco.getConexao();
+            //conexao = ConectaBanco.getConexao();
             pstmt = conexao.prepareStatement(EXCLUIR_CATEGORIA);
             pstmt.setString(1, categoria.getCategoria().toUpperCase());
             pstmt.execute();
@@ -157,12 +163,12 @@ public class CategoriaDAO {
     public Categoria consultaIdCategoriaParaCadastrarSubcategoria(Categoria categoria) throws ClassNotFoundException, SQLException {
 
         Categoria c = null;
-        Connection conexao = null;
+        //Connection conexao = null;
         PreparedStatement pstmt = null;
 
         try {
 
-            conexao = ConectaBanco.getConexao();
+            //conexao = ConectaBanco.getConexao();
             pstmt = conexao.prepareStatement(CONSULTA_ID_CATEGORIA_PARA_CADASTRAR_SUBCATEGORIA);
             pstmt.setString(1, categoria.getCategoria().toUpperCase());
             pstmt.execute();
@@ -187,12 +193,12 @@ public class CategoriaDAO {
     public Categoria consultaNomeCategoriaPorID(Categoria categoria) throws ClassNotFoundException, SQLException {
 
         Categoria c = null;
-        Connection conexao = null;
+        //Connection conexao = null;
         PreparedStatement pstmt = null;
 
         try {
 
-            conexao = ConectaBanco.getConexao();
+            //conexao = ConectaBanco.getConexao();
             pstmt = conexao.prepareStatement(CONSULTA_NOME_CATEGORIA_POR_ID);
             pstmt.setInt(1, Integer.parseInt(categoria.getId()));
             pstmt.execute();

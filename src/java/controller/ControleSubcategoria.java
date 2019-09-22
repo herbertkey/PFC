@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.*;
+import util.ConectaBanco;
 
 @WebServlet(urlPatterns = {"/ConsultarSubcategoria", "/CadastrarSubcategoria", "/AlterarSubcategoria", "/AlterarPageSubcategoria", "/ExcluirSubcategoria", "/CadastrarPageSubcategoria"})
 public class ControleSubcategoria extends HttpServlet {
@@ -37,7 +39,8 @@ public class ControleSubcategoria extends HttpServlet {
             }
             
             Categoria categoria = new Categoria();
-            CategoriaDAO categoriaDAO = new CategoriaDAO();
+            Connection conexao = ConectaBanco.getConexao();
+            CategoriaDAO categoriaDAO = new CategoriaDAO(conexao);
             categoria.setCategoria(request.getParameter("optCategoria"));
             categoria.setId(categoriaDAO.consultaIdCategoriaParaCadastrarSubcategoria(categoria).getId());
             
@@ -63,7 +66,8 @@ public class ControleSubcategoria extends HttpServlet {
                // rd.forward(request, response);
             }
             }
-            CategoriaDAO categoriaDAO = new CategoriaDAO();
+            Connection conexao = ConectaBanco.getConexao();
+            CategoriaDAO categoriaDAO = new CategoriaDAO(conexao);
             List<Categoria> categorias = new ArrayList<Categoria>();
             Categoria categoria = new Categoria();
             categoria.setCategoria("");
@@ -86,7 +90,8 @@ public class ControleSubcategoria extends HttpServlet {
         try {
             List<Categoria> categorias = new ArrayList<Categoria>();
             Categoria categoria = new Categoria();
-            CategoriaDAO categoriaDAO = new CategoriaDAO();
+            Connection conexao = ConectaBanco.getConexao();
+            CategoriaDAO categoriaDAO = new CategoriaDAO(conexao);
             categoria.setCategoria("");
             categorias = categoriaDAO.consultarCategoria(categoria);
             
@@ -150,7 +155,8 @@ public class ControleSubcategoria extends HttpServlet {
             subcategorias = subcategoriaDAO.consultaUmaSubcategoria(subcategoria);
             
             Categoria categoria = new Categoria();
-            CategoriaDAO categoriaDAO = new CategoriaDAO();
+            Connection conexao = ConectaBanco.getConexao();
+            CategoriaDAO categoriaDAO = new CategoriaDAO(conexao);
             categoria.setId(subcategorias.getCategoria().getId());
             categoria.setCategoria(categoriaDAO.consultaNomeCategoriaPorID(categoria).getCategoria());
             

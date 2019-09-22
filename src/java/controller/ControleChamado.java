@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.*;
+import util.ConectaBanco;
 
 @WebServlet(urlPatterns = {"/AbrirChamado", "/ConsultarChamado", "/AlterarPageChamado", "/AlterarChamado"})
 public class ControleChamado extends HttpServlet {
@@ -22,6 +24,7 @@ public class ControleChamado extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
+            
             String acao = request.getParameter("acao");
             if (acao.equals("Abrir")) {
                 Chamado chamado = new Chamado();
@@ -35,8 +38,9 @@ public class ControleChamado extends HttpServlet {
 
                 chamado.setDescricao(request.getParameter("txtDescricao"));
 
+                Connection conexao = ConectaBanco.getConexao();
                 Categoria categoria = new Categoria();
-                CategoriaDAO categoriaDAO = new CategoriaDAO();
+                CategoriaDAO categoriaDAO = new CategoriaDAO(conexao);
                 categoria.setCategoria(request.getParameter("optCategoria"));
                 categoria = categoriaDAO.consultaUmaCategoria(categoria);
                 chamado.setCategoria(categoria);
@@ -55,19 +59,7 @@ public class ControleChamado extends HttpServlet {
                 tecnico.setId(serviceChamado.atribuicaoDoChamado(tecnicos));
                 chamado.setTecnico(tecnico);      
                 
-                
-                                                 
-//                String prioridade = chamadoDAO.calcularPrioridadeDoChamado(chamado);
-                String prioridade = serviceChamado.calcularPrioridadeDoChamado(chamado);
-                if (prioridade.equalsIgnoreCase("BAIXA")) {
-                    chamado.setPrioridade(Prioridade.BAIXA);
-                } else if (prioridade.equalsIgnoreCase("MEDIA")) {
-                    chamado.setPrioridade(Prioridade.MEDIA);
-                } else if (prioridade.equalsIgnoreCase("ALTA")) {
-                    chamado.setPrioridade(Prioridade.ALTA);
-                } else if (prioridade.equalsIgnoreCase("ALTISSIMA")) {
-                    chamado.setPrioridade(Prioridade.ALTISSIMA);
-                }                         
+                chamado.setPrioridade(serviceChamado.calcularPrioridadeDoChamado(chamado));                       
                 
                 chamado.setData_inicio(chamadoDAO.getDateTime());
                 chamado.setData_fim("");
@@ -78,8 +70,9 @@ public class ControleChamado extends HttpServlet {
                         + "                                </div>");
                 request.setAttribute("chamado", chamado);
             }
-
-            CategoriaDAO categoriaDAO = new CategoriaDAO();
+            
+            Connection conexao = ConectaBanco.getConexao();
+            CategoriaDAO categoriaDAO = new CategoriaDAO(conexao);
             List<Categoria> categorias = new ArrayList<Categoria>();
             Categoria categoria = new Categoria();
             categoria.setCategoria("");
@@ -194,7 +187,8 @@ public class ControleChamado extends HttpServlet {
 
             List<Categoria> categorias = new ArrayList<Categoria>();
             Categoria categoria = new Categoria();
-            CategoriaDAO categoriaDAO = new CategoriaDAO();
+            Connection conexao = ConectaBanco.getConexao();
+            CategoriaDAO categoriaDAO = new CategoriaDAO(conexao);
             categoria.setCategoria("");
             categorias = categoriaDAO.consultarCategoria(categoria);
             request.setAttribute("consultacategoria", categorias);
@@ -256,7 +250,8 @@ public class ControleChamado extends HttpServlet {
                 chamado.setDescricao(request.getParameter("txtDescricao"));
 
                 Categoria categoria = new Categoria();
-                CategoriaDAO categoriaDAO = new CategoriaDAO();
+                Connection conexao = ConectaBanco.getConexao();
+                CategoriaDAO categoriaDAO = new CategoriaDAO(conexao);
                 categoria.setCategoria(request.getParameter("optCategoria"));
                 categoria = categoriaDAO.consultaUmaCategoria(categoria);
                 chamado.setCategoria(categoria);
@@ -269,18 +264,8 @@ public class ControleChamado extends HttpServlet {
 
                  ServiceChamado serviceChamado = new ServiceChamado();
                                                  
-//                String prioridade = chamadoDAO.calcularPrioridadeDoChamado(chamado);
-                String prioridade = serviceChamado.calcularPrioridadeDoChamado(chamado);
-                if (prioridade.equalsIgnoreCase("BAIXA")) {
-                    chamado.setPrioridade(Prioridade.BAIXA);
-                } else if (prioridade.equalsIgnoreCase("MEDIA")) {
-                    chamado.setPrioridade(Prioridade.MEDIA);
-                } else if (prioridade.equalsIgnoreCase("ALTA")) {
-                    chamado.setPrioridade(Prioridade.ALTA);
-                } else if (prioridade.equalsIgnoreCase("ALTISSIMA")) {
-                    chamado.setPrioridade(Prioridade.ALTISSIMA);
-                } 
-
+                chamado.setPrioridade(serviceChamado.calcularPrioridadeDoChamado(chamado));
+                
                 chamado.setData_fim("");
                 String status = request.getParameter("optStatus");
                 if (status.equalsIgnoreCase("aberto")) {

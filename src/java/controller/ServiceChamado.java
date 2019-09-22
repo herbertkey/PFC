@@ -15,9 +15,8 @@ import util.ConectaBanco;
 
 public class ServiceChamado {
 
-    public String calcularPrioridadeDoChamado(Chamado chamado) {
+    public Prioridade calcularPrioridadeDoChamado(Chamado chamado) {
 
-        String prioridade = "0";
         double prioridadeFinal = 0;
         double prioridadeCategoria = 0;
         double prioridadeSubcategoria = 0;
@@ -30,16 +29,14 @@ public class ServiceChamado {
         prioridadeFinal = Math.round((prioridadeSetor + prioridadeCategoria + prioridadeSubcategoria) / 3);
 
         if (prioridadeFinal==1) {
-            prioridade = "BAIXA";
+            return Prioridade.BAIXA;           
         } else if (prioridadeFinal==2) {
-            prioridade = "MEDIA";
+            return Prioridade.MEDIA; 
         } else if (prioridadeFinal==3) {
-            prioridade = "ALTA";
-        } else if (prioridadeFinal==4) {
-            prioridade = "ALTISSIMA";
+            return Prioridade.ALTA; 
+        } else {
+            return Prioridade.ALTISSIMA; 
         }
-
-        return prioridade;
 
     }
     
