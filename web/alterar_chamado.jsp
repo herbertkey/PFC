@@ -78,7 +78,9 @@
                                 <div class="row">
                                      <div class="col-lg-6">
                                     <form action="/ProjetoPFC_5/AlterarChamado" method="POST">
-                                        
+                                        <div class="form-group">
+                                        <button type="submit" name="acao" value="Adicionar Informacoes" class="btn btn-default">Adicionar novas informações</button> 
+                                        </div>
                                         <%
                                             Chamado chamado = (Chamado) request.getAttribute("chamado");
                                             String msg = (String) request.getAttribute("msg");
@@ -204,13 +206,12 @@
                                         
                                         <button type="submit" name="acao" value="Alterar" class="btn btn-default">Alterar chamado</button>  
 
-                                    
+                                    </form>
                                 </div>
                                     <div class="col-lg-6">
-                                     
                                     <div class="form-group">
                                             <label>Informações adicionais:</label>
-                                    </div>
+                                        </div>
                                         
                                         <%
                                             List<Historico> historicos = (List<Historico>) request.getAttribute("historico");
@@ -248,11 +249,9 @@
                                         %>
                                         <%
                                             } 
-                                        %>
-                                        <button type="submit" name="acao" value="Adicionar Informacoes" class="btn btn-default">Adicionar novas informações</button>    
+                                        %>             
                                     </div>
                                      <!-- /.col-lg-6 -->
-                                    </form>
                                 </div>
                             </div>
                         </div>
