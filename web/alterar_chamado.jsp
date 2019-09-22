@@ -202,8 +202,9 @@
                                             <input class="form-control" id="disabledInput" readonly="true" type="text" name="txtPrioridade" value="<%=chamado.getPrioridade()%>" >
                                         </div>
                                         
-                                        <button type="submit" name="acao" value="Alterar" class="btn btn-default">Alterar chamado</button>  
-
+                                        <button type="submit" name="acao" value="Alterar" class="btn btn-default">Alterar chamado</button>
+                                        <button type="submit" name="acao" value="Adicionar Informacoes" class="btn btn-default">Adicionar novas informações</button>    
+                                        </form>
                                     
                                 </div>
                                     <div class="col-lg-6">
@@ -249,10 +250,10 @@
                                         <%
                                             } 
                                         %>
-                                        <button type="submit" name="acao" value="Adicionar Informacoes" class="btn btn-default">Adicionar novas informações</button>    
+                                       
                                     </div>
                                      <!-- /.col-lg-6 -->
-                                    </form>
+                                    
                                 </div>
                             </div>
                         </div>
