@@ -301,6 +301,8 @@ public class ControleChamado extends HttpServlet {
                 List<Categoria> categorias = new ArrayList<Categoria>();
                 
                 categoria.setCategoria("");
+                conexao = ConectaBanco.getConexao();
+                categoriaDAO = new CategoriaDAO(conexao);
                 categorias = categoriaDAO.consultarCategoria(categoria);
                 request.setAttribute("consultacategoria", categorias);
 
