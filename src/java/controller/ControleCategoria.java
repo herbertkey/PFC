@@ -47,6 +47,8 @@ public class ControleCategoria extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("/admin/cadastro_categoria.jsp");
                 rd.forward(request, response);
             } else {
+                conexao = ConectaBanco.getConexao();
+                categoriaDAO = new CategoriaDAO(conexao);
                 categoriaDAO.cadastraNovaCategoria(categoria);
                 request.setAttribute("msg", "<div class=\"alert alert-success\" role=\"alert\">\n"
                         + "                                    Categoria cadastrada com sucesso!\n"
