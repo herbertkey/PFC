@@ -129,7 +129,7 @@ public class ControleUsuario extends HttpServlet {
 
             UsuarioDAO usuarioDAO = new UsuarioDAO();
             usuarioDAO.alterarUsuario(usuario);
-            request.getRequestDispatcher("/admin/consultar_usuario.jsp").forward(request, response);
+            request.getRequestDispatcher("ConsultarUsuario?txtNome=").forward(request, response);
 
         } catch (Exception erro) {
             RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");

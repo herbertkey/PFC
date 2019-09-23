@@ -211,7 +211,7 @@
                                         
                                 </div>
                                     <div class="col-lg-6">
-                                    <div class="form-group">
+                                        <div class="form-group">
                                             <label>Informações adicionais:</label>
                                         </div>
                                         
