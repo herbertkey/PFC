@@ -78,10 +78,7 @@
                                 <div class="row">
                                      <div class="col-lg-6">
                                      <form action="/ProjetoPFC_5/AlterarChamado" method="POST">   
-                                        <div class="form-group">
-                                    
-                                        <button type="submit" name="acao" value="Adicionar Informacoes" class="btn btn-default">Adicionar novas informações</button> 
-                                        </div>
+                                        
                                         <%
                                             Chamado chamado = (Chamado) request.getAttribute("chamado");
                                             String msg = (String) request.getAttribute("msg");
@@ -112,7 +109,7 @@
                                             if (usuarioSessao.getTipo().toString() == "CLIENTE") {%>
                                          
                                         <div class="form-group">
-                                            <label>Status:</label>
+                                            <label for="disabledSelect">Status:</label>
                                             <input class="form-control" id="disabledInput" readonly="true" type="text" name="optStatus" value="<%=chamado.getStatus().toString()%>" >
                                         </div> 
                                         
@@ -132,7 +129,7 @@
                                             <option selected><%=status%></option> 
                                             
                                             <%
-                                            } else if (status.toString() != "TODOS") {
+                                            } else {
                                             %>
                                             
                                             <option> <%= status%></option>
@@ -140,11 +137,11 @@
                                             <%
                                                 }
                                                 }
-                                                }
                                             %>   
                                             </select>
                                         </div>
-                                        
+                                            <%}
+                                            %>
                                         <div class="form-group">
                                             <label for="disabledSelect">Numero de Registro:</label>
                                             <input class="form-control" id="disabledInput" readonly="true" type="text" name="txtNumeroDeRegistro" value="<%=chamado.getUsuario().getNumero_registro()%>" >
@@ -205,9 +202,13 @@
                                             <input class="form-control" id="disabledInput" readonly="true" type="text" name="txtPrioridade" value="<%=chamado.getPrioridade()%>" >
                                         </div>
                                         
-                                        <button type="submit" name="acao" value="Alterar" class="btn btn-default">Alterar chamado</button>
+                                        <%if ("FECHADO" == chamado.getStatus().toString()){ %>
+                                        <button type="submit" disabled="true" name="acao" value="Adicionar Informacoes" class="btn btn-default">Adicionar novas informações</button> 
+                                        <%}else{%>
+                                        <button type="submit" name="acao" value="Adicionar Informacoes" class="btn btn-default">Adicionar novas informações</button> 
+                                        <%}%>
                                         <button type="submit" name="acao" value="Adicionar Informacoes" class="btn btn-default">Adicionar novas informações</button>    
-                                    </form>
+                                    
                                         
                                 </div>
                                     <div class="col-lg-6">
@@ -252,7 +253,14 @@
                                         <%
                                             } 
                                         %>
-                                       
+                                        <%if ("FECHADO" == chamado.getStatus().toString()){ %>
+                                        <button type="submit" disabled="true" name="acao" value="Adicionar Informacoes" class="btn btn-default">Adicionar novas informações</button> 
+                                        <%}else{%>
+                                        <button type="submit" name="acao" value="Adicionar Informacoes" class="btn btn-default">Adicionar novas informações</button> 
+                                        <%}%>   
+                                        
+                                        </form>
+                                        
                                     </div>
                                      <!-- /.col-lg-6 -->
                                     

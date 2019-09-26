@@ -45,11 +45,16 @@ public class ControleUsuario extends HttpServlet {
                 usuario.setSetor(Setor.REITORIA);
             } else if (setor.equalsIgnoreCase("coordenacao")) {
                 usuario.setSetor(Setor.COORDENACAO);
-            } else if (setor.equalsIgnoreCase("administracao")) {
-                usuario.setSetor(Setor.ADMINISTRACAO);
+            } else if (setor.equalsIgnoreCase("contabilidade")) {
+                usuario.setSetor(Setor.CONTABILIDADE);
+            } else if (setor.equalsIgnoreCase("recursos_humanos")) {
+                usuario.setSetor(Setor.RECURSOS_HUMANOS);
+            } else if (setor.equalsIgnoreCase("ti")) {
+                usuario.setSetor(Setor.TI);
+            } else if (setor.equalsIgnoreCase("financeiro")) {
+                usuario.setSetor(Setor.FINANCEIRO);
             } else if (setor.equalsIgnoreCase("portaria")) {
-                usuario.setSetor(Setor.PORTARIA);
-            }
+                usuario.setSetor(Setor.PORTARIA);}
 
             UsuarioDAO usuarioDAO = new UsuarioDAO();
             if (usuarioDAO.consultaUmUsuario(usuario).getNumero_registro() == usuario.getNumero_registro()) {
@@ -121,11 +126,16 @@ public class ControleUsuario extends HttpServlet {
                 usuario.setSetor(Setor.REITORIA);
             } else if (setor.equalsIgnoreCase("coordenacao")) {
                 usuario.setSetor(Setor.COORDENACAO);
-            } else if (setor.equalsIgnoreCase("administracao")) {
-                usuario.setSetor(Setor.ADMINISTRACAO);
+            } else if (setor.equalsIgnoreCase("contabilidade")) {
+                usuario.setSetor(Setor.CONTABILIDADE);
+            } else if (setor.equalsIgnoreCase("recursos_humanos")) {
+                usuario.setSetor(Setor.RECURSOS_HUMANOS);
+            } else if (setor.equalsIgnoreCase("ti")) {
+                usuario.setSetor(Setor.TI);
+            } else if (setor.equalsIgnoreCase("financeiro")) {
+                usuario.setSetor(Setor.FINANCEIRO);
             } else if (setor.equalsIgnoreCase("portaria")) {
-                usuario.setSetor(Setor.PORTARIA);
-            }
+                usuario.setSetor(Setor.PORTARIA);}
 
             UsuarioDAO usuarioDAO = new UsuarioDAO();
             usuarioDAO.alterarUsuario(usuario);

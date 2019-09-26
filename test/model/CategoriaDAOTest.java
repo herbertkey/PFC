@@ -21,18 +21,22 @@ public class CategoriaDAOTest {
     }
     @After
     public void finaliza()throws SQLException{
-        conexao.rollback();
+        //conexao.rollback();
     }
     
     @Test
-    public void deveCadastrarNovaCategoria(){
+    public void deveCadastrarNovaCategoria() throws SQLException{
         Categoria categoria = new Categoria();
         categoria.setCategoria("Maquinas");
         categoria.setPrioridade(Prioridade.ALTA);
         
-        categoriaDAO.cadastraNovaCategoria(categoria);
+       categoriaDAO.cadastraNovaCategoria(categoria);
         
         categoria.setCategoria("");
+        
+        conexao = ConectaBanco.getConexao();
+        conexao.setAutoCommit(false);
+        categoriaDAO = new CategoriaDAO(conexao);
         
         Categoria categoriaCadastrada = categoriaDAO.consultarCategoria(categoria).get(0);
         
