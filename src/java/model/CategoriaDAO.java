@@ -85,6 +85,7 @@ public class CategoriaDAO {
         PreparedStatement pstmt = null;
         try {
             //conexao = ConectaBanco.getConexao();
+            //UPDATE categoria SET categoria=?,prioridade=? WHERE upper(categoria)=?
             pstmt = conexao.prepareStatement(ALTERAR_CATEGORIA);
             pstmt.setString(1, categoria.getCategoria());
             pstmt.setString(2, categoria.getPrioridade().toString());
