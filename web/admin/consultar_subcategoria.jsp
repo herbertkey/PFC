@@ -24,7 +24,7 @@
         <div id="wrapper">
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="/ProjetoPFC_5/principal.jsp">Cadastro de categorias</a>
+                    <a class="navbar-brand" href="">Consultar subcategorias</a>
                 </div>
                 <ul class="nav navbar-nav navbar-left navbar-top-links">
                     <li><a href="/ProjetoPFC_5/ConsultarChamado?acao=Consultar"> <i class="fa fa-home fa-fw"></i> Home</a></li>
