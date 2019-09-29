@@ -51,6 +51,37 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         
+                        <% Usuario usuarioSessao = (Usuario) session.getAttribute("usuarioAutenticado");
+                                if (usuarioSessao.getTipo().toString() == "TECNICO") {%>
+                                    <li>
+                                        <a href="/ProjetoPFC_5/admin/area_restrita.jsp"> Área restrita</a>
+                                    </li>                  
+
+
+
+                            <%} else {
+                            %>
+
+
+                            <%
+                                if (usuarioSessao.getTipo().toString() == "SUPERVISOR") {%>
+                                     <li>
+                                        <a href = "/ProjetoPFC_5/admin/area_restrita.jsp" > Área restrita</a>
+                                     </li > 
+                                    
+                                    
+                                    
+                            <%
+                                }
+                            %>
+
+
+                                
+                            
+                            <%
+                                }
+                            %>
+                        
                         <li>
                                 <a href="/ProjetoPFC_5/AbrirChamado?acao="> Abrir Chamado</a>
                         </li>
