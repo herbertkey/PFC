@@ -50,7 +50,7 @@
                                     </div>
                                     
                                     <input class="btn btn-lg btn-primary btn-block" type="submit" value="Entrar" name="acao">
-                                    </form>
+                                    
                                 </fieldset>
                             </form>
                         </div>
