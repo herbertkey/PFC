@@ -60,7 +60,7 @@
                         <ul class="nav" id="side-menu">
                             
                             
-                            <% Usuario usuarioSessao = (Usuario) session.getAttribute("usuarioAutenticado");
+                             <% Usuario usuarioSessao = (Usuario) session.getAttribute("usuarioAutenticado");
                                 if (usuarioSessao.getTipo().toString() == "TECNICO") {%>
                                     <li>
                                         <a href="/ProjetoPFC_5/admin/area_restrita.jsp"> Área restrita</a>
