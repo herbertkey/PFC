@@ -7,20 +7,37 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
+import static javafx.scene.input.KeyCode.T;
 import model.*;
 
 public class ServiceChamadoTest {
    
-    private ChamadoDAO chamadoDAOMock;    
+    private ChamadoDAO chamadoDAOMock;
+    private Usuario usuarioMock;
+    private UsuarioDAO usuarioDAOMock;
+    private Usuario listaUsuarioMock;
+    private List<Usuario> usuariosMock;
+    private Chamado listaChamadoMock;
+    private List<Chamado> chamadosMock;
+    
     
     	@Before
 	public void inicializa(){
 		//criacao de mocks
 		chamadoDAOMock = mock(ChamadoDAO.class);
-
-		//definir comportamento               
+                usuarioMock = mock(Usuario.class);
+                usuarioDAOMock = mock(UsuarioDAO.class);  
+                
+                //listaUsuarioMock = mock(Usuario.class);
+                //usuariosMock.add(listaUsuarioMock);
+                //listaChamadoMock = mock(Chamado.class);
+                //chamadosMock.add(listaChamadoMock);
+                
+		//definir comportamento             
                 
                 //consultaPrioridadeChamadoPorTecnico
                 //totalChamadosPorTecnico
@@ -32,26 +49,23 @@ public class ServiceChamadoTest {
                 Categoria categoria = new Categoria("1", "Software", Prioridade.BAIXA);
                 Subcategoria subcategoria = new Subcategoria("1", "Netbeans", Prioridade.BAIXA, categoria);
                 Chamado chamado = new Chamado("1", "teste", "19/08/2019", "20/09/2019", StatusChamado.ABERTO, usuario, categoria, subcategoria, tecnico, Prioridade.BAIXA);
-		//when(pedidoDAOMock.consultaPorId(any(Pedido.class))).thenReturn(pedido);
+		when(chamadoDAOMock.consultarUmChamado(any(Chamado.class))).thenReturn(chamado);
 		//when(nfEletronicaMock.enviar(any(NotaFiscal.class))).thenReturn(new Random().nextLong());
 				
 		
 	}
+        
         @Test
 	public void deveCalcularAPrioridadeDoChamado(){
             
-                ServiceChamado serviceChamado = new ServiceChamado(chamadoDAOMock, usuario, usuarioDAO, usuarios, chamados)
-
-		NotaFiscalService notaFiscalService = new NotaFiscalService(pedidoDAOMock, notaFiscalDAOMock, nfEletronicaMock);
-		
-		NotaFiscal notaFiscal = notaFiscalService.gerar(new Pedido());
-		
-		assertEquals(Double.valueOf(250.0), notaFiscal.getValorBruto(), 0.001);
-		assertEquals(Double.valueOf(235.0),notaFiscal.getValorLiquido(), 0.001);
-		
+                ServiceChamado serviceChamado = new ServiceChamado(chamadoDAOMock, usuarioMock, usuarioDAOMock, usuariosMock, chamadosMock);
+                 		
+                Chamado chamado = chamadoDAOMock.consultarUmChamado(new Chamado());
+                
+		assertEquals(Prioridade.BAIXA, serviceChamado.calcularPrioridadeDoChamado(chamado));
+				
 		//validar comportamento dos mocks
-		verify(notaFiscalDAOMock).cadastrar(notaFiscal);
-		verify(nfEletronicaMock).enviar(notaFiscal);
+		verify(chamadoDAOMock).consultarUmChamado(chamado);
 				
 	}
         
