@@ -12,6 +12,23 @@ public class Usuario {
     private String cargo;
     private Setor setor; //Setor é referente ao setor de usuario (Classe Setor)
 
+    public Usuario() {
+    }
+
+    public Usuario(int id, int numero_registro, String email, String nome, String telefone, String senha, Tipo tipo, String cargo, Setor setor) {
+        this.id = id;
+        this.numero_registro = numero_registro;
+        this.email = email;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.senha = senha;
+        this.tipo = tipo;
+        this.cargo = cargo;
+        this.setor = setor;
+    }
+    
+    
+
     public int getId() {
         return id;
     }

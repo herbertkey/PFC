@@ -7,6 +7,18 @@ public class Subcategoria {
     private Prioridade prioridade;
     private Categoria categoria;
 
+    public Subcategoria() {
+    }
+
+    public Subcategoria(String id, String subcategoria, Prioridade prioridade, Categoria categoria) {
+        this.id = id;
+        this.subcategoria = subcategoria;
+        this.prioridade = prioridade;
+        this.categoria = categoria;
+    }
+    
+    
+
     public String getId() {
         return id;
     }

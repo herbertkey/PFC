@@ -202,12 +202,7 @@
                                             <input class="form-control" id="disabledInput" readonly="true" type="text" name="txtPrioridade" value="<%=chamado.getPrioridade()%>" >
                                         </div>
                                         
-                                        <%if ("FECHADO" == chamado.getStatus().toString()){ %>
-                                        <button type="submit" disabled="true" name="acao" value="Adicionar Informacoes" class="btn btn-default">Adicionar novas informações</button> 
-                                        <%}else{%>
-                                        <button type="submit" name="acao" value="Adicionar Informacoes" class="btn btn-default">Adicionar novas informações</button> 
-                                        <%}%>
-                                        <button type="submit" name="acao" value="Adicionar Informacoes" class="btn btn-default">Adicionar novas informações</button>    
+                                        <button type="submit" name="acao" value="Alterar" class="btn btn-default">Alterar chamado</button>
                                     
                                         
                                 </div>

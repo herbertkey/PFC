@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.*;
+import model.ChamadoDAO;
+import model.Chamado;
 import util.ConectaBanco;
 
 @WebServlet(urlPatterns = {"/AbrirChamado", "/ConsultarChamado", "/AlterarPageChamado", "/AlterarChamado"})
@@ -52,8 +54,8 @@ public class ControleChamado extends HttpServlet {
                 subcategoria = subcategoriaDAO.consultaUmaSubcategoria(subcategoria);
                 chamado.setSubcategoria(subcategoria);
 
-                ServiceChamado serviceChamado = new ServiceChamado();
-                
+                ServiceChamado serviceChamado = new ServiceChamado(new ChamadoDAO(),new Usuario(),new UsuarioDAO(),new ArrayList<Usuario>(),new ArrayList<Chamado>());
+
                 Usuario tecnico = new Usuario();
                 List<Usuario> tecnicos = new ArrayList<Usuario>();
                 tecnicos = usuarioDAO.consultarTecnico();       
@@ -263,9 +265,9 @@ public class ControleChamado extends HttpServlet {
                 subcategoria.setSubcategoria(request.getParameter("optSubcategoria"));
                 subcategoria = subcategoriaDAO.consultaUmaSubcategoria(subcategoria);
                 chamado.setSubcategoria(subcategoria);
-
-                 ServiceChamado serviceChamado = new ServiceChamado();
-                                                 
+        
+                ServiceChamado serviceChamado = new ServiceChamado(new ChamadoDAO(),new Usuario(),new UsuarioDAO(),new ArrayList<Usuario>(),new ArrayList<Chamado>());
+                
                 chamado.setPrioridade(serviceChamado.calcularPrioridadeDoChamado(chamado));
                 
                 chamado.setData_fim("");

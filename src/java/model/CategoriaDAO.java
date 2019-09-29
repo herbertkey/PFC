@@ -15,7 +15,6 @@ public class CategoriaDAO {
     private static final String ALTERAR_CATEGORIA = "UPDATE categoria SET categoria=?,prioridade=? WHERE upper(categoria)=?";
     private static final String CONSULTA_UMA_CATEGORIA = "SELECT id,categoria,prioridade FROM categoria Where upper(categoria)=?";
     private static final String EXCLUIR_CATEGORIA = "UPDATE categoria SET status='INATIVO' WHERE upper(categoria)=?";
-    private static final String CONSULTA_ID_CATEGORIA_PARA_CADASTRAR_SUBCATEGORIA = "SELECT id FROM categoria Where upper(categoria)=?";
     private static final String CONSULTA_NOME_CATEGORIA_POR_ID = "SELECT categoria FROM categoria Where id=?";
 
     private final Connection conexao;
@@ -161,36 +160,7 @@ public class CategoriaDAO {
         }
 
     }
-    public Categoria consultaIdCategoriaParaCadastrarSubcategoria(Categoria categoria) throws ClassNotFoundException, SQLException {
-
-        Categoria c = null;
-        //Connection conexao = null;
-        PreparedStatement pstmt = null;
-
-        try {
-
-            //conexao = ConectaBanco.getConexao();
-            pstmt = conexao.prepareStatement(CONSULTA_ID_CATEGORIA_PARA_CADASTRAR_SUBCATEGORIA);
-            pstmt.setString(1, categoria.getCategoria().toUpperCase());
-            pstmt.execute();
-            ResultSet resultado = pstmt.executeQuery();
-            c = new Categoria();
-            if (resultado.next()) {
-                c.setId(resultado.getString("id"));
-            }
-        } catch (SQLException sqlErro) {
-            throw new RuntimeException(sqlErro);
-        } finally {
-            if (conexao != null) {
-                try {
-                    conexao.close();
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        }
-        return c;
-    }
+    
     public Categoria consultaNomeCategoriaPorID(Categoria categoria) throws ClassNotFoundException, SQLException {
 
         Categoria c = null;

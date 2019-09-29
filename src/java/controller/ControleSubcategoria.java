@@ -42,7 +42,7 @@ public class ControleSubcategoria extends HttpServlet {
             Connection conexao = ConectaBanco.getConexao();
             CategoriaDAO categoriaDAO = new CategoriaDAO(conexao);
             categoria.setCategoria(request.getParameter("optCategoria"));
-            categoria.setId(categoriaDAO.consultaIdCategoriaParaCadastrarSubcategoria(categoria).getId());
+            categoria.setId(categoriaDAO.consultaUmaCategoria(categoria).getId());
             
             subcategoria.setCategoria(categoria);
 

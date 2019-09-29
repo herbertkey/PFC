@@ -6,14 +6,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.Chamado;
-import model.ChamadoDAO;
-import model.Prioridade;
-import model.Usuario;
-import model.UsuarioDAO;
+import model.*;
 import util.ConectaBanco;
 
 public class ServiceChamado {
+    
+    private ChamadoDAO chamadoDAO;
+    private Usuario usuario;
+    private UsuarioDAO usuarioDAO;
+    private List<Usuario> usuarios;
+    private List<Chamado> chamados;
+
+    public ServiceChamado(ChamadoDAO chamadoDAO, Usuario usuario, UsuarioDAO usuarioDAO, List<Usuario> usuarios, List<Chamado> chamados) {
+        this.chamadoDAO = chamadoDAO;
+        this.usuario = usuario;
+        this.usuarioDAO = usuarioDAO;
+        this.usuarios = usuarios;
+        this.chamados = chamados;
+    } 
+    
 
     public Prioridade calcularPrioridadeDoChamado(Chamado chamado) {
 
@@ -49,8 +60,6 @@ public class ServiceChamado {
             
             double prioridadeTotal = 0;
             
-            List<Chamado> chamados = new ArrayList<Chamado>();
-            ChamadoDAO chamadoDAO = new ChamadoDAO();
             chamados = chamadoDAO.consultaPrioridadeChamadoPorTecnico(u);
             
             for(Chamado ch: chamados) {
@@ -72,9 +81,7 @@ public class ServiceChamado {
 
         double prioridadeTotal = 0;
             
-            List<Chamado> chamados = new ArrayList<Chamado>();
-            ChamadoDAO chamadoDAO = new ChamadoDAO();
-            Usuario usuario = new Usuario();
+            
             usuario.setId(idTecnico);
             chamados = chamadoDAO.consultaPrioridadeChamadoPorTecnico(usuario);
             
@@ -98,10 +105,9 @@ public class ServiceChamado {
         int idTecnico = 0;
         int idChamado = 0;
         
-        List<Usuario> usuarios = new ArrayList<Usuario>();
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        
         usuarios = usuarioDAO.consultarTecnico();
-        ChamadoDAO chamadoDAO = new ChamadoDAO();
+        
         
         for(Usuario u: usuarios){
             

@@ -6,6 +6,17 @@ public class Categoria {
     private String categoria;
     private Prioridade prioridade;
 
+    public Categoria() {
+    }
+
+    public Categoria(String id, String categoria, Prioridade prioridade) {
+        this.id = id;
+        this.categoria = categoria;
+        this.prioridade = prioridade;
+    }
+    
+    
+
     public String getId() {
         return id;
     }

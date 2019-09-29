@@ -16,7 +16,25 @@ public class Chamado {
     private Subcategoria subcategoria; //Subcategoria do chamado
     private Usuario tecnico; //Técnico que será atribuido ao chamado
     private Prioridade prioridade; //Prioridade do Chamado (Calculo será feito por meio da regra de negocio)
+
+    public Chamado() {
+    }
+
+    public Chamado(String id, String descricao, String data_inicio, String data_fim, StatusChamado status, Usuario usuario, Categoria categoria, Subcategoria subcategoria, Usuario tecnico, Prioridade prioridade) {
+        this.id = id;
+        this.descricao = descricao;
+        this.data_inicio = data_inicio;
+        this.data_fim = data_fim;
+        this.status = status;
+        this.usuario = usuario;
+        this.categoria = categoria;
+        this.subcategoria = subcategoria;
+        this.tecnico = tecnico;
+        this.prioridade = prioridade;
+    }
    
+    
+    
     
     public String getId() {
         return id;
