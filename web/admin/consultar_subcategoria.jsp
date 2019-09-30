@@ -1,10 +1,9 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=ISO-8859-1" language="java" pageEncoding="UTF-8" import="java.sql.*" errorPage="" %>
 <%@page import="java.util.List"%>
 <%@page import="model.*"%>
 <%@page import="controller.*"%>
 <!DOCTYPE html>
 <html>
-    <head>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -103,15 +102,7 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <form action="/ProjetoPFC_5/ConsultarSubcategoria" method="GET">
-                                            <div class="form-group">
-                                                <label>Subcategoria:</label>
-                                                <input type="text" class="form-control" name="txtSubcategoria">
-                                            </div>
-                                            <button type="submit" class="btn btn-default">Consultar</button>
-                                            <button href="/ProjetoPFC_5/ConsultarSubcategoria?txtSubcategoria=" class="btn btn-default">Limpar consulta</button>
-                                            
-                                        </form>
+                                   
                                 </div>
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">

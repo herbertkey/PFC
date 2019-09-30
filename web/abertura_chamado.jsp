@@ -1,5 +1,5 @@
 <%@page import="java.util.ArrayList"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=ISO-8859-1" language="java" pageEncoding="UTF-8" import="java.sql.*" errorPage="" %>
 <%@page import="java.util.List"%>
 <%@page import="model.*"%>
 <%@page import="controller.*"%>
@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">

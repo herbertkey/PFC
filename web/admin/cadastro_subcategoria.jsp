@@ -1,5 +1,5 @@
 <%@page import="java.util.ArrayList"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=ISO-8859-1" language="java" pageEncoding="UTF-8" import="java.sql.*" errorPage="" %>
 <%@page import="java.util.List"%>
 <%@page import="model.*"%>
 <%@page import="controller.*"%>
