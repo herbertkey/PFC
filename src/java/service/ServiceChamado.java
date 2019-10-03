@@ -121,7 +121,7 @@ public class ServiceChamado {
         }
         if(quantidadeMaiorChamados>1){
             idChamado = chamadoDAO.ultimoChamadoAtribuido(idTecnico);
-        chamadoDAO.reatribuirChamado(chamado.getTecnico().getId(), idChamado);
+            chamadoDAO.reatribuirChamado(chamado.getTecnico().getId(), idChamado);
         }
         
         
