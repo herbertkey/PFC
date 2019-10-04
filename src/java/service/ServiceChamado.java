@@ -1,5 +1,7 @@
 package service;
 
+import dao.UsuarioDAO;
+import dao.ChamadoDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

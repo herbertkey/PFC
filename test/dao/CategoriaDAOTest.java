@@ -1,8 +1,11 @@
-package model;
+package dao;
 
+import dao.CategoriaDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import model.Categoria;
+import model.Prioridade;
 import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;

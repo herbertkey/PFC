@@ -1,5 +1,9 @@
 package controller;
 
+import dao.CategoriaDAO;
+import dao.UsuarioDAO;
+import dao.HistoricoDAO;
+import dao.SubcategoriaDAO;
 import service.ServiceChamado;
 import java.io.IOException;
 import java.sql.Connection;
@@ -16,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.*;
-import model.ChamadoDAO;
+import dao.ChamadoDAO;
 import model.Chamado;
 import util.ConectaBanco;
 

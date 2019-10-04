@@ -1,5 +1,7 @@
 package service;
 
+import dao.UsuarioDAO;
+import dao.ChamadoDAO;
 import java.sql.SQLException;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,6 +26,8 @@ public class ServiceChamadoTest {
     private List<Usuario> usuariosMock;
     private Chamado listaChamadoMock;
     private List<Chamado> chamadosMock;
+    private Usuario tecnico;
+    private Chamado chamado;
     
     
     	@Before
@@ -32,6 +36,7 @@ public class ServiceChamadoTest {
 		chamadoDAOMock = mock(ChamadoDAO.class);
                 usuarioMock = mock(Usuario.class);
                 usuarioDAOMock = mock(UsuarioDAO.class);  
+                //usuariosMock = mock(List.class);
                 
                 //listaUsuarioMock = mock(Usuario.class);
                 //usuariosMock.add(listaUsuarioMock);
@@ -41,10 +46,11 @@ public class ServiceChamadoTest {
 		//definir comportamento             
                                 
                 Usuario usuario = new Usuario(1, 111, "herbert@umc.br", "Herbert", "111", "111", Tipo.SUPERVISOR, "Supervisor", Setor.ADMINISTRACAO);
-                Usuario tecnico = new Usuario(2, 222, "tecnico@umc.br", "Tecnico", "222", "222", Tipo.TECNICO, "Tecnico", Setor.TI);
+                tecnico = new Usuario(2, 222, "tecnico@umc.br", "Tecnico", "222", "222", Tipo.TECNICO, "Tecnico", Setor.TI);
+                //usuarioMock = tecnico;
                 Categoria categoria = new Categoria("1", "Software", Prioridade.BAIXA);
                 Subcategoria subcategoria = new Subcategoria("1", "Netbeans", Prioridade.BAIXA, categoria);
-                Chamado chamado = new Chamado("1", "teste", "19/08/2019", "20/09/2019", StatusChamado.ABERTO, usuario, categoria, subcategoria, tecnico, Prioridade.BAIXA);
+                chamado = new Chamado("1", "teste", "19/08/2019", "20/09/2019", StatusChamado.ABERTO, usuario, categoria, subcategoria, tecnico, Prioridade.BAIXA);
                 List<Chamado> chamados = new ArrayList<Chamado>();
                 chamados.add(chamado);
                 usuarios.add(tecnico);
@@ -54,6 +60,7 @@ public class ServiceChamadoTest {
 		when(usuarioDAOMock.consultarTecnico()).thenReturn(usuarios);
                 when(chamadoDAOMock.totalChamadosPorTecnico(any(Usuario.class))).thenReturn(2);
                 when(chamadoDAOMock.ultimoChamadoAtribuido(2)).thenReturn(1);
+                
                 
 				
 		
@@ -67,9 +74,7 @@ public class ServiceChamadoTest {
                 Chamado chamado = chamadoDAOMock.consultarUmChamado(new Chamado());
                               
 		assertEquals(Prioridade.BAIXA, serviceChamado.calcularPrioridadeDoChamado(chamado));
-				
-		//validar comportamento dos mocks
-		//verify(chamadoDAOMock).consultarUmChamado(chamado);
+		
 				
 	}
         
@@ -80,7 +85,7 @@ public class ServiceChamadoTest {
                                   
 		assertEquals(2, serviceChamado.atribuicaoDoChamado(usuarios));
 		
-                Usuario tecnico = usuarioDAOMock.consultaUmUsuario(new Usuario());
+               // Usuario tecnico = usuarioDAOMock.consultaUmUsuario(new Usuario());
 		//validar comportamento dos mocks
 		verify(chamadoDAOMock).consultaPrioridadeChamadoPorTecnico(tecnico);
 				
@@ -89,24 +94,23 @@ public class ServiceChamadoTest {
         @Test
         public void deveVerificarSeAFilaDoTecnicoEstaVazia() throws ClassNotFoundException, SQLException{
             
-                 ServiceChamado serviceChamado = new ServiceChamado(chamadoDAOMock, usuarioMock, usuarioDAOMock, usuariosMock, chamadosMock);
+                 ServiceChamado serviceChamado = new ServiceChamado(chamadoDAOMock, tecnico, usuarioDAOMock, usuariosMock, chamadosMock);
                                   
 		assertEquals(false, serviceChamado.verificarFilaVazia(2));
 				
-		Usuario tecnico = usuarioDAOMock.consultaUmUsuario(new Usuario());
+		//Usuario tecnico = usuarioDAOMock.consultaUmUsuario(new Usuario());
 		//validar comportamento dos mocks
-		//verify(chamadoDAOMock).consultaPrioridadeChamadoPorTecnico(tecnico);
+		verify(chamadoDAOMock).consultaPrioridadeChamadoPorTecnico(tecnico);
 				
 	}
  
         @Test
         public void deveAtribuirUmChamadoParaOTecnico() throws ClassNotFoundException, SQLException{
             
-                ServiceChamado serviceChamado = new ServiceChamado(chamadoDAOMock, usuarioMock, usuarioDAOMock, usuariosMock, chamadosMock);
-                
-                Chamado chamado = new Chamado();
+                ServiceChamado serviceChamado = new ServiceChamado(chamadoDAOMock, usuarioMock, usuarioDAOMock, usuarios, chamadosMock);
                 
                 serviceChamado.realocacaoDeChamado(chamado);
+                verify(chamadoDAOMock).reatribuirChamado(2,1);
                 				
 	}
         

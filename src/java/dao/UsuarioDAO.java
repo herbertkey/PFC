@@ -1,4 +1,4 @@
-package model;
+package dao;
 
 import com.sun.xml.rpc.processor.modeler.j2ee.xml.string;
 import java.security.MessageDigest;
@@ -9,6 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.Setor;
+import model.Tipo;
+import model.Usuario;
 import sun.misc.BASE64Encoder;
 import util.ConectaBanco;
 

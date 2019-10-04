@@ -1,4 +1,4 @@
-package model;
+package dao;
 
 import java.sql.Connection;
 import java.util.Date;
@@ -12,6 +12,12 @@ import java.util.List;
 import java.util.Set;
 import util.ConectaBanco;
 import java.lang.Math;
+import model.Categoria;
+import model.Chamado;
+import model.Prioridade;
+import model.StatusChamado;
+import model.Subcategoria;
+import model.Usuario;
 
 public class ChamadoDAO {
 

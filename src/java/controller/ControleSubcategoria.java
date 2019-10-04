@@ -1,5 +1,7 @@
 package controller;
 
+import dao.CategoriaDAO;
+import dao.SubcategoriaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
