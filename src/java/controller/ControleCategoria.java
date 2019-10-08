@@ -71,7 +71,8 @@ public class ControleCategoria extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             Categoria categoria = new Categoria();
-            categoria.setCategoria(request.getParameter("txtCategoria"));
+            //categoria.setCategoria(request.getParameter("txtCategoria"));
+            categoria.setCategoria("");
             List<Categoria> categorias = new ArrayList<Categoria>();
             Connection conexao = ConectaBanco.getConexao();
             CategoriaDAO categoriaDAO = new CategoriaDAO(conexao);            
@@ -94,6 +95,7 @@ public class ControleCategoria extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             Categoria categoria = new Categoria();
+            categoria.setCategoria(request.getParameter("txtCategoria"));
             String prioridade = request.getParameter("optPrioridade");
             if (prioridade.equalsIgnoreCase("baixa")) {
                 categoria.setPrioridade(Prioridade.BAIXA);
@@ -108,7 +110,9 @@ public class ControleCategoria extends HttpServlet {
             Connection conexao = ConectaBanco.getConexao();
             CategoriaDAO categoriaDAO = new CategoriaDAO(conexao);
             categoriaDAO.alterarCategoria(categoria);
-            request.getRequestDispatcher("/admin/consultar_categoria.jsp").forward(request, response);
+            
+            consultarCategoria(request, response);
+            //request.getRequestDispatcher("/admin/consultar_categoria.jsp").forward(request, response);
 
         } catch (Exception erro) {
             RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");
@@ -126,11 +130,11 @@ public class ControleCategoria extends HttpServlet {
             Connection conexao = ConectaBanco.getConexao();
             CategoriaDAO categoriaDAO = new CategoriaDAO(conexao);
             Categoria categoria = new Categoria();
-            Categoria categorias = new Categoria();
+            //Categoria categorias = new Categoria();
             categoria.setCategoria(acao);
-            categorias = categoriaDAO.consultaUmaCategoria(categoria);
+            categoria = categoriaDAO.consultaUmaCategoria(categoria);
 
-            request.setAttribute("categoria", categorias);
+            request.setAttribute("categoria", categoria);
             request.getRequestDispatcher("/admin/alterar_categoria.jsp").forward(request, response);
 
         } catch (Exception erro) {
@@ -151,7 +155,9 @@ public class ControleCategoria extends HttpServlet {
             Connection conexao = ConectaBanco.getConexao();
             CategoriaDAO categoriaDAO = new CategoriaDAO(conexao);
             categoriaDAO.excluirCategoria(categoria);
-            request.getRequestDispatcher("/ConsultarCategoria?txtCategoria=").forward(request, response);
+            
+            consultarCategoria(request, response);
+            //request.getRequestDispatcher("/ConsultarCategoria?txtCategoria=").forward(request, response);
 
         } catch (Exception erro) {
             RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");

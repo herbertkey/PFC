@@ -39,6 +39,7 @@
                                     </div>
                                     </div>
                                     <p class="text-center" style="font-size:25px;">Ocorreu um erro!</p>
+                                    <%=((Exception)request.getAttribute("erro")).getMessage()%>
                                                                        
                                     
                                     <button onclick="window.location.href = '/ProjetoPFC_5/ConsultarChamado?acao=Consultar';" type="button" class="btn btn-warning btn-block">Voltar</button>

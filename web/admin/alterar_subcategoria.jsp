@@ -111,7 +111,7 @@
            										%>
             									<div class="form-group">
                                             		<label>Subcategoria:</label>
-                                           			<input class="form-control" type="text" name="txtSubcategoria" value="<%=subcategoria.getSubcategoria()%>" >
+                                                        <input class="form-control" readonly="true" type="text" name="txtSubcategoria" value="<%=subcategoria.getSubcategoria()%>" >
                                        			</div>
             									<div class="form-group">
                                             		<label>Prioridade:</label>
@@ -135,7 +135,7 @@
                									</div>
                									<div class="form-group">
                                             		<label>Categoria:</label>
-                                           			<input class="form-control" type="text" name="txtCategoria" value="<%=subcategoria.getCategoria().getCategoria() %>" >
+                                                        <input class="form-control" readonly="true" type="text" name="txtCategoria" value="<%=subcategoria.getCategoria().getCategoria() %>" >
                                        			</div>
                									<div class="form-group">
                                             	<button type="submit" value="Alterar" class="btn btn-default">Salvar</button>
@@ -143,7 +143,7 @@
             									
         									</form>
                                             <div class="form-group">
-                                            <button class="btn btn-default" onclick="window.location.href='/ProjetoPFC_5/ConsultarCategoria?txtCategoria='">Voltar</button>
+                                            <button class="btn btn-default" onclick="window.location.href='/ProjetoPFC_5/ConsultarSubcategoria?txtSubcategoria='">Voltar</button>
                                             </div>
                                         </div>
                                     </div>

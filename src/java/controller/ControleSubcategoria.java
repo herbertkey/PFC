@@ -98,7 +98,8 @@ public class ControleSubcategoria extends HttpServlet {
             categorias = categoriaDAO.consultarCategoria(categoria);
             
             Subcategoria subcategoria = new Subcategoria();
-            subcategoria.setSubcategoria(request.getParameter("txtSubcategoria"));
+            //subcategoria.setSubcategoria(request.getParameter("txtSubcategoria"));
+            subcategoria.setSubcategoria("");
             List<Subcategoria> subcategorias = new ArrayList<Subcategoria>();
             SubcategoriaDAO subcategoriaDAO = new SubcategoriaDAO();            
             subcategorias = subcategoriaDAO.consultarSubcategoria(subcategoria,categorias);
@@ -135,7 +136,10 @@ public class ControleSubcategoria extends HttpServlet {
 
             SubcategoriaDAO subcategoriaDAO = new SubcategoriaDAO();
             subcategoriaDAO.alterarSubcategoria(subcategoria);
-            request.getRequestDispatcher("/admin/consultar_subcategoria.jsp").forward(request, response);
+            
+            consultarSubcategoria(request, response);
+            
+            //request.getRequestDispatcher("/admin/consultar_subcategoria.jsp").forward(request, response);
 
         } catch (Exception erro) {
             RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");
