@@ -142,7 +142,7 @@
                                         
                                         <div class="form-group">
                                             <label>Categoria:</label>
-                                            <select class="form-control" class="select-categoria" name="optCategoria" id="cat">
+                                            <select class="form-control select-categoria" name="optCategoria" id="cat">
                                             <%
                                                 for (Categoria c : categorias) {
                                             %> 
@@ -154,7 +154,7 @@
                                         
                                         <div class="form-group">
                                             <label>Subcategoria:</label>
-                                            <select class="form-control" class="select-subcategoria" name="optSubcategoria">
+                                            <select class="form-control select-subcategoria" name="optSubcategoria">
                                             <%
                                                 for (Subcategoria sc : subcategorias) {
                                             %> 
@@ -162,6 +162,25 @@
                                             <%
                                                 }
                                             %></select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Categoria 2:</label>
+                                            <select class="form-control select-categoria" name="optCategoria2">                                            
+                                            <option >Software</option> 
+                                            <option >Hardware</option> 
+                                            <option >Infra</option> 
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Subcategoria 2:</label>
+                                            <select class="form-control select-subcategoria" name="optSubcategoria2">                                            
+                                            <option data-categoria="Software">Netbeans</option> 
+                                            <option data-categoria="Software">Eclipse</option>
+                                            <option data-categoria="Hardware">Monitor</option> 
+                                            <option data-categoria="Hardware">Mouse</option> 
+                                            <option data-categoria="Infra">Lampada</option> 
+                                            <option data-categoria="Infra">Cabeamento</option> 
+                                            </select>
                                         </div>
                                         <button class="btn btn-default" type="submit" value="Abrir" name="acao">Abrir Chamado</button> 
                                     </form>
