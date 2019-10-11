@@ -165,15 +165,15 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Categoria 2:</label>
-                                            <select class="form-control select-categoria" name="optCategoria2">                                            
+                                            <select class="select-categoria" name="optCategoria2">                                            
                                             <option >Software</option> 
                                             <option >Hardware</option> 
-                                            <option >Infra</option> 
+                                            <option selected >Infra</option> 
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label>Subcategoria 2:</label>
-                                            <select class="form-control select-subcategoria" name="optSubcategoria2">                                            
+                                            <select class="select-subcategoria" name="optSubcategoria2">                                            
                                             <option data-categoria="Software">Netbeans</option> 
                                             <option data-categoria="Software">Eclipse</option>
                                             <option data-categoria="Hardware">Monitor</option> 
@@ -207,7 +207,8 @@
 
         <!-- Custom Theme JavaScript -->
         <script src="/ProjetoPFC_5/js/startmin.js"></script>
-
+        
+        <script src="/ProjetoPFC_5/js/changeSelect.js"></script>
         <!-- Page-Level Demo Scripts - Tables - Use for reference -->
         <script>
             $(document).ready(function () {
@@ -215,6 +216,7 @@
                     responsive: true
                 });
             });
+
         </script>
         <%}%>
     </body>
