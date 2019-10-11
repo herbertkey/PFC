@@ -1,6 +1,7 @@
 package controller;
 
 import dao.CategoriaDAO;
+import dao.SubcategoriaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -151,10 +152,21 @@ public class ControleCategoria extends HttpServlet {
         try {
             String acao = (String) request.getParameter("acao");
             Categoria categoria = new Categoria();
-            categoria.setCategoria(acao);
-            Connection conexao = ConectaBanco.getConexao();
-            CategoriaDAO categoriaDAO = new CategoriaDAO(conexao);
-            categoriaDAO.excluirCategoria(categoria);
+            categoria.setId(acao);
+            
+            SubcategoriaDAO subcategoriaDAO = new SubcategoriaDAO();
+            if(subcategoriaDAO.consultarDependencia(Integer.parseInt(categoria.getId()))){
+                request.setAttribute("msg", "<div class=\"alert alert-danger\" role=\"alert\">\n"
+                        + "                                    Não é possivel excluir essa categoria!\n"
+                        + "                                </div>");
+            }else{
+                Connection conexao = ConectaBanco.getConexao();
+                CategoriaDAO categoriaDAO = new CategoriaDAO(conexao);
+                categoriaDAO.excluirCategoria(categoria);
+                request.setAttribute("msg", "<div class=\"alert alert-success\" role=\"alert\">\n"
+                        + "                                    Categoria Excluida!\n"
+                        + "                                </div>");
+            }
             
             consultarCategoria(request, response);
             //request.getRequestDispatcher("/ConsultarCategoria?txtCategoria=").forward(request, response);

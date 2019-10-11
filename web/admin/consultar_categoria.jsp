@@ -102,7 +102,14 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    
+                                    <%
+                                                String msg = (String) request.getAttribute("msg");
+                                                if (msg != null) {
+                                            %>
+                                            <font color="blue"><%=msg%></font>
+                                            <%
+                                                }
+                                            %>
                                 </div>
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
@@ -119,8 +126,8 @@
                                                 <tr>
                                                     <th>Categoria</th>
                                                     <th>Prioridade</th>
-                                                    <th></th>
-                                                    <th></th>
+                                                    <th>Alterar</th>
+                                                    <th>Excluir</th>
                                                 </tr>
                                             </thead>
                                             <tbody>                
@@ -131,7 +138,7 @@
                                                     <td> <%= c.getCategoria()%></td>
                                                     <td> <%= c.getPrioridade()%></td>          
                                                     <td><a href="/ProjetoPFC_5/AlterarPageCategoria?acao=<%=c.getCategoria()%>">Alterar</a>    </td>
-                                                    <td><a href="/ProjetoPFC_5/ExcluirCategoria?acao=<%=c.getCategoria()%>">Excluir</a>    </td>
+                                                    <td><a href="/ProjetoPFC_5/ExcluirCategoria?acao=<%=c.getId()%>">Excluir</a>    </td>
                                                 </tr>       
                                                 <%
                                                         }

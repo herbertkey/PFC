@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        
+        <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -142,7 +142,7 @@
                                         
                                         <div class="form-group">
                                             <label>Categoria:</label>
-                                            <select class="form-control" name="optCategoria" id="cat">
+                                            <select class="form-control" class="select-categoria" name="optCategoria" id="cat">
                                             <%
                                                 for (Categoria c : categorias) {
                                             %> 
@@ -154,11 +154,11 @@
                                         
                                         <div class="form-group">
                                             <label>Subcategoria:</label>
-                                            <select class="form-control" name="optSubcategoria">
+                                            <select class="form-control" class="select-subcategoria" name="optSubcategoria">
                                             <%
                                                 for (Subcategoria sc : subcategorias) {
                                             %> 
-                                            <option><%=sc.getSubcategoria()%></option> 
+                                            <option data-categoria="<%=sc.getCategoria().getCategoria()%>"><%=sc.getSubcategoria()%></option> 
                                             <%
                                                 }
                                             %></select>

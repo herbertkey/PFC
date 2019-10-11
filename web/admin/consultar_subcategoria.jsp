@@ -102,7 +102,14 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                   
+                                   <%
+                                                String msg = (String) request.getAttribute("msg");
+                                                if (msg != null) {
+                                            %>
+                                            <font color="blue"><%=msg%></font>
+                                            <%
+                                                }
+                                            %>
                                 </div>
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">

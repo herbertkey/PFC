@@ -15,8 +15,8 @@ public class CategoriaDAO {
     private static final String CADASTRA_NOVA_CATEGORIA = "INSERT INTO categoria (categoria,prioridade,status) values (?,?,'ATIVO')";
     private static final String CONSULTA_CATEGORIA = "SELECT id, categoria, prioridade FROM categoria WHERE upper(categoria) LIKE ? and status='ATIVO'";
     private static final String ALTERAR_CATEGORIA = "UPDATE categoria SET categoria=?,prioridade=? WHERE upper(categoria)=?";
-    private static final String CONSULTA_UMA_CATEGORIA = "SELECT id,categoria,prioridade FROM categoria Where upper(categoria)=?";
-    private static final String EXCLUIR_CATEGORIA = "UPDATE categoria SET status='INATIVO' WHERE upper(categoria)=?";
+    private static final String CONSULTA_UMA_CATEGORIA = "SELECT id,categoria,prioridade FROM categoria Where upper(categoria)=? AND status='ATIVO'";
+    private static final String EXCLUIR_CATEGORIA = "UPDATE categoria SET status='INATIVO' WHERE id=?";
     private static final String CONSULTA_NOME_CATEGORIA_POR_ID = "SELECT categoria FROM categoria Where id=?";
 
     private final Connection conexao;
@@ -146,7 +146,8 @@ public class CategoriaDAO {
 
             //conexao = ConectaBanco.getConexao();
             pstmt = conexao.prepareStatement(EXCLUIR_CATEGORIA);
-            pstmt.setString(1, categoria.getCategoria().toUpperCase());
+            //UPDATE categoria SET status='INATIVO' WHERE id=?
+            pstmt.setInt(1, Integer.parseInt(categoria.getId()));
             pstmt.execute();
             
         } catch (SQLException sqlErro) {

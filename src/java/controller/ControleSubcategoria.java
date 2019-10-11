@@ -189,6 +189,10 @@ public class ControleSubcategoria extends HttpServlet {
             SubcategoriaDAO subcategoriaDAO = new SubcategoriaDAO();
             subcategoriaDAO.excluirSubcategoria(subcategoria);
             
+            request.setAttribute("msg", "<div class=\"alert alert-success\" role=\"alert\">\n"
+                        + "                                    Subcategoria Excluida!\n"
+                        + "                                </div>");
+            
             request.getRequestDispatcher("/ConsultarSubcategoria?txtSubcategoria=").forward(request, response);
 
         } catch (Exception erro) {
