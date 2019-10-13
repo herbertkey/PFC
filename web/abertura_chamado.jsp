@@ -156,15 +156,16 @@
                                         <div class="form-group">
                                             <label>Subcategoria:</label>
                                             <select class="form-control select-subcategoria" name="optSubcategoria">
+                                                <option ></option>
                                             <%
                                                 for (Subcategoria sc : subcategorias) {
                                             %> 
                                             <option data-categoria="<%=sc.getCategoria().getCategoria()%>"><%=sc.getSubcategoria()%></option> 
                                             <%
                                                 }
-                                            %></select>
+                                            %>
+                                            </select>
                                         </div>
-                                        
                                         <button class="btn btn-default" type="submit" value="Abrir" name="acao">Abrir Chamado</button> 
                                     </form>
                                 </div>

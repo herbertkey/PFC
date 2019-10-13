@@ -8,6 +8,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+        <script src="/ProjetoPFC_5/js/changeSelect.js" ></script>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -187,7 +189,7 @@
                                         
                                         <div class="form-group">
                                             <label>Categoria:</label>
-                                            <select class="form-control" name="optCategoria" id="cat">
+                                            <select class="form-control  select-categoria" name="optCategoria" id="cat">
                                             <%
                                                 for (Categoria c : categorias) {
                                                     if (c.getCategoria().equals(chamado.getCategoria().getCategoria())) {
@@ -205,17 +207,17 @@
                                         
                                         <div class="form-group">
                                             <label>Subcategoria:</label>
-                                            <select class="form-control" name="optSubcategoria">
+                                            <select class="form-control  select-subcategoria" name="optSubcategoria">
                                         
                                             <%
                                                 for (Subcategoria sc : subcategorias) {
                                                     if (sc.getSubcategoria().equals(chamado.getSubcategoria().getSubcategoria())) {
                                             %> 
-                                            <option selected><%=sc.getSubcategoria()%></option> 
+                                            <option data-categoria="<%=sc.getCategoria().getCategoria()%>" selected><%=sc.getSubcategoria()%></option> 
                                             <%
                                             } else {
                                             %> 
-                                            <option><%=sc.getSubcategoria()%></option> 
+                                            <option data-categoria="<%=sc.getCategoria().getCategoria()%>"><%=sc.getSubcategoria()%></option> 
                                             <%
                                                     }
                                                 }
