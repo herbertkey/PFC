@@ -9,6 +9,7 @@
 <html lang="en">
     <head>
         <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+        <script src="/ProjetoPFC_5/js/changeSelect.js"></script>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -163,25 +164,7 @@
                                                 }
                                             %></select>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Categoria 2:</label>
-                                            <select class="select-categoria" name="optCategoria2">                                            
-                                            <option >Software</option> 
-                                            <option >Hardware</option> 
-                                            <option selected >Infra</option> 
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Subcategoria 2:</label>
-                                            <select class="select-subcategoria" name="optSubcategoria2">                                            
-                                            <option data-categoria="Software">Netbeans</option> 
-                                            <option data-categoria="Software">Eclipse</option>
-                                            <option data-categoria="Hardware">Monitor</option> 
-                                            <option data-categoria="Hardware">Mouse</option> 
-                                            <option data-categoria="Infra">Lampada</option> 
-                                            <option data-categoria="Infra">Cabeamento</option> 
-                                            </select>
-                                        </div>
+                                        
                                         <button class="btn btn-default" type="submit" value="Abrir" name="acao">Abrir Chamado</button> 
                                     </form>
                                 </div>
@@ -207,8 +190,7 @@
 
         <!-- Custom Theme JavaScript -->
         <script src="/ProjetoPFC_5/js/startmin.js"></script>
-        
-        <script src="/ProjetoPFC_5/js/changeSelect.js"></script>
+                
         <!-- Page-Level Demo Scripts - Tables - Use for reference -->
         <script>
             $(document).ready(function () {

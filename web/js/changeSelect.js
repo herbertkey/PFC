@@ -12,19 +12,19 @@ function changeoptCategoria2(){
 }
 
 function alterSelectSubcategoria(categoria_selected){
-//  $('.select-subcategoria options').hide();
+  $('.select-subcategoria options').hide();
   $('.select-subcategoria option').each(function(index, data){
     console.log(this);
     console.log('Option:'+$(this).attr('data-categoria')+' selected:'+ categoria_selected);
     
     if($(this).attr('data-categoria') === categoria_selected){
-      $(this).show();
+      $(this).show();      
     }else{
        $(this).hide();
     }
     
   });  
-//  $(".select-subcategoria option:first").prop('selectedIndex',0);
+  $(".select-subcategoria option:first").prop('selectedIndex',0);
 }
 
 
