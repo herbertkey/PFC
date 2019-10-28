@@ -318,9 +318,6 @@ public class ControleChamado extends HttpServlet {
                 request.setAttribute("consultasubcategoria", subcategorias);
                 
                 //Condição que vai verificar se a fila ficou vazia 
-                if(serviceChamado.verificarFilaVazia(chamados.getTecnico().getId())){
-                    serviceChamado.realocacaoDeChamado(chamados);
-                }
 
                 RequestDispatcher rd = request.getRequestDispatcher("/alterar_chamado.jsp");
                 rd.forward(request, response);

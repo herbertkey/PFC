@@ -77,61 +77,7 @@ public class ServiceChamado {
         }
         
         return idTecnico;
-    }
-    
-    public boolean verificarFilaVazia(int idTecnico) {
+    } 
 
-        double prioridadeTotal = 0;
-            
-            
-            usuario.setId(idTecnico);
-            chamados = chamadoDAO.consultaPrioridadeChamadoPorTecnico(usuario);
-            
-            for(Chamado ch: chamados) {
-                prioridadeTotal = prioridadeTotal + ch.getPrioridade().getPrioridade();
-                                    
-            }
-            
-            if(prioridadeTotal == 0){
-                return true;
-            }else{
-                return false;
-            }      
-            
-    }
-    
-    public void realocacaoDeChamado(Chamado chamado) {
- 
-        double quantidadeChamados = 0;
-        double quantidadeMaiorChamados = 0;
-        int idTecnico = 0;
-        int idChamado = 0;
-        
-        
-        usuarios = usuarioDAO.consultarTecnico();
-        
-        
-        for(Usuario u: usuarios){
-            
-            quantidadeChamados = chamadoDAO.totalChamadosPorTecnico(u);
-                       
-            if(quantidadeChamados>quantidadeMaiorChamados){
-                quantidadeMaiorChamados=quantidadeChamados;
-                idTecnico = u.getId();
-            }            
-            
-        }
-        if(quantidadeMaiorChamados>1){
-            idChamado = chamadoDAO.ultimoChamadoAtribuido(idTecnico);
-            chamadoDAO.reatribuirChamado(chamado.getTecnico().getId(), idChamado);
-        }
-        
-        
-        
-        
-    }
-    
-    
-    
     
 }
