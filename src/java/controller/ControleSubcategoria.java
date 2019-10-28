@@ -40,10 +40,10 @@ public class ControleSubcategoria extends HttpServlet {
                 subcategoria.setPrioridade(Prioridade.ALTISSIMA);
             }
             
-            Categoria categoria = new Categoria();
+            Categoria categoria = new Categoria();            
+            categoria.setCategoria(request.getParameter("optCategoria"));
             Connection conexao = ConectaBanco.getConexao();
             CategoriaDAO categoriaDAO = new CategoriaDAO(conexao);
-            categoria.setCategoria(request.getParameter("optCategoria"));
             categoria.setId(categoriaDAO.consultaUmaCategoria(categoria).getId());
             
             subcategoria.setCategoria(categoria);

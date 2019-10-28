@@ -115,8 +115,7 @@ public class ControleChamado extends HttpServlet {
                 
                 Usuario usuario = (Usuario)sessaoUsuario.getAttribute("usuarioAutenticado");
 
-//              chamado.setStatus(StatusChamado.TODOS);
-                
+//              chamado.setStatus(StatusChamado.TODOS);                
 
                 List<Chamado> chamados = new ArrayList<Chamado>();
                 ChamadoDAO chamadoDAO = new ChamadoDAO();
@@ -283,10 +282,7 @@ public class ControleChamado extends HttpServlet {
                 } else if (status.equalsIgnoreCase("fechado")) {
                     chamado.setStatus(StatusChamado.FECHADO);
                     chamado.setData_fim(chamadoDAO.getDateTime());
-                } else if (status.equalsIgnoreCase("todos")) {
-                    //chamado.setStatus(StatusChamado.TODOS);
-                }
-         
+                }         
 
                 chamadoDAO.alterarChamado(chamado);
 
