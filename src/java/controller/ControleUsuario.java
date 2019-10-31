@@ -219,6 +219,8 @@ public class ControleUsuario extends HttpServlet {
                 cadastrarUsuario(request, response);
             } else if (url.equals(request.getContextPath() + "/AlterarUsuario")) {
                 alterarUsuario(request, response);
+            }else if (url.equals(request.getContextPath() + "/ConsultarUsuario")) {
+                consultarUsuario(request, response);
             }
         } catch (Exception erro) {
             RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");

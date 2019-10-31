@@ -55,7 +55,7 @@
                                 <a href="#"> Usuário<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="/ProjetoPFC_5/CadastrarUsuario?acao="> Cadastro de Usuário</a>
+                                        <a href="/ProjetoPFC_5/admin/cadastro_usuario.jsp"> Cadastro de Usuário</a>
                                     </li>
                                     <li>
                                         <a href="/ProjetoPFC_5/ConsultarUsuario?txtNome="> Consultar Usuário</a>
@@ -106,7 +106,7 @@
                                     <div class="row">
                                         <div class="col-lg-6">
                                             
-                                            <form role="form" action="/ProjetoPFC_5/CadastrarCategoria" method="POST">
+                                            <form role="form" action="/ProjetoPFC_5/AlterarUsuario" method="POST">
                                             	<%
         								        Usuario usuario = (Usuario) request.getAttribute("usuario");
 												%> 

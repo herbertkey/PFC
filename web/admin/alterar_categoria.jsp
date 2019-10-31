@@ -55,7 +55,7 @@
                                 <a href="#"> Usuário<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="/ProjetoPFC_5/CadastrarUsuario?acao="> Cadastro de Usuário</a>
+                                        <a href="/ProjetoPFC_5/admin/cadastro_usuario.jsp"> Cadastro de Usuário</a>
                                     </li>
                                     <li>
                                         <a href="/ProjetoPFC_5/ConsultarUsuario?txtNome="> Consultar Usuário</a>
@@ -113,7 +113,7 @@
             									%> 
             									<div class="form-group">
                                             		<label>Categoria:</label>
-                                           			<input class="form-control" type="text" name="txtCategoria" value="<%=categoria.getCategoria()%>" >
+                                           			<input class="form-control" type="text" readonly="true" name="txtCategoria" value="<%=categoria.getCategoria()%>" >
                                        			</div>
             									<div class="form-group">
                                             		<label>Prioridade:</label>
