@@ -122,17 +122,17 @@
                                         %>
                                         <div class="form-group">
                                             <label for="disabledSelect">Número do chamado:</label>
-                                            <input class="form-control" id="disabledInput" readonly="true" type="text" name="txtId" value="<%=chamado.getId()%>" >
+                                            <input class="form-control" id="disabledInput" readonly="true" type="text" name="txtId" value="<%=chamado.getId()%>" required="required">
                                         </div>
                                         
                                         <div class="form-group">
                                             <label for="disabledSelect">Data de abertura do chamado:</label>
-                                            <input class="form-control" id="disabledInput" readonly="true" type="text" value="<%=chamado.getData_inicio()%>" >
+                                            <input class="form-control" id="disabledInput" readonly="true" type="text" value="<%=chamado.getData_inicio()%>" required="required">
                                         </div>                                    
                                         
                                         <div class="form-group">
                                             <label for="disabledSelect">Descrição do chamado:</label>
-                                            <textarea class="form-control" id="disabledInput" readonly="true" name="txtDescricao" ><%=chamado.getDescricao()%></textarea>
+                                            <textarea class="form-control" id="disabledInput" readonly="true" name="txtDescricao" required="required"><%=chamado.getDescricao()%></textarea>
                                         </div> 
                                         
                                                             
@@ -142,7 +142,7 @@
                                          
                                         <div class="form-group">
                                             <label for="disabledSelect">Status:</label>
-                                            <input class="form-control" id="disabledInput" readonly="true" type="text" name="optStatus" value="<%=chamado.getStatus().toString()%>" >
+                                            <input class="form-control" id="disabledInput" readonly="true" type="text" name="optStatus" value="<%=chamado.getStatus().toString()%>" required="required">
                                         </div> 
                                         
                                         <%} 
@@ -151,7 +151,7 @@
                                         
                                         <div class="form-group">
                                             <label>Status:</label>
-                                            <select class="form-control" name="optStatus">
+                                            <select class="form-control" name="optStatus" required="required">
                                         
                                             <%
                                                 for (StatusChamado status : StatusChamado.values()) {
@@ -176,11 +176,11 @@
                                             %>
                                         <div class="form-group">
                                             <label for="disabledSelect">Numero de Registro:</label>
-                                            <input class="form-control" id="disabledInput" readonly="true" type="text" name="txtNumeroDeRegistro" value="<%=chamado.getUsuario().getNumero_registro()%>" >
+                                            <input class="form-control" id="disabledInput" readonly="true" type="text" name="txtNumeroDeRegistro" value="<%=chamado.getUsuario().getNumero_registro()%>" required="required">
                                         </div>                    
                                         <div class="form-group">
                                             <label for="disabledSelect">Nome:</label>
-                                            <input class="form-control" id="disabledInput" readonly="true" type="text" name="txtNome" value="<%=chamado.getUsuario().getNome()%>" >
+                                            <input class="form-control" id="disabledInput" readonly="true" type="text" name="txtNome" value="<%=chamado.getUsuario().getNome()%>" required="required">
                                         </div>      
                                         
                                         <%List<Categoria> categorias = (List<Categoria>) request.getAttribute("consultacategoria");%>
@@ -189,7 +189,7 @@
                                         
                                         <div class="form-group">
                                             <label>Categoria:</label>
-                                            <select class="form-control  select-categoria" name="optCategoria" id="cat">
+                                            <select class="form-control  select-categoria" name="optCategoria" id="cat" required="required">
                                             <%
                                                 for (Categoria c : categorias) {
                                                     if (c.getCategoria().equals(chamado.getCategoria().getCategoria())) {
@@ -207,7 +207,7 @@
                                         
                                         <div class="form-group">
                                             <label>Subcategoria:</label>
-                                            <select class="form-control  select-subcategoria" name="optSubcategoria">
+                                            <select class="form-control  select-subcategoria" name="optSubcategoria" required="required">
                                         
                                             <%
                                                 for (Subcategoria sc : subcategorias) {
@@ -226,12 +226,12 @@
                                         
                                         <div class="form-group">
                                             <label for="disabledSelect">Técnico:</label>
-                                            <input class="form-control" id="disabledInput" readonly="true" type="text" name="txtTecnico" value="<%=chamado.getTecnico().getNome()%>" >
+                                            <input class="form-control" id="disabledInput" readonly="true" type="text" name="txtTecnico" value="<%=chamado.getTecnico().getNome()%>" required="required">
                                         </div>
                                         
                                         <div class="form-group">
                                             <label for="disabledSelect">Prioridade:</label>
-                                            <input class="form-control" id="disabledInput" readonly="true" type="text" name="txtPrioridade" value="<%=chamado.getPrioridade()%>" >
+                                            <input class="form-control" id="disabledInput" readonly="true" type="text" name="txtPrioridade" value="<%=chamado.getPrioridade()%>" required="required">
                                         </div>
                                         
                                         <button type="submit" name="acao" value="Alterar" class="btn btn-default">Alterar chamado</button>

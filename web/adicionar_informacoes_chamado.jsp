@@ -116,26 +116,26 @@
                                         %> 
                                         <div class="form-group">
                                             <label for="disabledSelect">Numero de Registro:</label>
-                                            <input class="form-control" id="disabledInput" readonly="true" type="text" name="txtNumeroDeRegistro" value="<%=usuario.getNumero_registro()%>" >
+                                            <input class="form-control" id="disabledInput" readonly="true" type="text" name="txtNumeroDeRegistro" value="<%=usuario.getNumero_registro()%>" required="required">
                                         </div>
                                         <div class="form-group">
                                             <label for="disabledSelect">Nome:</label>
-                                            <input class="form-control" id="disabledInput" readonly="true" type="text" name="txtNome" value="<%=usuario.getNome()%>" >
+                                            <input class="form-control" id="disabledInput" readonly="true" type="text" name="txtNome" value="<%=usuario.getNome()%>" required="required">
                                         </div>
                                        
 
                                         
                                         <div class="form-group">
                                             <label for="disabledSelect">Número do chamado:</label>
-                                            <input class="form-control" id="disabledInput" readonly="true" type="text" name="txtId" value="<%=chamado.getId()%>" >
+                                            <input class="form-control" id="disabledInput" readonly="true" type="text" name="txtId" value="<%=chamado.getId()%>" required="required">
                                         </div>
 					<div class="form-group">
                                             <label for="disabledSelect">Descrição do chamado:</label>
-                                            <textarea class="form-control" id="disabledInput" readonly="true" name="txtDescricao" ><%=chamado.getDescricao()%></textarea>
+                                            <textarea class="form-control" id="disabledInput" readonly="true" name="txtDescricao" required="required"><%=chamado.getDescricao()%></textarea>
                                         </div> 
 					<div class="form-group">
                                         <label for="disabledSelect">Novas Informações:</label>
-                                            <textarea class="form-control" name="txtInformacoesAdicionais" ></textarea>
+                                            <textarea class="form-control" name="txtInformacoesAdicionais" required="required"></textarea>
                                         </div> 
 					<button type="submit" name="acao" value="Adicionar" class="btn btn-default">Adicionar novas informações</button> 
 					</form>

@@ -116,11 +116,11 @@
 
                                                 <div class="form-group">
                                                     <label>Nome da categoria:</label>
-                                                    <input type="text" class="form-control" placeholder="Categoria" name="txtCategoria">
+                                                    <input type="text" class="form-control" placeholder="Categoria" name="txtCategoria" required="required">
                                                 </div>
                                                 <div class="form-group">
                                                 	<label>Prioridade:</label>
-                                                    	<select class="form-control" name="optPrioridade">
+                                                    	<select class="form-control" name="optPrioridade" required="required">
                                                             <%
                                                             for (Prioridade prioridade : Prioridade.values()) {
                                                             %>

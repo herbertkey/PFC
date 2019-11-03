@@ -111,13 +111,13 @@
            										%>
             									<div class="form-group">
                                             		<label>Subcategoria:</label>
-                                                        <input class="form-control" readonly="true" type="text" name="txtSubcategoria" value="<%=subcategoria.getSubcategoria()%>" >
+                                                        <input class="form-control" readonly="true" type="text" name="txtSubcategoria" value="<%=subcategoria.getSubcategoria()%>" required="required">
                                        			</div>
             									<div class="form-group">
                                             		<label>Prioridade:</label>
                                            			
                                        			
-            										<select class="form-control" name="optPrioridade">
+            										<select class="form-control" name="optPrioridade" required="required">
             									    <%
             									    for (Prioridade prioridade : Prioridade.values()) {
             									        if (prioridade == subcategoria.getPrioridade()) {
@@ -135,7 +135,7 @@
                									</div>
                									<div class="form-group">
                                             		<label>Categoria:</label>
-                                                        <input class="form-control" readonly="true" type="text" name="txtCategoria" value="<%=subcategoria.getCategoria().getCategoria() %>" >
+                                                        <input class="form-control" readonly="true" type="text" name="txtCategoria" value="<%=subcategoria.getCategoria().getCategoria() %>" required="required">
                                        			</div>
                									<div class="form-group">
                                             	<button type="submit" value="Alterar" class="btn btn-default">Salvar</button>

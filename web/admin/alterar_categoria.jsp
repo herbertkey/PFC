@@ -113,13 +113,13 @@
             									%> 
             									<div class="form-group">
                                             		<label>Categoria:</label>
-                                           			<input class="form-control" type="text" readonly="true" name="txtCategoria" value="<%=categoria.getCategoria()%>" >
+                                           			<input class="form-control" type="text" readonly="true" name="txtCategoria" value="<%=categoria.getCategoria()%>" required="required">
                                        			</div>
             									<div class="form-group">
                                             		<label>Prioridade:</label>
                                            			
                                        			
-            										<select class="form-control" name="optPrioridade">
+            										<select class="form-control" name="optPrioridade" required="required">
             									    <%
             									    for (Prioridade prioridade : Prioridade.values()) {
             									        if (prioridade == categoria.getPrioridade()) {

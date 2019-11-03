@@ -113,26 +113,26 @@
 
 											<div class="form-group">
                                             	<label for="disabledSelect">Numero de Registro:</label>
-                                           		<input class="form-control" id="disabledInput"  readonly="true" type="text" name="txtNumeroDeRegistro" value="<%=usuario.getNumero_registro()%>" >
+                                           		<input class="form-control" id="disabledInput"  readonly="true" type="text" name="txtNumeroDeRegistro" value="<%=usuario.getNumero_registro()%>" required="required">
                                        		</div>
                                        		<div class="form-group">
                                             	<label>Nome:</label>
-                                           		<input class="form-control" type="text" name="txtNome" value="<%=usuario.getNome()%>" >
+                                           		<input class="form-control" type="text" name="txtNome" value="<%=usuario.getNome()%>" required="required">
                                        		</div>
                                        		<div class="form-group">
                                             	<label>E-mail:</label>
-                                           		<input class="form-control" type="text" name="txtEmail" value="<%=usuario.getEmail()%>" >
+                                           		<input class="form-control" type="text" name="txtEmail" value="<%=usuario.getEmail()%>" required="required">
                                        		</div>
                                        		<div class="form-group">
                                             	<label>Telefone:</label>
-                                           		<input class="form-control" type="text" name="txtTelefone" value="<%=usuario.getTelefone()%>" >
+                                           		<input class="form-control" type="text" name="txtTelefone" value="<%=usuario.getTelefone()%>" required="required">
                                        		</div>
             								
             									<% 
                 								if (usuarioSessao.getTipo().toString() == "TECNICO") {%>
             										<div class="form-group">
                                             			<label for="disabledSelect">Tipo de usuário:</label>
-                                           				<input class="form-control" id="disabledInput"  readonly="true" type="text" name="optTipo" value="<%=usuario.getTipo()%>">
+                                           				<input class="form-control" id="disabledInput"  readonly="true" type="text" name="optTipo" value="<%=usuario.getTipo()%>" required="required">
                                        				</div>
                  
             									<%} else {%>
@@ -140,7 +140,7 @@
                                             			<label for="disabledSelect">Tipo de usuário:</label>
                                            				
                                        				
-            										<select class="form-control" name="optTipo">
+            										<select class="form-control" name="optTipo" required="required"> 
                 									<%
                 									for (Tipo tipo : Tipo.values()) {
                     									if (tipo == usuario.getTipo()) {
@@ -160,11 +160,11 @@
                 									</div>
                 							<div class="form-group">
                                             	<label>Cargo:</label>
-                                           		<input class="form-control" type="text" name="txtCargo" value="<%=usuario.getCargo()%>" >
+                                           		<input class="form-control" type="text" name="txtCargo" value="<%=usuario.getCargo()%>" required="required">
                                        		</div>
             								<div class="form-group">
                                                 <label>Setor:</label>
-                                                <select class="form-control" name="optSetor">
+                                                <select class="form-control" name="optSetor" required="required">
                                                     <%
             										        for (Setor setor : Setor.values()) {
             										            if (setor == usuario.getSetor()) {

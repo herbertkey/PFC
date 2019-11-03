@@ -115,44 +115,45 @@
 
                                                 <div class="form-group">
                                                     <label>Número de Registro:</label>
-                                                    <input type="number" class="form-control" placeholder="Número de Registro" name="txtNumeroDeRegistro" pattern="[0-9]+$">
+                                                    <input type="number" class="form-control" placeholder="Número de Registro" name="txtNumeroDeRegistro" pattern="[0-9]+$" required="required">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Nome:</label>
-                                                    <input type="text" class="form-control" placeholder="Nome" name="txtNome">
+                                                    <input type="text" class="form-control" placeholder="Nome" name="txtNome" required="required">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Email:</label>
-                                                    <input type="email" class="form-control" placeholder="Email" name="txtEmail">
+                                                    <input type="email" class="form-control" placeholder="Email" name="txtEmail" required="required">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Telefone:</label>
-                                                    <input type="tel" class="form-control" placeholder="Telefone" name="txtTelefone">
+                                                    <input type="tel" class="form-control" placeholder="Telefone" name="txtTelefone" required="required">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Senha:</label>
-                                                    <input type="password" class="form-control" placeholder="Senha" name="txtSenha">
+                                                    <input type="password" class="form-control" placeholder="Senha" name="txtSenha" required="required">
                                                     <p class="help-block">Utilize sempre senhas seguras</p>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Cargo:</label>
-                                                    <input type="texte" class="form-control" placeholder="Cargo" name="txtCargo">
+                                                    <input type="text" class="form-control" placeholder="Cargo" name="txtCargo" required="required">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <% Usuario usuarioSessao = (Usuario) session.getAttribute("usuarioAutenticado");
                                                             if (usuarioSessao.getTipo().toString() == "TECNICO") {%>
-                                                    <label>Tipo de Usuário:</label> <input class="form-control" value="CLIENTE" readonly name="optTipo"> <br/>                   
+                                                    <label>Tipo de Usuário:</label> 
+                                                    <input class="form-control" value="CLIENTE" readonly name="optTipo" required="required"> <br/>                   
                                                     <%} else {
                                                     %>
                                                     <label>Tipo de Usuário:</label>
 
-                                                    <select class="form-control" name="optTipo"><%
+                                                    <select class="form-control" name="optTipo" required="required"><%
                                                         for (Tipo tipo : Tipo.values()) {
                                                         %>
                                                         <option ><%=tipo%></option> 
@@ -166,7 +167,7 @@
 
                                                         <div class="form-group">
                                                             <label>Setor:</label>
-                                                            <select class="form-control" name="optSetor">
+                                                            <select class="form-control" name="optSetor" required="required">
                                                                 <%
                                                                     for (Setor setores : Setor.values()) {
                                                                 %>

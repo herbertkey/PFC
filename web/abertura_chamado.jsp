@@ -125,17 +125,17 @@
                                         
                                         <div class="form-group">
                                             <label for="disabledSelect">Número de Registro:</label>
-                                            <input class="form-control" id="disabledInput" readonly="true" type="text" name="txtNumeroDeRegistro" value="<%=usuario.getNumero_registro()%>" >
+                                            <input class="form-control" id="disabledInput" readonly="true" type="text" name="txtNumeroDeRegistro" value="<%=usuario.getNumero_registro()%>" required="required">
                                         </div>
                                         
                                         <div class="form-group">
                                             <label for="disabledSelect">Nome:</label>
-                                            <input class="form-control" id="disabledInput"  readonly="true" type="text" name="txtNome" value="<%=usuario.getNome()%> " >
+                                            <input class="form-control" id="disabledInput"  readonly="true" type="text" name="txtNome" value="<%=usuario.getNome()%> " required="required">
                                         </div>
                                         
                                         <div class="form-group">
                                             <label>Descrição:</label>
-                                            <textarea class="form-control" name="txtDescricao" rows="5"></textarea>
+                                            <textarea class="form-control" name="txtDescricao" rows="5" required="required"></textarea>
                                         </div>
                                                                                 
                                         <%List<Categoria> categorias = (List<Categoria>) request.getAttribute("consultacategoria");%>
@@ -143,7 +143,7 @@
                                         
                                         <div class="form-group">
                                             <label>Categoria:</label>
-                                            <select class="form-control select-categoria" name="optCategoria" id="cat">
+                                            <select class="form-control select-categoria" name="optCategoria" id="cat" required="required">
                                             <%
                                                 for (Categoria c : categorias) {
                                             %> 
@@ -155,7 +155,7 @@
                                         
                                         <div class="form-group">
                                             <label>Subcategoria:</label>
-                                            <select class="form-control select-subcategoria" name="optSubcategoria">
+                                            <select class="form-control select-subcategoria" name="optSubcategoria" required="required">
                                                 <option ></option>
                                             <%
                                                 for (Subcategoria sc : subcategorias) {

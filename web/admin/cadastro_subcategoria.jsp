@@ -123,7 +123,7 @@
 
                                             <div class="form-group">
                                                 <label>Nome da categoria:</label>
-                                                <select class="form-control" name="optCategoria">
+                                                <select class="form-control" name="optCategoria" required="required">
 
                                                     <%
                                                         for (Categoria c : categorias) {
@@ -140,12 +140,12 @@
 
                                             <div class="form-group">
                                                 <label>Nome da subcategoria:</label>
-                                                <input type="text" class="form-control" placeholder="Subcategoria" name="txtSubcategoria">
+                                                <input type="text" class="form-control" placeholder="Subcategoria" name="txtSubcategoria" required="required">
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Prioridade:</label>
-                                                <select class="form-control"name="optPrioridade"><%
+                                                <select class="form-control" name="optPrioridade" required="required"><%
                                                     for (Prioridade prioridade : Prioridade.values()) {
                                                     %>
                                                     <option ><%=prioridade%></option> 
