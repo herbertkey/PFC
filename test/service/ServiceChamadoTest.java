@@ -91,5 +91,19 @@ public class ServiceChamadoTest {
 				
 	}
         
+                
+        @Test
+        public void deveVerificarSeAFilaDoTecnicoEstaVazia() throws ClassNotFoundException, SQLException{
+            
+                 ServiceChamado serviceChamado = new ServiceChamado(chamadoDAOMock, tecnico, usuarioDAOMock, usuariosMock, chamadosMock);
+                                  
+		assertEquals(false, serviceChamado.verificarFilaVazia(2));
+				
+		//Usuario tecnico = usuarioDAOMock.consultaUmUsuario(new Usuario());
+		//validar comportamento dos mocks
+		verify(chamadoDAOMock).consultaPrioridadeChamadoPorTecnico(tecnico);
+				
+	}
+ 
     
 }

@@ -115,8 +115,6 @@ public class ControleChamado extends HttpServlet {
                 
                 Usuario usuario = (Usuario)sessaoUsuario.getAttribute("usuarioAutenticado");
 
-//              chamado.setStatus(StatusChamado.TODOS);                
-
                 List<Chamado> chamados = new ArrayList<Chamado>();
                 ChamadoDAO chamadoDAO = new ChamadoDAO();
 

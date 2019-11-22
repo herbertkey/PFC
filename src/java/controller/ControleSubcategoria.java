@@ -90,8 +90,8 @@ public class ControleSubcategoria extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            List<Categoria> categorias = new ArrayList<Categoria>();
             Categoria categoria = new Categoria();
+            List<Categoria> categorias = new ArrayList<Categoria>();
             Connection conexao = ConectaBanco.getConexao();
             CategoriaDAO categoriaDAO = new CategoriaDAO(conexao);
             categoria.setCategoria("");

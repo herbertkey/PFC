@@ -79,5 +79,26 @@ public class ServiceChamado {
         return idTecnico;
     } 
 
+    public boolean verificarFilaVazia(int idTecnico) {
+
+        double prioridadeTotal = 0;
+            
+            
+            usuario.setId(idTecnico);
+            chamados = chamadoDAO.consultaPrioridadeChamadoPorTecnico(usuario);
+            
+            for(Chamado ch: chamados) {
+                prioridadeTotal = prioridadeTotal + ch.getPrioridade().getPrioridade();
+                                    
+            }
+            
+            if(prioridadeTotal == 0){
+                return true;
+            }else{
+                return false;
+            }      
+            
+    }
+    
     
 }

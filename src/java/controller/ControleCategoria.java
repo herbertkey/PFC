@@ -72,7 +72,6 @@ public class ControleCategoria extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             Categoria categoria = new Categoria();
-            //categoria.setCategoria(request.getParameter("txtCategoria"));
             categoria.setCategoria("");
             List<Categoria> categorias = new ArrayList<Categoria>();
             Connection conexao = ConectaBanco.getConexao();
