@@ -77,8 +77,9 @@
                                     <li>
                                         <a href="/ProjetoPFC_5/ConsultarCategoria?txtCategoria="> Consultar Categoria</a>
                                     </li>
+                                </ul>
                             </li>
-</ul>
+
                             <li>
                                 <a href="#"> Subcategoria<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
@@ -88,6 +89,17 @@
                                     <li>
                                         <a href="/ProjetoPFC_5/ConsultarSubcategoria?txtSubcategoria="> Consultar Subcategoria</a>
                                     </li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="#">Relatórios<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="/ProjetoPFC_5/admin/gera_relatorio.jsp"> Relatório 1</a>
+                                    </li>
+                                    
+                                </ul>
                             </li>
 
 
