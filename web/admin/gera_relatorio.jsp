@@ -1,7 +1,9 @@
+<%@ page contentType="text/html; charset=ISO-8859-1" language="java" pageEncoding="UTF-8" import="java.sql.*" errorPage="" %>
+<%@page import="java.util.List"%>
 <%@page import="model.*"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="controller.*"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,39 +20,31 @@
         <link href="/ProjetoPFC_5/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <%
-            Usuario usuario = (Usuario) session.getAttribute("usuarioAutenticado");
-
-            if (usuario != null) {
-        %>
         <div id="wrapper">
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="">Área restrita</a>
+                    <a class="navbar-brand" href="">Relatórios</a>
                 </div>
-				
                 <ul class="nav navbar-nav navbar-left navbar-top-links">
                     <li><a href="/ProjetoPFC_5/ConsultarChamado?acao=Consultar"> <i class="fa fa-home fa-fw"></i> Home</a></li>
                 </ul>
-
-                 <ul class="nav navbar-right navbar-top-links">
+                <ul class="nav navbar-right navbar-top-links">
                     <li class="dropdown navbar-inverse">
-                        
                     </li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%
+                            Usuario usuario = (Usuario) session.getAttribute("usuarioAutenticado");
+                            if (usuario != null) {
+                            %>
                             <i class="fa fa-user fa-fw"></i> <%=usuario.getNome()%> <b class="caret"></b>
-                            
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-
                             <li><a href="/ProjetoPFC_5/ControleAcesso?acao=Sair"><i class="fa fa-sign-out fa-fw"></i> Sair</a>
                             </li>
                         </ul>
                     </li>
                 </ul>
                 <!-- /.navbar-top-links -->
-
                 <div class="navbar-default sidebar" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
@@ -96,7 +90,7 @@
                                 <a href="#">Relatórios<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="/ProjetoPFC_5/admin/gera_relatorio.jsp"> Relatório 1</a>
+                                        <a href="/ProjetoPFC_5/CadastrarSubcategoria?acao="> Relatório 1</a>
                                     </li>
                                     
                                 </ul>
@@ -110,12 +104,12 @@
                 </div>
                 <!-- /.navbar-static-side -->
             </nav>
-			<div id="page-wrapper">
+            <div id="page-wrapper">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
-                            
-                            <h1 class="page-header">Área restrita de <%=usuario.getNome()%></h1>
+
+                            <h1 class="page-header">Relatório</h1>
                             <%}%>
                         </div>
                         <!-- /.col-lg-12 -->
@@ -123,48 +117,69 @@
                     <!-- /.row -->
                     <div class="row">
                         <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    
+                                </div>
+                                <!-- /.panel-heading -->
+                                <div class="panel-body">
+                                    <div class="table-responsive">
+
+                                        
+                                        <%
+                                            List<Usuario> usuarios = (List<Usuario>) request.getAttribute("consulta");
+                                        %>  
+
+                                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                            <thead>
+                                                <tr>
+													<th>Lore</th>
+													<th>Ipsum</th>
+													<th>Lore</th>
+													<th>Ipsum</th>
+													<th>Lore</th>
+													<th>Ipsum</th> 
+													<th>Lore</th>
+													<th>Ipsum</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>                
+												<%if (usuarios != null) {
+													for (Usuario u : usuarios) {
+												%>               
+                                                <tr class="odd gradeX">
+                                                    <td> <%= u.getNumero_registro()%></td>
+													<td> <%= u.getEmail()%></td>
+													<td> <%= u.getNome()%></td>
+													<td> <%= u.getTelefone()%></td>
+													<td> <%= u.getTipo()%></td>
+													<td> <%= u.getCargo()%></td>
+													<td> <%= u.getSetor()%></td>            
+													<td><a href="/ProjetoPFC_5/AlterarPageUsuario?acao=<%=u.getNumero_registro()%>">Alterar</a>    </td>
+													<td><a href="/ProjetoPFC_5/ExcluirUsuario?acao=<%=u.getNumero_registro()%>">Excluir</a>    </td>
+                                                </tr>       
+                                                <%
+                                                        }
+                                                    }
+                                                %>
+                                            </tbody> 
+                                        </table>
+                                    </div>
+                                    <!-- /.table-responsive -->
+                                </div>
+                                <!-- /.panel-body -->
+                            </div>
                             <!-- /.panel -->
                         </div>
                         <!-- /.col-lg-12 -->
-                    </div>
-                    <!-- /.row -->
-                    <div class="row">
-                        <div class="col-lg-6">
-                           <!-- /.panel -->
-                        </div>
-                        <!-- /.col-lg-6 -->
-                        <div class="col-lg-6">
-                           <!-- /.panel -->
-                        </div>
-                        <!-- /.col-lg-6 -->
-                    </div>
-                    <!-- /.row -->
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <!-- /.panel -->
-                        </div>
-                        <!-- /.col-lg-6 -->
-                        <div class="col-lg-6">
-                           <!-- /.panel -->
-                        </div>
-                        <!-- /.col-lg-6 -->
-                    </div>
-                    <!-- /.row -->
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <!-- /.panel -->
-                        </div>
-                        <!-- /.col-lg-6 -->
-                        <div class="col-lg-6">
-                             <!-- /.panel -->
-                        </div>
-                        <!-- /.col-lg-6 -->
                     </div>
                     <!-- /.row -->
                 </div>
                 <!-- /.container-fluid -->
             </div>
             <!-- /#page-wrapper -->
+
+
 
         </div>
         <!-- /#wrapper -->
@@ -187,12 +202,11 @@
 
         <!-- Page-Level Demo Scripts - Tables - Use for reference -->
         <script>
-            $(document).ready(function() {
+            $(document).ready(function () {
                 $('#dataTables-example').DataTable({
-                        responsive: true
+                    responsive: true
                 });
             });
         </script>
-
     </body>
 </html>
