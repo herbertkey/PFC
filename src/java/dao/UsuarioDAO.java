@@ -1,6 +1,6 @@
 package dao;
 
-import com.sun.xml.rpc.processor.modeler.j2ee.xml.string;
+//import com.sun.xml.rpc.processor.modeler.j2ee.xml.string;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;

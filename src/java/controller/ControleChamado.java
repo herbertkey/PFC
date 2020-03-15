@@ -273,10 +273,31 @@ public class ControleChamado extends HttpServlet {
                 
                 chamado.setData_fim("");
                 String status = request.getParameter("optStatus");
+                
+                Chamado chamados_status = new Chamado();
+                chamados_status = chamadoDAO.consultarUmChamado(chamado);
+                
+                if(!chamados_status.getStatus().equals(status)){
+                    HistoricoDAO historicoDAO = new HistoricoDAO();
+                    Historico historico = new Historico();
+                    
+                    historico.setUsuario(usuario);
+
+                    historico.setInformacoes_adicionais("Status alterado de "+ chamados_status.getStatus() + " para " + status);
+
+                    historico.setChamado(chamado);
+                    historico.setData(chamadoDAO.getDateTime());
+
+                    historicoDAO.inserirInformacoes(historico);
+
+                }
+                
                 if (status.equalsIgnoreCase("aberto")) {
                     chamado.setStatus(StatusChamado.ABERTO);
                 } else if (status.equalsIgnoreCase("em_andamento")) {
                     chamado.setStatus(StatusChamado.EM_ANDAMENTO);
+                } else if (status.equalsIgnoreCase("pendente_interacao")) {
+                    chamado.setStatus(StatusChamado.PENDENTE_INTERACAO);
                 } else if (status.equalsIgnoreCase("fechado")) {
                     chamado.setStatus(StatusChamado.FECHADO);
                     chamado.setData_fim(chamadoDAO.getDateTime());
@@ -316,6 +337,10 @@ public class ControleChamado extends HttpServlet {
                 request.setAttribute("consultasubcategoria", subcategorias);
                 
                 //Condição que vai verificar se a fila ficou vazia 
+                if(serviceChamado.verificarFilaVazia(chamados.getTecnico().getId())){
+                    serviceChamado.realocacaoDeChamado(chamados);
+                }
+
 
                 RequestDispatcher rd = request.getRequestDispatcher("/alterar_chamado.jsp");
                 rd.forward(request, response);
