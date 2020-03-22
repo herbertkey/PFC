@@ -31,6 +31,8 @@ public class ChamadoDAO {
     private static final String TOTAL_CHAMADOS_POR_TECNICO = "SELECT count(id) AS id FROM chamado WHERE ?=tecnico AND (status LIKE 'ABERTO')";
     private static final String ULTIMO_CHAMADO_ATRIBUIDO = "SELECT id , data_inicio FROM chamado WHERE ?=tecnico AND (status LIKE 'ABERTO') order by data_inicio asc";
     private static final String REATRIBUIR_CHAMADO = "UPDATE chamado SET tecnico=? WHERE id=?";
+    private static final String REL_CHAMADOS_CONCLUIDOS = "SELECT cha.id, cha.data_inicio, cha.data_fim, cha.descricao, cat.categoria, sub.subcategoria, usu.nome FROM chamado cha INNER JOIN categoria cat ON cha.categoria = cat.id INNER JOIN subcategoria sub ON cha.subcategoria = sub.id INNER JOIN usuario usu ON cha.usuario = usu.id WHERE data_fim <> '' AND to_date(data_inicio,'DD MM YYYY') > to_date(?,'DD MM YYYY' AND to_date(data_fim,'DD MM YYYY') < to_date(?,'DD MM YYYY') ORDER BY 1";
+    private static final String REL_CONCLUSAO_TECNICO = "SELECT tec.nome as tecnico, cha.id, cha.data_inicio, cha.data_fim, cha.descricao, cat.categoria, sub.subcategoria, usu.nome FROM chamado cha INNER JOIN categoria cat ON cha.categoria = cat.id INNER JOIN subcategoria sub ON cha.subcategoria = sub.id INNER JOIN usuario usu ON cha.usuario = usu.id INNER JOIN usuario tec ON cha.tecnico = tec.id WHERE data_fim <> '' AND UPPER(tec.nome) like UPPER(?) ORDER BY 2";
     
     public void abrirChamado(Chamado chamado) {
         Connection conexao = null;
@@ -471,5 +473,133 @@ public class ChamadoDAO {
                 }
             }
         }
+    }
+    
+    public List<Chamado> relChamadosConcluidos(String data_ini, String data_fim) {
+
+        Connection conexao = null;
+        PreparedStatement pstmt = null;
+        List<Chamado> chamados = new ArrayList<Chamado>();
+        try {
+
+            conexao = ConectaBanco.getConexao();
+            pstmt = conexao.prepareStatement(REL_CHAMADOS_CONCLUIDOS);
+//            
+//              SELECT  cha.id,
+//                      cha.data_inicio,
+//                      cha.data_fim,
+//                      cha.descricao,
+//                      cat.categoria,
+//                      sub.subcategoria,
+//                      usu.nome
+//              FROM chamado cha 
+//                  INNER JOIN categoria cat ON cha.categoria = cat.id 
+//                  INNER JOIN subcategoria sub ON cha.subcategoria = sub.id
+//                  INNER JOIN usuario usu ON cha.usuario = usu.id
+//              WHERE 1=1
+//                  AND data_fim <> ''
+//                  AND to_date(data_inicio,'DD MM YYYY') > to_date(?,'DD MM YYYY')
+//                  AND to_date(data_fim,'DD MM YYYY') < to_date(?,'DD MM YYYY')
+//              ORDER BY 1
+
+            pstmt.setString(1, data_ini);
+            pstmt.setString(2, data_fim);
+            ResultSet resultado = pstmt.executeQuery();
+            if (resultado.next()) {
+                Chamado c = new Chamado();
+                Usuario u = new Usuario();
+                Usuario t = new Usuario();
+                Categoria cat = new Categoria();
+                Subcategoria s = new Subcategoria();
+                c.setId(resultado.getString("id"));
+                c.setDescricao(resultado.getString("descricao"));
+                c.setData_inicio(resultado.getString("data_inicio"));
+                c.setData_fim(resultado.getString("data_fim"));
+                u.setNome(resultado.getString("nome"));
+                c.setUsuario(u);
+                cat.setCategoria(resultado.getString("categoria"));
+                c.setCategoria(cat);
+                s.setSubcategoria(resultado.getString("subcategoria"));
+                c.setSubcategoria(s);
+                
+                chamados.add(c);
+            }
+        } catch (SQLException sqlErro) {
+            throw new RuntimeException(sqlErro);
+        } finally {
+            if (conexao != null) {
+                try {
+                    conexao.close();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        }
+        return chamados;
+    }
+    
+        public List<Chamado> relConclusaoTecnico(Usuario tecnico) {
+
+        Connection conexao = null;
+        PreparedStatement pstmt = null;
+        List<Chamado> chamados = new ArrayList<Chamado>();
+        try {
+
+            conexao = ConectaBanco.getConexao();
+            pstmt = conexao.prepareStatement(CONSULTA_UM_CHAMADO);
+//            
+//          SELECT  tec.nome as tecnico,
+//                  cha.id,
+//                  cha.data_inicio,
+//                  cha.data_fim,
+//                  cha.descricao,
+//                  cat.categoria,
+//                  sub.subcategoria,
+//                  usu.nome
+//          FROM chamado cha 
+//              INNER JOIN categoria cat ON cha.categoria = cat.id 
+//              INNER JOIN subcategoria sub ON cha.subcategoria = sub.id
+//              INNER JOIN usuario usu ON cha.usuario = usu.id
+//              INNER JOIN usuario tec ON cha.tecnico = tec.id
+//          WHERE 1=1
+//              AND data_fim <> ''
+//              AND UPPER(tec.nome) like ?
+//          ORDER BY 2
+
+            pstmt.setString(1, "%" + tecnico.getNome().toUpperCase() + "%");
+            ResultSet resultado = pstmt.executeQuery();
+            if (resultado.next()) {
+                Chamado c = new Chamado();
+                Usuario u = new Usuario();
+                Usuario t = new Usuario();
+                Categoria cat = new Categoria();
+                Subcategoria s = new Subcategoria();
+                c.setId(resultado.getString("id"));
+                c.setDescricao(resultado.getString("descricao"));
+                c.setData_inicio(resultado.getString("data_inicio"));
+                c.setData_fim(resultado.getString("data_fim"));
+                u.setNome(resultado.getString("nome"));
+                c.setUsuario(u);
+                cat.setCategoria(resultado.getString("categoria"));
+                c.setCategoria(cat);
+                s.setSubcategoria(resultado.getString("subcategoria"));
+                c.setSubcategoria(s);
+                t.setNome(resultado.getString("tecnico"));
+                c.setTecnico(t);
+                
+                chamados.add(c);
+            }
+        } catch (SQLException sqlErro) {
+            throw new RuntimeException(sqlErro);
+        } finally {
+            if (conexao != null) {
+                try {
+                    conexao.close();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        }
+        return chamados;
     }
 }
