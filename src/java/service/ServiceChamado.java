@@ -113,7 +113,7 @@ public class ServiceChamado {
         
         for(Usuario u: usuarios){
             
-            quantidadeChamados = chamadoDAO.totalChamadosPorTecnico(u);
+            quantidadeChamados = chamadoDAO.totalChamadosAbertosPorTecnico(u);
                        
             if(quantidadeChamados>quantidadeMaiorChamados){
                 quantidadeMaiorChamados=quantidadeChamados;

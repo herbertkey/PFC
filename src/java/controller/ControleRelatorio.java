@@ -35,10 +35,10 @@ public class ControleRelatorio extends HttpServlet {
                 String data_fim = request.getParameter("dtFim");
                      
             
-                List<Chamado> chamados = new ArrayList<Chamado>();
+                
                 ChamadoDAO chamadoDAO = new ChamadoDAO();
-               
-                chamados = chamadoDAO.relChamadosConcluidos(data_ini, data_fim);
+                
+                List<Chamado> chamados = chamadoDAO.relChamadosConcluidos(data_ini, data_fim);
                 
                 request.setAttribute("consulta", chamados);
                 RequestDispatcher rd = request.getRequestDispatcher("/principal.jsp");

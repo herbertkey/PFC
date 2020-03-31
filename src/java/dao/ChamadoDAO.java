@@ -375,7 +375,7 @@ public class ChamadoDAO {
         return chamados;
     }
     
-    public int totalChamadosPorTecnico(Usuario usuario) {
+    public int totalChamadosAbertosPorTecnico(Usuario usuario) {
 
         Connection conexao = null;
         PreparedStatement pstmt = null;

@@ -58,7 +58,7 @@ public class ServiceChamadoTest {
                 when(chamadoDAOMock.consultaPrioridadeChamadoPorTecnico(any(Usuario.class))).thenReturn(chamados);
                 when(usuarioDAOMock.consultaUmUsuario(any(Usuario.class))).thenReturn(tecnico);
 		when(usuarioDAOMock.consultarTecnico()).thenReturn(usuarios);
-                when(chamadoDAOMock.totalChamadosPorTecnico(any(Usuario.class))).thenReturn(2);
+                when(chamadoDAOMock.totalChamadosAbertosPorTecnico(any(Usuario.class))).thenReturn(2);
                 when(chamadoDAOMock.ultimoChamadoAtribuido(2)).thenReturn(1);
                 
                 
