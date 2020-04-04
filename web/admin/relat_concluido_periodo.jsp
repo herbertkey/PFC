@@ -23,7 +23,7 @@
         <div id="wrapper">
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="">Relatórios</a>
+                    <a class="navbar-brand" href="">Chamados Concluídos por Período</a>
                 </div>
                 <ul class="nav navbar-nav navbar-left navbar-top-links">
                     <li><a href="/ProjetoPFC_5/ConsultarChamado?acao=Consultar"> <i class="fa fa-home fa-fw"></i> Home</a></li>
@@ -90,7 +90,10 @@
                                 <a href="#">Relatórios<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="/ProjetoPFC_5/CadastrarSubcategoria?acao="> Relatório 1</a>
+                                        <a href="/ProjetoPFC_5/admin/relat_concluido_tecnico.jsp"> Chamados Concluídos por Técnico</a>
+                                    </li>
+                                    <li>
+                                        <a href="/ProjetoPFC_5/admin/relat_concluido_periodo.jsp"> Chamados Concluídos por Período</a>
                                     </li>
                                     
                                 </ul>
@@ -109,64 +112,86 @@
                     <div class="row">
                         <div class="col-lg-12">
 
-                            <h1 class="page-header">Relatório</h1>
+                            <h1 class="page-header">Relatório de Chamados Concluídos por Período</h1>
                             <%}%>
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
                     <!-- /.row -->
-                    <div class="row">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Início</label>
+                            <input id="date_inicio" type="date" class="form-control">
+                            
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Fim</label>
+                            <input id="date_fim" type="date" class="form-control">
+                            
+                        </div>
+                    </div> 
+                     <div class="row">
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
+                                    
+                                        <form role="form" action="/ProjetoPFC_5/ConsultarChamado" method="GET">
+                                            <div>
+                                                <label>Relatório</label>
+                                            </div>
+                                              
+                                        </form>
+                                    
                                     
                                 </div>
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
                                     <div class="table-responsive">
-
-                                        
                                         <%
-                                            List<Usuario> usuarios = (List<Usuario>) request.getAttribute("consulta");
-                                        %>  
+                                            List<Chamado> chamados = (List<Chamado>) request.getAttribute("consulta");
 
+                                        %>
                                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                            
                                             <thead>
                                                 <tr>
-													<th>Lore</th>
-													<th>Ipsum</th>
-													<th>Lore</th>
-													<th>Ipsum</th>
-													<th>Lore</th>
-													<th>Ipsum</th> 
-													<th>Lore</th>
-													<th>Ipsum</th>
+                                                    <th>Técnico</th>
+                                                    <th>ID</th>
+                                                    <th>Data Início</th>
+                                                    <th>Data Fim</th>
+                                                    <th>Descrição</th>                                                    
+                                                    <th>Categoria</th> 
+                                                    <th>Subcategoria</th> 
+                                                    <th>Nome</th>
+                                                    
                                                 </tr>
                                             </thead>
-                                            <tbody>                
-												<%if (usuarios != null) {
-													for (Usuario u : usuarios) {
-												%>               
-                                                <tr class="odd gradeX">
-                                                    <td> <%= u.getNumero_registro()%></td>
-													<td> <%= u.getEmail()%></td>
-													<td> <%= u.getNome()%></td>
-													<td> <%= u.getTelefone()%></td>
-													<td> <%= u.getTipo()%></td>
-													<td> <%= u.getCargo()%></td>
-													<td> <%= u.getSetor()%></td>            
-													<td><a href="/ProjetoPFC_5/AlterarPageUsuario?acao=<%=u.getNumero_registro()%>">Alterar</a>    </td>
-													<td><a href="/ProjetoPFC_5/ExcluirUsuario?acao=<%=u.getNumero_registro()%>">Excluir</a>    </td>
-                                                </tr>       
-                                                <%
+                                            <tbody>
+                                                <%if (chamados != null) {
+                                                        for (Chamado c : chamados) {
+                                                %>                
+                                                <tr>
+                                                    <td> <%= c.getTecnico().getNome()%></td>  
+                                                    <td> <%= c.getId()%></td>                                                    
+                                                    <td> <%= c.getData_inicio()%></td>
+                                                    <td> <%= c.getData_fim()%></td>
+                                                    <td> <%= c.getDescricao()%></td>
+                                                    <td> <%= c.getCategoria().getCategoria()%></td
+                                                    <td> <%= c.getSubcategoria().getSubcategoria()%></td>
+                                                    <td> <%= c.getUsuario().getNome()%></td>
+                                                    
+                                                                                                        
+                                                    <%
+                                                            }
                                                         }
-                                                    }
-                                                %>
-                                            </tbody> 
+                                                    %>
+                                            </tbody>
                                         </table>
                                     </div>
                                     <!-- /.table-responsive -->
-                                </div>
+                                    </div>
                                 <!-- /.panel-body -->
                             </div>
                             <!-- /.panel -->
