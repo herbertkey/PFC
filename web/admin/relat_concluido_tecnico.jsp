@@ -90,7 +90,7 @@
                                 <a href="#">Relatórios<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="/ProjetoPFC_5/admin/relat_concluido_tecnico.jsp"> Chamados Concluídos por Técnico</a>
+                                        <a href="/ProjetoPFC_5/ConcluidoTecnico?acao=relat_concluido_tecnico"> Chamados Concluídos por Técnico</a>
                                     </li>
                                     <li>
                                         <a href="/ProjetoPFC_5/admin/relat_concluido_periodo.jsp"> Chamados Concluídos por Período</a>
@@ -117,18 +117,41 @@
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
+                    <form action="/ProjetoPFC_5/ConcluidoTecnico" method="POST">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                        <%
+                            List<Usuario> tecnicos = (List<Usuario>) request.getAttribute("consultatecnico");
+                        %>
+                                                
+                            <label>Técnico</label>
+                            <select name="optTecnico" required="required">
+                            <%if (tecnicos != null) {
+                               for (Usuario t : tecnicos) {
+                            %> 
+                            <option><%=t.getNome() %></option> 
+                            <%
+                              }
+                            }
+                            %></select>
+                            
+                        </div>
+                    </div>
+                    
+                    <button type="submit" name="acao" value="gerar_relatorio" class="btn btn-default">Gerar Relatorio</button>
+                    </form>    
                     <!-- /.row -->
                      <div class="row">
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     
-                                        <form role="form" action="/ProjetoPFC_5/ConsultarChamado" method="GET">
+                                        
                                             <div>
                                                 <label>Relatório</label>
                                             </div>
                                               
-                                        </form>
+                                        
                                     
                                     
                                 </div>
@@ -164,7 +187,7 @@
                                                     <td> <%= c.getData_inicio()%></td>
                                                     <td> <%= c.getData_fim()%></td>
                                                     <td> <%= c.getDescricao()%></td>
-                                                    <td> <%= c.getCategoria().getCategoria()%></td
+                                                    <td> <%= c.getCategoria().getCategoria()%></td>
                                                     <td> <%= c.getSubcategoria().getSubcategoria()%></td>
                                                     <td> <%= c.getUsuario().getNome()%></td>
                                                     

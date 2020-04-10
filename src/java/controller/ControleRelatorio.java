@@ -24,24 +24,22 @@ import dao.ChamadoDAO;
 import model.Chamado;
 import util.ConectaBanco;
 
-@WebServlet(urlPatterns = {"/ChamadosConcluidos", "/ConclusaoTecnico"})
+@WebServlet(urlPatterns = {"/ConcluidoPeriodo", "/ConcluidoTecnico"})
 public class ControleRelatorio extends HttpServlet {
 
-    protected void chamadosConcluidos(HttpServletRequest request, HttpServletResponse response)
+    protected void concluidoPeriodo(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {            
                 String data_ini = request.getParameter("dtIni");
-                String data_fim = request.getParameter("dtFim");
-                     
+                String data_fim = request.getParameter("dtFim");                 
             
-                
                 ChamadoDAO chamadoDAO = new ChamadoDAO();
-                
-                List<Chamado> chamados = chamadoDAO.relChamadosConcluidos(data_ini, data_fim);
+                List<Chamado> chamados = new ArrayList<Chamado>();
+                chamados = chamadoDAO.relChamadosConcluidos(data_ini, data_fim);
                 
                 request.setAttribute("consulta", chamados);
-                RequestDispatcher rd = request.getRequestDispatcher("/principal.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/admin/relat_concluido_periodo.jsp");
                 rd.forward(request, response);
            
         } catch (Exception erro) {
@@ -51,11 +49,25 @@ public class ControleRelatorio extends HttpServlet {
         }
     }
     
-        protected void conclusaoTecnico(HttpServletRequest request, HttpServletResponse response)
+        protected void concluidoTecnico(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
+            String acao = request.getParameter("acao");
+            if(acao.equals("relat_concluido_tecnico")){
+                UsuarioDAO usuarioDAO = new UsuarioDAO();
+                List<Usuario> tecnicos = usuarioDAO.consultarTecnico();
             
+                request.setAttribute("consultatecnico", tecnicos);
+                RequestDispatcher rd = request.getRequestDispatcher("/admin/relat_concluido_tecnico.jsp");
+                rd.forward(request, response);
+            
+            } else if (acao.equals("gerar_relatorio")) {
+                UsuarioDAO usuarioDAO = new UsuarioDAO();
+                List<Usuario> tecnicos = usuarioDAO.consultarTecnico();
+            
+                request.setAttribute("consultatecnico", tecnicos);
+                
                 Usuario tecnico = new Usuario();
                 tecnico.setNome(request.getParameter("optTecnico"));
                 
@@ -68,10 +80,10 @@ public class ControleRelatorio extends HttpServlet {
                 chamados = chamadoDAO.relConclusaoTecnico(tecnico);                
            
                 request.setAttribute("consulta", chamados);
-                RequestDispatcher rd = request.getRequestDispatcher("/principal.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/admin/relat_concluido_tecnico.jsp");
                 rd.forward(request, response);
             
-
+            }
         } catch (Exception erro) {
             RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");
             request.setAttribute("erro", erro);
@@ -84,10 +96,10 @@ public class ControleRelatorio extends HttpServlet {
             throws ServletException, IOException {
         String url = request.getRequestURI();
         try {
-            if (url.equals(request.getContextPath() + "/ChamadosConcluidos")) {
-                chamadosConcluidos(request, response);
-            } else if (url.equals(request.getContextPath() + "/ConclusaoTecnico")) {
-                conclusaoTecnico(request, response);
+            if (url.equals(request.getContextPath() + "/ConcluidoPeriodo")) {
+                concluidoPeriodo(request, response);
+            } else if (url.equals(request.getContextPath() + "/ConcluidoTecnico")) {
+                concluidoTecnico(request, response);
             } 
         } catch (Exception erro) {
             RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");
@@ -101,10 +113,10 @@ public class ControleRelatorio extends HttpServlet {
             throws ServletException, IOException {
         String url = request.getRequestURI();
         try {
-            if (url.equals(request.getContextPath() + "/ChamadosConcluidos")) {
-                chamadosConcluidos(request, response);
-            } else if (url.equals(request.getContextPath() + "/ConclusaoTecnico")) {
-                conclusaoTecnico(request, response);
+            if (url.equals(request.getContextPath() + "/ConcluidoPeriodo")) {
+                concluidoPeriodo(request, response);
+            } else if (url.equals(request.getContextPath() + "/ConcluidoTecnico")) {
+                concluidoTecnico(request, response);
             } 
         } catch (Exception erro) {
             RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");

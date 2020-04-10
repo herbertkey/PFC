@@ -90,7 +90,7 @@
                                 <a href="#">Relatórios<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="/ProjetoPFC_5/admin/relat_concluido_tecnico.jsp"> Chamados Concluídos por Técnico</a>
+                                        <a href="/ProjetoPFC_5/ConcluidoTecnico?acao=relat_concluido_tecnico"> Chamados Concluídos por Técnico</a>
                                     </li>
                                     <li>
                                         <a href="/ProjetoPFC_5/admin/relat_concluido_periodo.jsp"> Chamados Concluídos por Período</a>
@@ -118,33 +118,34 @@
                         <!-- /.col-lg-12 -->
                     </div>
                     <!-- /.row -->
+                    <form action="/ProjetoPFC_5/ConcluidoPeriodo" method="POST">
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label>Início</label>
-                            <input id="date_inicio" type="date" class="form-control">
+                            <input type="date" class="form-control" name="dtIni">
                             
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label>Fim</label>
-                            <input id="date_fim" type="date" class="form-control">
+                            <input type="date" class="form-control" name="dtFim">
                             
                         </div>
-                    </div> 
+                    </div>
+                    <button type="submit" class="btn btn-default">Gerar Relatorio</button>
+                    </form>
+                    
                      <div class="row">
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     
-                                        <form role="form" action="/ProjetoPFC_5/ConsultarChamado" method="GET">
                                             <div>
                                                 <label>Relatório</label>
                                             </div>
                                               
-                                        </form>
-                                    
-                                    
+                                        
                                 </div>
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
@@ -157,7 +158,6 @@
                                             
                                             <thead>
                                                 <tr>
-                                                    <th>Técnico</th>
                                                     <th>ID</th>
                                                     <th>Data Início</th>
                                                     <th>Data Fim</th>
@@ -172,13 +172,12 @@
                                                 <%if (chamados != null) {
                                                         for (Chamado c : chamados) {
                                                 %>                
-                                                <tr>
-                                                    <td> <%= c.getTecnico().getNome()%></td>  
+                                                <tr> 
                                                     <td> <%= c.getId()%></td>                                                    
                                                     <td> <%= c.getData_inicio()%></td>
                                                     <td> <%= c.getData_fim()%></td>
                                                     <td> <%= c.getDescricao()%></td>
-                                                    <td> <%= c.getCategoria().getCategoria()%></td
+                                                    <td> <%= c.getCategoria().getCategoria()%></td>
                                                     <td> <%= c.getSubcategoria().getSubcategoria()%></td>
                                                     <td> <%= c.getUsuario().getNome()%></td>
                                                     
@@ -201,6 +200,7 @@
                     <!-- /.row -->
                 </div>
                 <!-- /.container-fluid -->
+                
             </div>
             <!-- /#page-wrapper -->
 

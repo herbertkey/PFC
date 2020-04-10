@@ -96,7 +96,7 @@
                                 <a href="#">Relatórios<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="/ProjetoPFC_5/admin/relat_concluido_tecnico.jsp"> Chamados Concluídos por Técnico</a>
+                                        <a href="/ProjetoPFC_5/ConcluidoTecnico?acao=relat_concluido_tecnico"> Chamados Concluídos por Técnico</a>
                                     </li>
                                     <li>
                                         <a href="/ProjetoPFC_5/admin/relat_concluido_periodo.jsp"> Chamados Concluídos por Período</a>

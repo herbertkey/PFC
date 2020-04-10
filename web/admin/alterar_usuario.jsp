@@ -84,6 +84,18 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li>
+                                <a href="#">Relatórios<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="/ProjetoPFC_5/ConcluidoTecnico?acao=relat_concluido_tecnico"> Chamados Concluídos por Técnico</a>
+                                    </li>
+                                    <li>
+                                        <a href="/ProjetoPFC_5/admin/relat_concluido_periodo.jsp"> Chamados Concluídos por Período</a>
+                                    </li>
+                                    
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                     <!-- /.sidebar-collapse -->
