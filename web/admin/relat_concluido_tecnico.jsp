@@ -118,27 +118,34 @@
                         <!-- /.col-lg-12 -->
                     </div>
                     <form action="/ProjetoPFC_5/ConcluidoTecnico" method="POST">
-                    <div class="col-lg-3">
-                        <div class="form-group">
-                        <%
-                            List<Usuario> tecnicos = (List<Usuario>) request.getAttribute("consultatecnico");
-                        %>
-                                                
-                            <label>Técnico</label>
-                            <select name="optTecnico" required="required">
-                            <%if (tecnicos != null) {
-                               for (Usuario t : tecnicos) {
-                            %> 
-                            <option><%=t.getNome() %></option> 
+                    <div class="col-lg-12">
+                        <div class="col-lg-3">
+                            <div class="form-group">
                             <%
-                              }
-                            }
-                            %></select>
+                                List<Usuario> tecnicos = (List<Usuario>) request.getAttribute("consultatecnico");
+                            %>
+                                                
+                                <label>Técnico</label>
+                                <select class="form-control" name="optTecnico" required="required">
+                                <%if (tecnicos != null) {
+                                    for (Usuario t : tecnicos) {
+                                %> 
+                                <option><%=t.getNome() %></option> 
+                                <%
+                                    }
+                                }
+                                %></select>
                             
+                            </div>
                         </div>
                     </div>
-                    
-                    <button type="submit" name="acao" value="gerar_relatorio" class="btn btn-default">Gerar Relatorio</button>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                        </br>
+                        <button type="submit" name="acao" value="gerar_relatorio" class="btn btn-default">Gerar Relatorio</button>
+                        </div>
+                    </div>
+                        
                     </form>    
                     <!-- /.row -->
                      <div class="row">

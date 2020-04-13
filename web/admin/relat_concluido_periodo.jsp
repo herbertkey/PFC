@@ -118,26 +118,34 @@
                         <!-- /.col-lg-12 -->
                     </div>
                     <!-- /.row -->
-                    <form action="/ProjetoPFC_5/ConcluidoPeriodo" method="POST">
-                    <div class="col-lg-3">
-                        <div class="form-group">
-                            <label>Início</label>
-                            <input type="date" class="form-control" name="dtIni">
-                            
+                    <div class="col-lg-12">
+                        <form action="/ProjetoPFC_5/ConcluidoPeriodo" method="POST">
+                       
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Início</label>
+                                    <input type="date" class="form-control" name="dtIni">
+                                </div>
+                            </div>
+                        
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Fim</label>
+                                    <input type="date" class="form-control" name="dtFim">
+                                </div>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label>Fim</label>
-                            <input type="date" class="form-control" name="dtFim">
                             
+                            <button type="submit" class="btn btn-default btn-">Gerar</button>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-default">Gerar Relatorio</button>
                     </form>
                     
                      <div class="row">
                         <div class="col-lg-12">
+                            
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     
