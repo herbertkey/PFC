@@ -54,19 +54,13 @@ public class ControleRelatorio extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             String acao = request.getParameter("acao");
-            if(acao.equals("relat_concluido_tecnico")){
+            
                 UsuarioDAO usuarioDAO = new UsuarioDAO();
                 List<Usuario> tecnicos = usuarioDAO.consultarTecnico();
             
                 request.setAttribute("consultatecnico", tecnicos);
-                RequestDispatcher rd = request.getRequestDispatcher("/admin/relat_concluido_tecnico.jsp");
-                rd.forward(request, response);
-            
-            } else if (acao.equals("gerar_relatorio")) {
-                UsuarioDAO usuarioDAO = new UsuarioDAO();
-                List<Usuario> tecnicos = usuarioDAO.consultarTecnico();
-            
-                request.setAttribute("consultatecnico", tecnicos);
+                
+            if (acao.equals("gerar_relatorio")){
                 
                 Usuario tecnico = new Usuario();
                 tecnico.setNome(request.getParameter("optTecnico"));
@@ -80,10 +74,14 @@ public class ControleRelatorio extends HttpServlet {
                 chamados = chamadoDAO.relConclusaoTecnico(tecnico);                
            
                 request.setAttribute("consulta", chamados);
-                RequestDispatcher rd = request.getRequestDispatcher("/admin/relat_concluido_tecnico.jsp");
-                rd.forward(request, response);
-            
+                            
             }
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/admin/relat_concluido_tecnico.jsp");
+            rd.forward(request, response);
+            
+            
+            
         } catch (Exception erro) {
             RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");
             request.setAttribute("erro", erro);

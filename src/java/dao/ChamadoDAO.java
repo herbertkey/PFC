@@ -334,7 +334,7 @@ public class ChamadoDAO {
         }
     }
 
-        public List<Chamado> consultaPrioridadeChamadoPorTecnico(Usuario usuario){
+    public List<Chamado> consultaPrioridadeChamadoPorTecnico(Usuario usuario){
 
         Connection conexao = null;
         PreparedStatement pstmt = null;
@@ -538,7 +538,7 @@ public class ChamadoDAO {
         return chamados;
     }
     
-        public List<Chamado> relConclusaoTecnico(Usuario tecnico) {
+    public List<Chamado> relConclusaoTecnico(Usuario tecnico) {
 
         Connection conexao = null;
         PreparedStatement pstmt = null;

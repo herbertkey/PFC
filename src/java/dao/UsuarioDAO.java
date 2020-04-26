@@ -215,6 +215,7 @@ public class UsuarioDAO {
         }
 
     }
+    
     public String criptografa(String senha){ 
         try{ 
             MessageDigest digest = MessageDigest.getInstance("MD5"); 
