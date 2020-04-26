@@ -136,7 +136,7 @@
                                             List<Chamado> chamados = (List<Chamado>) request.getAttribute("consulta");
 
                                         %>
-                                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                        <table id="principal" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                             
                                             <thead>
                                                 <tr>
@@ -197,7 +197,7 @@
 
         </div>
         <!-- /#wrapper -->
-
+        
         <!-- jQuery -->
         <script src="/ProjetoPFC_5/js/jquery.min.js"></script>
 
@@ -217,8 +217,8 @@
         <!-- Page-Level Demo Scripts - Tables - Use for reference -->
         <script>
             $(document).ready(function() {
-                $('#dataTables-example').DataTable({
-                        responsive: true
+                $('#principal').DataTable({
+                        "order": [[ 4, "asc" ]]    
                 });
             });
         </script>
