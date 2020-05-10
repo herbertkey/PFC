@@ -155,20 +155,22 @@
                                         
                                             <%
                                                 for (StatusChamado status : StatusChamado.values()) {
+                                                    
+                                                    if(!chamado.getStatus().equals(StatusChamado.ABERTO) && status.equals(StatusChamado.ABERTO)){
+                                                        continue;
+                                                    }
+                                                    
                                                     if (status == chamado.getStatus()) {
-                                            %> 
-                                            
-                                            <option selected><%=status%></option> 
-                                            
+                                            %>                                             
+                                            <option selected><%=status%></option>                                             
                                             <%
                                             } else {
-                                            %>
-                                            
-                                            <option> <%= status%></option>
-                                            
+                                            %>                                            
+                                            <option> <%= status%></option>                                            
                                             <%
                                                 }
                                                 }
+                                                
                                             %>   
                                             </select>
                                         </div>

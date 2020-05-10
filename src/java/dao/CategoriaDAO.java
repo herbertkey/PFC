@@ -34,6 +34,7 @@ public class CategoriaDAO {
             pstmt.setString(1, categoria.getCategoria());
             pstmt.setString(2, categoria.getPrioridade().toString());
             pstmt.execute();
+            
         } catch (SQLException sqlErro) {
             throw new RuntimeException(sqlErro);
         } finally {
