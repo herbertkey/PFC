@@ -123,7 +123,7 @@
                                             
                                             <form role="form" action="/ProjetoPFC_5/AlterarUsuario" method="POST">
                                             	<%
-        								        Usuario usuario = (Usuario) request.getAttribute("usuario");
+        						Usuario usuario2 = (Usuario) request.getAttribute("usuario");
 												%> 
 
 											<div class="form-group">
@@ -132,57 +132,57 @@
                                        		</div>
                                        		<div class="form-group">
                                             	<label>Nome:</label>
-                                           		<input class="form-control" type="text" name="txtNome" value="<%=usuario.getNome()%>" required="required">
+                                           		<input class="form-control" type="text" name="txtNome" value="<%=usuario2.getNome()%>" required="required">
                                        		</div>
                                        		<div class="form-group">
                                             	<label>E-mail:</label>
-                                           		<input class="form-control" type="text" name="txtEmail" value="<%=usuario.getEmail()%>" required="required">
+                                           		<input class="form-control" type="text" name="txtEmail" value="<%=usuario2.getEmail()%>" required="required">
                                        		</div>
                                        		<div class="form-group">
                                             	<label>Telefone:</label>
-                                           		<input class="form-control" type="text" name="txtTelefone" value="<%=usuario.getTelefone()%>" required="required">
+                                           		<input class="form-control" type="text" name="txtTelefone" value="<%=usuario2.getTelefone()%>" required="required">
                                        		</div>
             								
             									<% 
                 								if (usuarioSessao.getTipo().toString() == "TECNICO") {%>
             										<div class="form-group">
                                             			<label for="disabledSelect">Tipo de usuário:</label>
-                                           				<input class="form-control" id="disabledInput"  readonly="true" type="text" name="optTipo" value="<%=usuario.getTipo()%>" required="required">
+                                                                <input class="form-control" id="disabledInput"  readonly="true" type="text" name="optTipo" value="<%=usuario2.getTipo()%>" required="required">
                                        				</div>
                  
-            									<%} else {%>
-            										<div class="form-group">
-                                            			<label for="disabledSelect">Tipo de usuário:</label>
-                                           				
+            							<%} else {%>
+            							<div class="form-group">
+                                            			<label for="disabledSelect">Tipo de usuário:</label>                                           				
                                        				
             										<select class="form-control" name="optTipo" required="required"> 
                 									<%
                 									for (Tipo tipo : Tipo.values()) {
-                    									if (tipo == usuario.getTipo()) {
+                    									if (tipo == usuario2.getTipo()) {
                 										%> 
                 										<option selected><%=tipo%></option> 
                 										<%
                 										} else {
-                											%>
-                											<option><%=tipo%></option> 
-                											<%
-                        								}
+                                                                                                %>
+                										<option><%=tipo%></option> 
+                										<%
+                                                                                                }
 
-                    								}
-                									%></select><%
+                                                                                        }
+                									%>
+                                                                                        </select>
+                									</div><%
                 									    }
                 									%>
-                									</div>
-                							<div class="form-group">
+                				<div class="form-group">
                                             	<label>Cargo:</label>
-                                           		<input class="form-control" type="text" name="txtCargo" value="<%=usuario.getCargo()%>" required="required">
+                                           	<input class="form-control" type="text" name="txtCargo" value="<%=usuario2.getCargo()%>" required="required">
                                        		</div>
-            								<div class="form-group">
+            					<div class="form-group">
                                                 <label>Setor:</label>
                                                 <select class="form-control" name="optSetor" required="required">
                                                     <%
             										        for (Setor setor : Setor.values()) {
-            										            if (setor == usuario.getSetor()) {
+            										            if (setor == usuario2.getSetor()) {
             										    %> 
             										    <option selected><%=setor%></option> 
             										    <%
