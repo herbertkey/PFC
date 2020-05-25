@@ -83,7 +83,9 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li>
+                            <%
+                            if (usuario.getTipo().toString() == "SUPERVISOR") {%>
+                                   <li>
                                 <a href="#">Relatórios<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
@@ -95,6 +97,7 @@
                                     
                                 </ul>
                             </li>
+                            <%} %>
                         </ul>
                     </div>
                     <!-- /.sidebar-collapse -->

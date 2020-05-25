@@ -1,3 +1,4 @@
+
 package AutorizacaoDeAcesso;
 
 import java.io.IOException;
@@ -12,13 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.*;
 
-public class AcessoAdministrativo implements Filter{
-
+public class AcessoRelatorio implements Filter{
+    
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
        
     }
-
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         
@@ -26,12 +26,11 @@ public class AcessoAdministrativo implements Filter{
         HttpSession sessaoUsuario = ((HttpServletRequest)request).getSession();
         Usuario usuario = (Usuario) sessaoUsuario.getAttribute("usuarioAutenticado");
         
-        if(usuario!=null && (usuario.getTipo().equals(Tipo.SUPERVISOR)||usuario.getTipo().equals(Tipo.TECNICO))){
+        if(usuario!=null && (usuario.getTipo().equals(Tipo.SUPERVISOR))){
             chain.doFilter(request, response);
         } else{
             ((HttpServletResponse)response).sendRedirect("/ProjetoPFC_5/acessoNegado.jsp");
-        }
-        
+        }       
         
         
         
@@ -41,6 +40,5 @@ public class AcessoAdministrativo implements Filter{
     public void destroy() {
         
     }
-    
     
 }
