@@ -128,7 +128,7 @@
 
 											<div class="form-group">
                                             	<label for="disabledSelect">Numero de Registro:</label>
-                                           		<input class="form-control" id="disabledInput"  readonly="true" type="text" name="txtNumeroDeRegistro" value="<%=usuario.getNumero_registro()%>" required="required">
+                                           		<input class="form-control" id="disabledInput"  readonly="true" type="text" name="txtNumeroDeRegistro" value="<%=usuario2.getNumero_registro()%>" required="required">
                                        		</div>
                                        		<div class="form-group">
                                             	<label>Nome:</label>
