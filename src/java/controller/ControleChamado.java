@@ -276,8 +276,9 @@ public class ControleChamado extends HttpServlet {
                 
                 Chamado chamados_status = new Chamado();
                 chamados_status = chamadoDAO.consultarUmChamado(chamado);
+                String status2 = chamados_status.getStatus().toString();
                 
-                if(!chamados_status.getStatus().equals(status)){
+                if(!status2.equalsIgnoreCase(status)){
                     HistoricoDAO historicoDAO = new HistoricoDAO();
                     Historico historico = new Historico();
                     
