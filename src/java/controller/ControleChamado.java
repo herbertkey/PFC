@@ -282,7 +282,11 @@ public class ControleChamado extends HttpServlet {
                     HistoricoDAO historicoDAO = new HistoricoDAO();
                     Historico historico = new Historico();
                     
-                    historico.setUsuario(usuario);
+                    HttpSession sessaoUsuario = request.getSession();                
+                    Usuario usuario2 = (Usuario)sessaoUsuario.getAttribute("usuarioAutenticado");             
+                    usuario2 = usuarioDAO.consultaUmUsuario(usuario2);
+                    
+                    historico.setUsuario(usuario2);
 
                     historico.setInformacoes_adicionais("Status alterado de "+ chamados_status.getStatus() + " para " + status);
 
